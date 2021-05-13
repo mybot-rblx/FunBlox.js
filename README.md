@@ -4,7 +4,7 @@
 # Instructions
 
 ```
-npm i funblox
+npm i funblox.js
 ```
 
 ```js
