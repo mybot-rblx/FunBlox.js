@@ -1,19 +1,29 @@
 {
   "name": "funblox.js",
-  "version": "2.0.1",
+  "version": "2.1.16",
   "description": "This package made by fedee#9606 this a roblox API you may use it for your verification or something if you use our package give us credit <3.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["roblox", "api", "rbx", "funblox"],
-  "author": "Yankue",
+  "keywords": [
+    "roblox",
+    "api",
+    "rbx",
+    "funblox"
+  ],
+  "author": "Fede1212156",
   "license": "MIT",
   "dependencies": {
     "node-fetch": "^2.6.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Fede1212156/FunBlox"
-  }
+    "url": "git+https://github.com/Fede1212156/FunBlox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fede1212156/FunBlox/issues"
+  },
+  "homepage": "https://github.com/Fede1212156/FunBlox#readme",
+  "devDependencies": {}
 }
