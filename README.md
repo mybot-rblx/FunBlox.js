@@ -26,7 +26,7 @@ roblox.getUser("149556783", "id").then(respon => {
     console.log("ERR")
 })
 ```
-#Group Examples
+# Group Examples
 
 ```js
 const roblox = require("funblox.js")
