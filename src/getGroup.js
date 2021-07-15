@@ -6,10 +6,10 @@ async function test() {
 
 async function getGroupDetails(groupId) {
     return new Promise(async (resolve, reject) => {
-        let roleResponse = await fetch(`https://groups.roblox.com/v1/groups/${groupData.id}/roles`, {
+        let roleResponse = await fetch(`https://groups.roblox.com/v1/groups/${groupId.id}/roles`, {
             headers: {'Content-Type': 'application/json'}
         });
-        let thumbnailResponse = await fetch(`https://thumbnails.roblox.com/v1/groups/icons?format=Png&groupIds=${groupData.id}&isCircular=false&size=420x420`, {
+        let thumbnailResponse = await fetch(`https://thumbnails.roblox.com/v1/groups/icons?format=Png&groupIds=${groupId.id}&isCircular=false&size=420x420`, {
             headers: {'Content-Type': 'application/json'}
         });
         let groupData = await fetch(`https://groups.roblox.com/v2/groups?groupIds=${groupId}`, {
