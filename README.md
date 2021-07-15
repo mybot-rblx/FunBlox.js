@@ -1,6 +1,7 @@
 # FunBlox
-**We are a roblox API on development! (Contact us : fedee#9606)**
+**We are a roblox API on development! (Contact us : fedee#9606 / DinoChickenFlexJosh#0656)**
 
+(Discord Server)[https://discord.gg/3PcZBE2u]
 # Instructions
 
 ```
