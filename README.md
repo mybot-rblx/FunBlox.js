@@ -5,7 +5,7 @@
 # Instructions
 
 ```
-npm i funblox.js
+npm i @mybot-rblx/funblox.js
 ```
 
 ```js
