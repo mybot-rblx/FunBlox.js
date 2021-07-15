@@ -7,6 +7,19 @@
 ```
 npm i @mybot-rblx/funblox.js
 ```
+# Get group rank
+
+```js
+const roblox = require("@mybot-rblx/funblox.js")
+
+roblox.getUserRank("groupid", "userid").then(respon => {
+    console.log(respon)
+}).catch(() => {
+    console.log("ERR")
+})
+```
+
+# Getusername info
 
 ```js
 const roblox = require("@mybot-rblx/funblox.js")
