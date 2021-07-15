@@ -1,7 +1,12 @@
 # FunBlox
 **We are a roblox API on development! (Contact us : fedee#9606 / DinoChickenFlexJosh#0656)**
+
+
 [NPM Page](https://www.npmjs.com/package/@mybot-rblx/funblox.js)
+
+
 [Discord Server](https://discord.gg/uxfTMgRmTt)
+
 # Instructions
 
 ```
