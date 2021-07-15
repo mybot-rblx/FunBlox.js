@@ -6,9 +6,13 @@ async function test() {
 
 async function getGroupDetails(groupData) {
     return new Promise((resolve, reject) => {
-        fetch(`https://groups.roblox.com/v1/groups/${groupData.id}/roles`).then(async (roleResponse) => {
+        fetch(`https://groups.roblox.com/v1/groups/${groupData.id}/roles`, {
+            headers: {'Content-Type': 'application/json'}
+        }).then(async (roleResponse) => {
             roleResponse = await roleResponse.json();
-            fetch(`https://thumbnails.roblox.com/v1/groups/icons?format=Png&groupIds=${groupData.id}&isCircular=false&size=420x420`).then(async (thumbnailResponse) => {
+            fetch(`https://thumbnails.roblox.com/v1/groups/icons?format=Png&groupIds=${groupData.id}&isCircular=false&size=420x420`, {
+                headers: {'Content-Type': 'application/json'}
+            }).then(async (thumbnailResponse) => {
                 thumbnailResponse = await thumbnailResponse.json();
                 const returnable = {
                     "id": groupData.id,
@@ -45,7 +49,9 @@ module.exports = async function(identifier, type) {
     return new Promise((resolve, reject) => {
         if(!type) type = "id";
         if(type == "id") {
-            fetch(`https://groups.roblox.com/v1/groups/${identifier}/`).then(async (response) => {
+            fetch(`https://groups.roblox.com/v1/groups/${identifier}/`, {
+                headers: {'Content-Type': 'application/json'}
+            }).then(async (response) => {
                 if(response.success !== 'undefined') {
                     if(response.status == 404) return reject("Not found.");
                 }
@@ -59,10 +65,14 @@ module.exports = async function(identifier, type) {
                 });
             });
         } else if(type == "name" || type == "groupname" || type == "username") {
-            fetch(`https://groups.roblox.com/v1/groups/search/lookup?groupName=${identifier}`).then(async (searchRes) => {
+            fetch(`https://groups.roblox.com/v1/groups/search/lookup?groupName=${identifier}`, {
+                headers: {'Content-Type': 'application/json'}
+            }).then(async (searchRes) => {
                 searchRes = await searchRes.json();
                 if(typeof searchRes.data === 'undefined') return reject('Not found.');
-                fetch(`https://groups.roblox.com/v1/groups/${searchRes.data[0].id}/`).then(async (response) => {
+                fetch(`https://groups.roblox.com/v1/groups/${searchRes.data[0].id}/`, {
+                    headers: {'Content-Type': 'application/json'}
+                }).then(async (response) => {
                     response = await response.json();
                     getGroupDetails(response).then(finished => {
                         resolve(finished);
