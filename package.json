@@ -1,5 +1,5 @@
 {
-  "name": "funblox.js",
+  "name": "@mybot-rblx/funblox.js",
   "version": "2.1.29",
   "description": "This package made by fedee#9606 this a roblox API you may use it for your verification or something if you use our package give us credit <3.",
   "main": "index.js",
@@ -19,11 +19,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fede1212156/FunBlox.git"
+    "url": "git+https://github.com/mybot-rblx/FunBlox.git"
   },
   "bugs": {
-    "url": "https://github.com/Fede1212156/FunBlox/issues"
+    "url": "https://github.com/mybot-rblx/FunBlox/issues"
   },
-  "homepage": "https://github.com/Fede1212156/FunBlox#readme",
+  "homepage": "https://github.com/mybot-rblx/FunBlox#readme",
   "devDependencies": {}
 }
