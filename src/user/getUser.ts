@@ -1,4 +1,5 @@
-const { friends, thumbnails, users, api } = require("./api");
+import * as exp from "constants";
+import { friends, thumbnails, users, api } from "../api";
 
 
 async function getUserDetails(userid) {
@@ -9,35 +10,27 @@ async function getUserDetails(userid) {
         let friendsResponse = await friends.get(`v1/users/${userid}/friends`)
         let followingResponse = await friends.get(`v1/users/${userid}/followings`);
         let avatarResponse = await thumbnails.get(`v1/users/avatar?userIds=${userid}&size=720x720&format=Png&isCircular=false`)
-
-        // parse responses to json
-        basicData = JSON.parse(basicData)
-        statusResponse = JSON.parse(statusResponse)
-        followersResponse = JSON.parse(followersResponse)
-        friendsResponse = JSON.parse(friendsResponse)
-        followingResponse = JSON.parse(followingResponse)
-        avatarResponse = JSON.parse(avatarResponse)
         
         let followersArr = [];
-        followersResponse.data.forEach(user => {
+        followersResponse.data.data.forEach(user => {
             followersArr.push(user.id);
         });
         let friendsArr = [];
-        friendsResponse.data.forEach(user => {
+        friendsResponse.data.data.forEach(user => {
             friendsArr.push(user.id);
         });
         let followingArr = [];
-        followingResponse.data.forEach(user => {
+        followingResponse.data.data.forEach(user => {
             followingArr.push(user.id);
         });
 
         resolve({
-            "id": basicData.id,
-            "username": basicData.name,
-            "description": basicData.description,
-            "status": statusResponse.status,
-            "created": basicData.created,
-            "avatar_url": avatarResponse.data[0].imageUrl,
+            "id": basicData.data.id,
+            "username": basicData.data.name,
+            "description": basicData.data.description,
+            "status": statusResponse.data.status,
+            "created": basicData.data.created,
+            "avatar_url": avatarResponse.data.data[0].imageUrl,
             "friends": {
                 "count": friendsArr.length,
                 "ids": friendsArr
@@ -54,7 +47,7 @@ async function getUserDetails(userid) {
     });
 }
 
-module.exports = async function(identifier, type) {
+export default async function(identifier: [String, Number], type: String): Promise<Object> {
     return new Promise(async (resolve, reject) => {
 
         if(!type) type = "id";
@@ -66,11 +59,9 @@ module.exports = async function(identifier, type) {
         } else if(type == "username") {
             let response = await api.get(`users/get-by-username?username=${identifier}`)
 
-            response = JSON.parse(response)
+            if(response.data.success === false) return reject("Not found. - getUser.js");
 
-            if(response.success === false) return reject("Not found. - getUser.js");
-
-            getUserDetails(response.Id).then(finished => {
+            getUserDetails(response.data.Id).then(finished => {
                 resolve(finished);
             });
         }

@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+        "rootDir": "src",
+		"outDir": "dist",
+        "declaration": true,
+        "moduleResolution": "node",
+        "module": "commonjs",
+		"target": "es2020", // Node.js 14
+		"lib": [
+			"esnext", "esnext.array", "esnext.asynciterable", "esnext.intl", "esnext.symbol"
+		],
+	},
+	"include": [
+		"src"
+	]
+}

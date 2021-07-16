@@ -1,22 +1,20 @@
-const { groups } = require("./api");
+import { groups } from "../api";
 
 async function getGroupRank(group, user) {
     return new Promise(async (resolve, reject) => {
-        let body = await groups.get(`v2/users/${user}/groups/roles`, false)
+        let body = await groups.get(`v2/users/${user}/groups/roles`)
 
-        body = JSON.parse(body)
-
-        if (body.errors) {
-            if (errors[0].code == 1) return reject("Not found. - getUserRank.js");
+        if (body.data.errors) {
+            if (body.data.errors[0].code == 1) return reject("Not found. - getUserRank.js");
         }
 
-        const groupObject = body.data.find((info) => group === info.group.id)
+        const groupObject = body.data.data.find((info) => group === info.group.id)
 
-        resolve(groupObject ? parseInt(groupObject.role.rank) : 0)
+        resolve(groupObject.role)
     })
 }
 
-module.exports = async function (group, user) {
+export default async function (group: Number, user: Number): Promise<Object> {
     return new Promise(async (resolve, reject) => {
         if (!group) {
             throw new TypeError("Please enter a valid GROUP_ID. The format is: roblox.getUserRank(groupid, userid)");

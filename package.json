@@ -1,10 +1,17 @@
 {
   "name": "@mybot-rblx/funblox.js",
-  "version": "2.2.2",
+  "version": "3.0.0",
   "description": "This package made by fedee#9606 this a roblox API you may use it for your verification or something if you use our package give us credit <3.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "src/index.ts",
+  "typings": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc --build tsconfig.json",
     "test": "node tests"
+  },
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./src/index.ts"
   },
   "keywords": [
     "roblox",
@@ -22,7 +29,10 @@
     "url": "https://github.com/mybot-rblx/FunBlox/issues"
   },
   "homepage": "https://github.com/mybot-rblx/FunBlox#readme",
+  "devDependencies": {
+    "@types/node": "^16.3.3"
+  },
   "dependencies": {
-    "request-promise": "^4.2.6"
+    "axios": "^0.21.1"
   }
 }

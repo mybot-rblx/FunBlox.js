@@ -1,5 +1,5 @@
-const hello = require("../index")
+const hello = require("../")
 
 module.exports = async function() {
-    return await hello.getGroup("2700627", "id")
+    return await hello.getGroupByID("2700627", "id")
 }

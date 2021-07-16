@@ -1,4 +1,4 @@
-const { groups, friends } = require("../src/api");
+const { groups, friends } = require("../dist/api");
 
 
     let response = friends.get('v1/users/156711358/followers');

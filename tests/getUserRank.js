@@ -1,5 +1,5 @@
-const getUserRank = require("../src/getUserRank");
+const hello = require("../");
 
 module.exports = async function() {
-    return await getUserRank(2700627, 156711358)
+    return await hello.getUserRank(2700627, 156711358)
 }
