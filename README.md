@@ -1,5 +1,5 @@
 # FunBlox
-**We are a roblox API on development! (Contact us : fedee#9606/DinoChickenFlexJosh#0656)**
+**We are a roblox API on development! (Contact us : fedee#9606 / DinoChickenFlexJosh#0656)**
 
 [![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main)   [<img src="https://i.ibb.co/S6XXfxW/0001-4390861584-20210716-002953-0000.png" width="100"/>](https://discord.gg/uxfTMgRmTt)  [<img src="https://i.ibb.co/41YjbCq/0001-4391443590-20210716-004829-0000.png" width="100"/>](https://www.npmjs.com/package/@mybot-rblx/funblox.js)
 
