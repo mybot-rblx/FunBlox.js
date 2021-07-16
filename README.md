@@ -64,4 +64,12 @@ roblox.getGroup("10394589", "id").then(res => {
 }).catch(console.error);
 
 ```
+
+# Package information
+| Maintained  | ✅ |
+| ------- | ------------------ |
+| Active Support   | ✅        |
+| Developers | [@fede1212156](https://www.roblox.com/users/835364986/profile), [@Joshuadl12](https://www.roblox.com/users/156711358/profile) |
+
+
 # More Coming Soon...
