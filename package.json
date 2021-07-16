@@ -14,9 +14,6 @@
   ],
   "author": "Fede1212156",
   "license": "MIT",
-  "dependencies": {
-    "node-fetch": "^2.6.1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mybot-rblx/FunBlox.git"
@@ -25,5 +22,7 @@
     "url": "https://github.com/mybot-rblx/FunBlox/issues"
   },
   "homepage": "https://github.com/mybot-rblx/FunBlox#readme",
-  "devDependencies": {}
+  "dependencies": {
+    "request-promise": "^4.2.6"
+  }
 }

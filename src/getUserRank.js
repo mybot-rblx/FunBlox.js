@@ -1,15 +1,16 @@
-const fetch = require('node-fetch');
+const { groups } = require("./api");
 
-async function getGroupRank(Data) {
+async function getGroupRank(group, user) {
     return new Promise(async (resolve, reject) => {
-        let body = await fetch(`https://groups.roblox.com/v2/users/${Data.userId}/groups/roles`, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+        let body = await groups.get(`v2/users/${user}/groups/roles`, false)
 
-        body = await body.json();
-        const groupObject = body.data.find((info) => Data.groupId === info.group.id)
+        body = JSON.parse(body)
+
+        if (body.errors) {
+            if (errors[0].code == 1) return reject("Not found. - getUserRank.js");
+        }
+
+        const groupObject = body.data.find((info) => group === info.group.id)
 
         resolve(groupObject ? parseInt(groupObject.role.rank) : 0)
     })
@@ -23,21 +24,8 @@ module.exports = async function (group, user) {
         if (!user) {
             throw new TypeError("Please enter a valid USER_ID. The format is: roblox.getUserRank(groupid, userid)");
         }
-        fetch(`https://groups.roblox.com/v2/users/${Data.userId}/groups/roles`, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(async (response) => {
-            if (response.success !== 'undefined') {
-                if (response.status == 404) return reject("Not found.");
-            }
-            response = await response.json();
-            if (typeof response.errors !== 'undefined') {
-                if (errors[0].code == 1) return reject("Not found.");
-            }
-            getGroupRank(response).then(finished => {
-                resolve(finished);
-            });
-        })
+        getGroupRank(group, user).then(finished => {
+            resolve(finished);
+        });
     })
 }
