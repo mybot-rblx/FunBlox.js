@@ -61,8 +61,6 @@ module.exports = async function(identifier, type) {
             searchRes = JSON.parse(searchRes)
             if(!searchRes.data.length) return reject('Not found. - getGroup.js');
 
-            console.log(searchRes)
-
             getGroupDetails(searchRes.data[0].id).then(finished => {
                 resolve(finished);
             });
