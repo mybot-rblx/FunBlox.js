@@ -1,7 +1,7 @@
 # FunBlox
 **We are a roblox API on development! (Contact us : fedee#9606 / DinoChickenFlexJosh#0656)**
 
-[![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main)   [<img src="https://i.ibb.co/S6XXfxW/0001-4390861584-20210716-002953-0000.png" width="100"/>](https://discord.gg/uxfTMgRmTt)  [[![NPM](https://nodei.co/npm/@mybot-rblx/bloxfun.png)](https://nodei.co/npm/@mybot-rblx/bloxfun/)
+[![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main)   [<img src="https://i.ibb.co/S6XXfxW/0001-4390861584-20210716-002953-0000.png" width="100"/>](https://discord.gg/uxfTMgRmTt)  [![NPM](https://nodei.co/npm/@mybot-rblx/bloxfun.png)](https://nodei.co/npm/@mybot-rblx/funblox.js/)
 
 
 
