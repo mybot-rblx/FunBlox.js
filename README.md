@@ -78,5 +78,10 @@ roblox.getGroupByID("10394589", "id").then(res => {
 | Active Support | ✅|
 | Developers | [@fede1212156](https://www.roblox.com/users/835364986/profile), [@Joshuadl12](https://www.roblox.com/users/156711358/profile) |
 
+# [License](https://github.com/mybot-rblx/FunBlox/blob/main/LICENSE)
+This package is under license (MIT).
+License description:
+
+A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
 
 # More Coming Soon...
