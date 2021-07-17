@@ -1,4 +1,5 @@
 import { groups } from "../api";
+import getUser from "./getUser";
 
 async function getGroupRank(group, user) {
     return new Promise(async (resolve, reject) => {
@@ -14,7 +15,7 @@ async function getGroupRank(group, user) {
     })
 }
 
-export default async function (group: Number, user: Number): Promise<Object> {
+export default async function (group: Number, user: [Number, String]): Promise<Object> {
     return new Promise(async (resolve, reject) => {
         if (!group) {
             throw new TypeError("Please enter a valid GROUP_ID. The format is: roblox.getUserRank(groupid, userid)");
@@ -22,8 +23,20 @@ export default async function (group: Number, user: Number): Promise<Object> {
         if (!user) {
             throw new TypeError("Please enter a valid USER_ID. The format is: roblox.getUserRank(groupid, userid)");
         }
-        getGroupRank(group, user).then(finished => {
-            resolve(finished);
-        });
+        if (typeof user === "number") {
+            getGroupRank(group, user).then(finished => {
+                resolve(finished);
+            });
+        } else if (typeof user === "string") {
+            if (Number(user)) {
+                getGroupRank(group, user).then(finished => {
+                    resolve(finished);
+                });
+            } else {
+                let wow = await getUser(user, "username")
+
+                wow.id
+            }
+        }
     })
 }

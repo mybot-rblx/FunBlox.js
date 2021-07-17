@@ -1,6 +1,26 @@
 import * as exp from "constants";
 import { friends, thumbnails, users, api } from "../api";
 
+interface UserResponse {
+        "id": Number,
+        "username": String,
+        "description": String,
+        "status": String,
+        "created": String,
+        "avatar_url": String,
+        "friends": {
+            "count": Number,
+            "ids": Array<Number>
+        },
+        "followers": {
+            "count": Number,
+            "ids": Array<Number>
+        },
+        "following": {
+            "count": Number,
+            "ids": Array<Number>
+        }
+}
 
 async function getUserDetails(userid) {
     return new Promise(async (resolve, reject) => {
@@ -24,7 +44,7 @@ async function getUserDetails(userid) {
             followingArr.push(user.id);
         });
 
-        resolve({
+        return resolve({
             "id": basicData.data.id,
             "username": basicData.data.name,
             "description": basicData.data.description,
@@ -47,22 +67,22 @@ async function getUserDetails(userid) {
     });
 }
 
-export default async function(identifier: [String, Number], type: String): Promise<Object> {
+export default async function(identifier: [String, Number], type: String): Promise<UserResponse> {
     return new Promise(async (resolve, reject) => {
 
         if(!type) type = "id";
 
         if(type == "id") {
-            getUserDetails(identifier).then(finished => {
-                resolve(finished);
-            });
+            getUserDetails(identifier).then((finished: UserResponse) => {
+                return resolve(finished);
+            })
         } else if(type == "username") {
             let response = await api.get(`users/get-by-username?username=${identifier}`)
 
             if(response.data.success === false) return reject("Not found. - getUser.js");
 
-            getUserDetails(response.data.Id).then(finished => {
-                resolve(finished);
+            getUserDetails(response.data.Id).then((finished: UserResponse) => {
+                return resolve(finished);
             });
         }
     });
