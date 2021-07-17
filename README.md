@@ -1,7 +1,7 @@
 # FunBlox
 **We are a roblox API on development! (Contact us : fedee#9606 / DinoChickenFlexJosh#0656)**
 
-[![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main)   [<img src="https://i.ibb.co/S6XXfxW/0001-4390861584-20210716-002953-0000.png" width="100"/>](https://discord.gg/uxfTMgRmTt)  [[![NPM](https://nodei.co/npm/@mybot-rblx/bloxfun.png)](https://nodei.co/npm/@mybot-rblx/bloxfun/)
+[![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main)   [<img src="https://i.ibb.co/S6XXfxW/0001-4390861584-20210716-002953-0000.png" width="100"/>](https://discord.gg/uxfTMgRmTt)  [![NPM](https://nodei.co/npm/@mybot-rblx/funblox.js.png)](https://nodei.co/npm/@mybot-rblx/funblox.js/)
 
 
 
@@ -49,7 +49,7 @@ roblox.getUser("149556783", "id").then(respon => {
 ```js
 const roblox = require("@mybot-rblx/funblox.js")
 
-roblox.getGroup("Iron Cafe", "name").then(res => {
+roblox.getGroupByName("Iron Cafe", "name").then(res => {
     console.log(res);
 
 }).catch(console.error);
@@ -58,7 +58,7 @@ roblox.getGroup("Iron Cafe", "name").then(res => {
 ```js
 const roblox = require("@mybot-rblx/funblox.js")
 
-roblox.getGroup("10394589", "id").then(res => {
+roblox.getGroupByID("10394589", "id").then(res => {
     console.log(res);
 
 }).catch(console.error);
