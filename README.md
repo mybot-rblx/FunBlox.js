@@ -10,7 +10,7 @@
 **FunBlox is an API for ROBLOX that was developed at the time with JS after two months it was reverted to a package made with TS, today the developers work to add more functions.**
 
 
-[![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main)   [<img src="https://img.shields.io/discord/776614395722989599.svg?style=for-the-badge" width="100"/>](https://discord.gg/uxfTMgRmTt)  [![NPM](https://nodei.co/npm/@mybot-rblx/funblox.js.png)](https://nodei.co/npm/@mybot-rblx/funblox.js/)
+[![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main)   [<img src="https://img.shields.io/discord/776614395722989599.svg?style=for-the-badge" width="100"/>](https://discord.gg/3PjNrKW4h7)  [![NPM](https://nodei.co/npm/@mybot-rblx/funblox.js.png)](https://nodei.co/npm/@mybot-rblx/funblox.js/)
 
 
 
