@@ -2,23 +2,23 @@ import * as Promise from "bluebird";
 import { friends, thumbnails, users, api } from "../api";
 
 interface UserResponse {
-    "id": Number,
-    "username": String,
-    "description": String,
-    "status": String,
-    "created": String,
-    "avatar_url": String,
+    "id": number,
+    "username": string,
+    "description": string,
+    "status": string,
+    "created": string,
+    "avatar_url": string,
     "friends": {
-        "count": Number,
-        "ids": Array<Number>
+        "count": number,
+        "ids": Array<number>
     },
     "followers": {
-        "count": Number,
-        "ids": Array<Number>
+        "count": number,
+        "ids": Array<number>
     },
     "following": {
-        "count": Number,
-        "ids": Array<Number>
+        "count": number,
+        "ids": Array<number>
     }
 }
 
@@ -65,7 +65,7 @@ async function getUserDetails(userid) {
         };
 }
 
-export default function(identifier: Number | String): Promise<UserResponse> {
+export default function(identifier: number | string): Promise<UserResponse> {
     return new Promise(async (resolve, reject) => {
         if (Number(identifier)) {
             getUserDetails(identifier).then((finished: UserResponse) => {

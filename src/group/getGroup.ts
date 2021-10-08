@@ -2,42 +2,42 @@ import * as Promise from "bluebird";
 import { groups, thumbnails } from "../api"
 
 interface GroupData {
-    id: Number,
-    name: String,
-    description: String
+    id: number,
+    name: string,
+    description: string,
     owner: OwnerObject,
-    membercount: Number,
-    thumbnail: String,
+    membercount: number,
+    thumbnail: string,
     shout: Shout,
     roles: Array<RoleJSON>
 }
 
 interface RoleJSON {
-    id: Number,
-    name: String,
-    membercount: Number
+    id: number,
+    name: string,
+    membercount: number
 }
 
 interface OwnerObject {
-    buildersClubMembershipType: String,
-    userId: Number,
-    username: String,
-    displayName: String
+    buildersClubMembershipType: string,
+    userId: number,
+    username: string,
+    displayName: string
 }
 
 interface Shout {
-    content: String,
-    created: String,
+    content: string,
+    created: string,
     author: ShoutAuthor
 }
 
 interface ShoutAuthor {
-    id: Number,
-    username: String
-    displayName: String
+    id: number,
+    username: string
+    displayName: string
 }
 
-async function wow(identifier: String | Number): Promise<GroupData> {
+async function wow(identifier: string | number): Promise<GroupData> {
     let roleResponse = await groups.get(`v1/groups/${identifier}/roles`);
     let thumbnailResponse = await thumbnails.get(`v1/groups/icons?format=Png&groupIds=${identifier}&isCircular=false&size=420x420`);
     let groupData = await groups.get(`v1/groups/${identifier}`)
@@ -73,7 +73,7 @@ async function wow(identifier: String | Number): Promise<GroupData> {
     }
 }
 
-export default function (identifier: Number | String): Promise<GroupData> {
+export default function (identifier: number | string): Promise<GroupData> {
     return new Promise(async (resolve, reject) => {
         if (Number(identifier)) {
             wow(identifier).then(resolve).catch(reject);

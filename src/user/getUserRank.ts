@@ -16,7 +16,7 @@ function getGroupRank(group, user) {
     })
 }
 
-export default function(group: Number, user: Number | String) {
+export default function(group: number, user: number | string) {
     if (Number(user)){
         return new Promise(async (resolve, reject) => {
             getGroupRank(group, user).then(finished => {

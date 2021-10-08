@@ -17,7 +17,7 @@ let eligibleSizes = {
     }
   }
 
-async function getUserThumb(user, size: String, format: String, isCircular: Boolean,  cropType = 'body') {
+async function getUserThumb(user, size: string, format: string, isCircular: Boolean,  cropType = 'body') {
     return new Promise(async (resolve, reject) => {
 
       cropType = cropType.toLowerCase()
@@ -47,7 +47,7 @@ async function getUserThumb(user, size: String, format: String, isCircular: Bool
 })
 }
 
-export default async function (user: Number | String, size: String, format: String, isCircular: Boolean, cropType = 'body'): Promise<Object> {
+export default async function (user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<Object> {
     return new Promise(async (resolve, reject) => {
         if (Number(user)) {
             getUserThumb(user, size, format, isCircular,  cropType = 'body').then(finished => {
