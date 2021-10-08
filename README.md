@@ -4,7 +4,7 @@
 # FunBlox
 **We are a roblox API on development! (Contact us : fedee#9606 / DinoChickenFlexJosh#0656)**
 
-**Emails: hello@mybot-rblx.tk, support@mybot-rblx.tk**
+**Emails: joshuadl12@mybot-rblx.tk**
 
 # Project Information
 **FunBlox is an API for ROBLOX that was developed at the time with JS after two months it was reverted to a package made with TS, today the developers work to add more functions.**
