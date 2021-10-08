@@ -2,24 +2,24 @@ import * as exp from "constants";
 import { friends, thumbnails, users, api } from "../api";
 
 interface UserResponse {
-        "id": Number,
-        "username": String,
-        "description": String,
-        "status": String,
-        "created": String,
-        "avatar_url": String,
-        "friends": {
-            "count": Number,
-            "ids": Array<Number>
-        },
-        "followers": {
-            "count": Number,
-            "ids": Array<Number>
-        },
-        "following": {
-            "count": Number,
-            "ids": Array<Number>
-        }
+    "id": Number,
+    "username": String,
+    "description": String,
+    "status": String,
+    "created": String,
+    "avatar_url": String,
+    "friends": {
+        "count": Number,
+        "ids": Array<Number>
+    },
+    "followers": {
+        "count": Number,
+        "ids": Array<Number>
+    },
+    "following": {
+        "count": Number,
+        "ids": Array<Number>
+    }
 }
 
 async function getUserDetails(userid) {
@@ -30,7 +30,7 @@ async function getUserDetails(userid) {
         let friendsResponse = await friends.get(`v1/users/${userid}/friends`)
         let followingResponse = await friends.get(`v1/users/${userid}/followings`);
         let avatarResponse = await thumbnails.get(`v1/users/avatar?userIds=${userid}&size=720x720&format=Png&isCircular=false`)
-        
+
         let followersArr = [];
         followersResponse.data.data.forEach(user => {
             followersArr.push(user.id);
@@ -67,23 +67,24 @@ async function getUserDetails(userid) {
     });
 }
 
-export default async function(identifier: [String, Number], type: String): Promise<UserResponse> {
-    return new Promise(async (resolve, reject) => {
-
-        if(!type) type = "id";
-
-        if(type == "id") {
+export default class {
+    byID(identifier: Number): Promise<UserResponse> {
+        return new Promise(async (resolve, reject) => {
             getUserDetails(identifier).then((finished: UserResponse) => {
                 return resolve(finished);
             })
-        } else if(type == "username") {
+        });
+    }
+
+    byUsername(identifier: String): Promise<UserResponse> {
+        return new Promise(async (resolve, reject) => {
             let response = await api.get(`users/get-by-username?username=${identifier}`)
 
-            if(response.data.success === false) return reject("Not found. - getUser.js");
+            if (response.data.success === false) return reject("Not found. - getUser.js");
 
             getUserDetails(response.data.Id).then((finished: UserResponse) => {
                 return resolve(finished);
             });
-        }
-    });
+        })
+    }
 }

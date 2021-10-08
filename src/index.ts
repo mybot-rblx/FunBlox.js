@@ -1,13 +1,15 @@
-import getUser from './user/getUser';
-import getGroupByID from './group/getGroupByID';
-import getGroupByName from './group/getGroupByName';
+import GetUser from './user/getUser';
+import GetGroup from './group/getGroup';
 import getUserRank from './user/getUserRank';
 import * as api from './api'
 
+// if any have class
+const getGroup = new GetGroup()
+const getUser = new GetUser()
+
 export {
-    getGroupByID,
+    getGroup,
     api,
     getUser,
     getUserRank,
-    getGroupByName
 }

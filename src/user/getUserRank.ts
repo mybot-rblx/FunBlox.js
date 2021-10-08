@@ -1,5 +1,8 @@
+import { resolve } from "path/posix";
 import { groups } from "../api";
-import getUser from "./getUser";
+import GetUser from "./getUser";
+
+const getUser = new GetUser()
 
 async function getGroupRank(group, user) {
     return new Promise(async (resolve, reject) => {
@@ -14,29 +17,38 @@ async function getGroupRank(group, user) {
         resolve(groupObject.role)
     })
 }
-
-export default async function (group: Number, user: [Number, String]): Promise<Object> {
-    return new Promise(async (resolve, reject) => {
+export default class {
+    async byUsername(group: Number, user: String) {
         if (!group) {
             throw new TypeError("Please enter a valid GROUP_ID. The format is: roblox.getUserRank(groupid, userid)");
         }
         if (!user) {
             throw new TypeError("Please enter a valid USER_ID. The format is: roblox.getUserRank(groupid, userid)");
         }
-        if (typeof user === "number") {
+
+        let wow = await getUser.byUsername(user)
+
+        if (!wow) throw new TypeError("User was not found.")
+
+        return new Promise(async (resolve, reject) => {
+            getGroupRank(group, wow.id).then(finished => {
+                resolve(finished);
+            });
+        })
+    }
+
+    byID(group: Number, user: Number) {
+        if (!group) {
+            throw new TypeError("Please enter a valid GROUP_ID. The format is: roblox.getUserRank(groupid, userid)");
+        }
+        if (!user) {
+            throw new TypeError("Please enter a valid USER_ID. The format is: roblox.getUserRank(groupid, userid)");
+        }
+
+        return new Promise(async (resolve, reject) => {
             getGroupRank(group, user).then(finished => {
                 resolve(finished);
             });
-        } else if (typeof user === "string") {
-            if (Number(user)) {
-                getGroupRank(group, user).then(finished => {
-                    resolve(finished);
-                });
-            } else {
-                let wow = await getUser(user, "username")
-
-                wow.id
-            }
-        }
-    })
+        })
+    }
 }

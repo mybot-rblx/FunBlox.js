@@ -1,5 +1,5 @@
 const hello = require("../")
 
 module.exports = async function() {
-    return await hello.getGroupByID("2700627", "id")
+    return await hello.getGroup.byID("2700627")
 }
