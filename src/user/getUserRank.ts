@@ -1,8 +1,6 @@
 import { resolve } from "path/posix";
 import { groups } from "../api";
-import GetUser from "./getUser";
-
-const getUser = new GetUser()
+import getUser from "./getUser";
 
 async function getGroupRank(group, user) {
     return new Promise(async (resolve, reject) => {
@@ -26,7 +24,7 @@ export default class {
             throw new TypeError("Please enter a valid USER_ID. The format is: roblox.getUserRank(groupid, userid)");
         }
 
-        let wow = await getUser.byUsername(user)
+        let wow = await getUser(user)
 
         if (!wow) throw new TypeError("User was not found.")
 

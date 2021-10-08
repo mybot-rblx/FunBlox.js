@@ -67,24 +67,20 @@ async function getUserDetails(userid) {
     });
 }
 
-export default class {
-    byID(identifier: Number): Promise<UserResponse> {
+export default function(identifier: Number | String): Promise<UserResponse> {
         return new Promise(async (resolve, reject) => {
-            getUserDetails(identifier).then((finished: UserResponse) => {
-                return resolve(finished);
-            })
+            if (Number(identifier)) {
+                getUserDetails(identifier).then((finished: UserResponse) => {
+                    return resolve(finished);
+                })
+            } else {
+                let response = await api.get(`users/get-by-username?username=${identifier}`)
+
+                if (response.data.success === false) return reject("Not found. - getUser.js");
+
+                getUserDetails(response.data.Id).then((finished: UserResponse) => {
+                    return resolve(finished);
+                });
+            }
         });
     }
-
-    byUsername(identifier: String): Promise<UserResponse> {
-        return new Promise(async (resolve, reject) => {
-            let response = await api.get(`users/get-by-username?username=${identifier}`)
-
-            if (response.data.success === false) return reject("Not found. - getUser.js");
-
-            getUserDetails(response.data.Id).then((finished: UserResponse) => {
-                return resolve(finished);
-            });
-        })
-    }
-}
