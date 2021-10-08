@@ -77,7 +77,7 @@ export default function(identifier: Number | String): Promise<GroupData> {
     
                 if(!searchRes.data.data.length) return reject('Not found. - getGroup.js');
         
-                this.byID(searchRes.data.data[0].id).then(finished => {
+                this(searchRes.data.data[0].id).then(finished => {
                     resolve(finished);
                 });
             }
