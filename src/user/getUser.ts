@@ -1,4 +1,4 @@
-import * as exp from "constants";
+import * as Promise from "bluebird";
 import { friends, thumbnails, users, api } from "../api";
 
 interface UserResponse {
@@ -23,7 +23,6 @@ interface UserResponse {
 }
 
 async function getUserDetails(userid) {
-    return new Promise(async (resolve, reject) => {
         let basicData = await users.get(`v1/users/${userid}/`)
         let statusResponse = await users.get(`v1/users/${userid}/status`)
         let followersResponse = await friends.get(`v1/users/${userid}/followers`)
@@ -44,7 +43,7 @@ async function getUserDetails(userid) {
             followingArr.push(user.id);
         });
 
-        return resolve({
+        return {
             "id": basicData.data.id,
             "username": basicData.data.name,
             "description": basicData.data.description,
@@ -63,8 +62,7 @@ async function getUserDetails(userid) {
                 "count": followingArr.length,
                 "ids": followingArr
             }
-        });
-    });
+        };
 }
 
 export default function(identifier: Number | String): Promise<UserResponse> {

@@ -1,4 +1,4 @@
-import { PSKCallbackNegotation } from "tls";
+import * as Promise from "bluebird";
 import { thumbnails } from "../api";
 import getUser from "./getUser";
 

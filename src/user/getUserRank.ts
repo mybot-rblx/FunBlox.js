@@ -1,8 +1,8 @@
-import { resolve } from "path/posix";
+import * as Promise from "bluebird";
 import { groups } from "../api";
 import getUser from "./getUser";
 
-async function getGroupRank(group, user) {
+function getGroupRank(group, user) {
     return new Promise(async (resolve, reject) => {
         let body = await groups.get(`v2/users/${user}/groups/roles`)
 
@@ -28,7 +28,7 @@ export default function(group: Number, user: Number | String) {
             let wow = await getUser(user)
 
             if (!wow) throw new TypeError("User was not found.")
-            
+
             getGroupRank(group, wow.id).then(finished => {
                 resolve(finished);
             });
