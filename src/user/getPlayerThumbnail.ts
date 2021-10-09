@@ -2,7 +2,18 @@ import * as Promise from "bluebird";
 import { thumbnails } from "../api";
 import getUser from "./getUser";
 
-let eligibleSizes = {
+interface EligibleSizes {
+    body: EligibleSizesData
+    bust: EligibleSizesData
+    headshot: EligibleSizesData
+}
+
+interface EligibleSizesData {
+    sizes: Array<string>,
+    endpoint: string
+}
+
+let eligibleSizes: EligibleSizes = {
     body: {
       sizes: ['30x30', '48x48', '60x60', '75x75', '100x100', '110x110', '140x140', '150x150', '150x200', '180x180', '250x250', '352x352', '420x420', '720x720'],
       endpoint: 'avatar'
@@ -24,7 +35,7 @@ async function getUserThumb(user: number | string, size: string, format: string,
       if (!Object.keys(eligibleSizes).includes(cropType)) {
         throw new Error(`Invalid cropping type provided: ${cropType} | Use: ${Object.keys(eligibleSizes).join(', ')}`)
       }
-      const { sizes, endpoint } = eligibleSizes[cropType]
+      const { sizes, endpoint }: EligibleSizesData = eligibleSizes[cropType]
       // Validate size
       size = size || sizes[sizes.length - 1]
       if (typeof size === 'number') {
@@ -50,9 +61,7 @@ async function getUserThumb(user: number | string, size: string, format: string,
 export default async function (user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<Object> {
     return new Promise(async (resolve, reject) => {
         if (Number(user)) {
-            getUserThumb(user, size, format, isCircular, cropType).then(finished => {
-                resolve(finished);
-            });
+            getUserThumb(user, size, format, isCircular, cropType).catch(reject).then(resolve);
         } else {
             getUser(user).then(async (user) => {
                 if (user.id) {
