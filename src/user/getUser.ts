@@ -1,4 +1,4 @@
-import * as Promise from "bluebird";
+import * as Promise from 'bluebird';
 import { friends, thumbnails, users, api } from "../api";
 
 interface UserResponse {
@@ -65,7 +65,7 @@ async function getUserDetails(userid: number | string): Promise<UserResponse> {
         };
 }
 
-export default function(identifier: number | string): Promise<UserResponse> {
+export default async function(identifier: number | string): Promise<UserResponse> {
     return new Promise(async (resolve, reject) => {
         if (Number(identifier)) {
             getUserDetails(identifier).then(resolve).catch(reject);

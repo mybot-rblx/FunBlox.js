@@ -35,7 +35,7 @@ async function getUserThumb(user: number | string, size: string, format: string,
       if (!Object.keys(eligibleSizes).includes(cropType)) {
         throw new Error(`Invalid cropping type provided: ${cropType} | Use: ${Object.keys(eligibleSizes).join(', ')}`)
       }
-      const { sizes, endpoint }: EligibleSizesData = eligibleSizes[cropType]
+      const { sizes, endpoint } = eligibleSizes[cropType]
       // Validate size
       size = size || sizes[sizes.length - 1]
       if (typeof size === 'number') {
