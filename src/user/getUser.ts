@@ -22,7 +22,7 @@ interface UserResponse {
     }
 }
 
-async function getUserDetails(userid) {
+async function getUserDetails(userid: number | string): Promise<UserResponse> {
         let basicData = await users.get(`v1/users/${userid}/`)
         let statusResponse = await users.get(`v1/users/${userid}/status`)
         let followersResponse = await friends.get(`v1/users/${userid}/followers`)

@@ -2,7 +2,7 @@ import * as Promise from "bluebird";
 import { groups } from "../api";
 import getUser from "./getUser";
 
-function getGroupRank(group, user) {
+function getGroupRank(group: number, user: number | string) {
     return new Promise(async (resolve, reject) => {
         let body = await groups.get(`v2/users/${user}/groups/roles`)
 
@@ -17,21 +17,20 @@ function getGroupRank(group, user) {
 }
 
 export default function(group: number, user: number | string) {
-    if (Number(user)){
-        return new Promise((resolve, _reject) => {
-                getGroupRank(group, user).then(finished => {
+    return new Promise(async (resolve, _reject) => {
+        if (Number(user)) {
+                    getGroupRank(group, user).then(finished => {
+                        resolve(finished);
+                    });
+        } else {
+                let wow = await getUser(user)
+
+                if (!wow) throw new TypeError("User was not found.")
+
+                getGroupRank(group, wow.id).then(finished => {
                     resolve(finished);
                 });
-            })
-    } else {
-        return new Promise(async (resolve, _reject) => {
-            let wow = await getUser(user)
-
-            if (!wow) throw new TypeError("User was not found.")
-
-            getGroupRank(group, wow.id).then(finished => {
-                resolve(finished);
-            });
-        })
-    }
+            
+        };
+    });
 }
