@@ -17,7 +17,7 @@ let eligibleSizes = {
     }
   }
 
-async function getUserThumb(user, size: string, format: string, isCircular: Boolean,  cropType = 'body') {
+async function getUserThumb(user: number | string, size: string, format: string, isCircular: boolean,  cropType = 'body') {
     return new Promise(async (resolve, reject) => {
 
       cropType = cropType.toLowerCase()
