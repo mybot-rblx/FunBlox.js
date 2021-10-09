@@ -68,17 +68,13 @@ async function getUserDetails(userid: number | string): Promise<UserResponse> {
 export default function(identifier: number | string): Promise<UserResponse> {
     return new Promise(async (resolve, reject) => {
         if (Number(identifier)) {
-            getUserDetails(identifier).then((finished: UserResponse) => {
-                return resolve(finished);
-            })
+            getUserDetails(identifier).then(resolve).catch(reject);
         } else {
             let response = await api.get(`users/get-by-username?username=${identifier}`)
 
             if (response.data.success === false) return reject("Not found. - getUser.js");
 
-            getUserDetails(response.data.Id).then((finished: UserResponse) => {
-                return resolve(finished);
-            });
+            getUserDetails(response.data.Id).then(resolve).catch(reject);
         }
     });
 }

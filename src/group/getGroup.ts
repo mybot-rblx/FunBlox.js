@@ -82,9 +82,7 @@ export default function (identifier: number | string): Promise<GroupData> {
 
             if (!searchRes.data.data.length) return reject('Not found. - getGroup.js');
 
-            wow(searchRes.data.data[0].id).then(finished => {
-                resolve(finished);
-            });
+            wow(searchRes.data.data[0].id).catch(reject).then(resolve);
         }
     });
 }

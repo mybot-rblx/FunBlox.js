@@ -56,9 +56,7 @@ export default async function (user: number | string, size: string, format: stri
         } else {
             getUser(user).then(async (user) => {
                 if (user.id) {
-                    getUserThumb(user.id, size, format, isCircular,  cropType = 'body').then(finished => {
-                        resolve(finished);
-                    });
+                    getUserThumb(user.id, size, format, isCircular,  cropType = 'body').catch(reject).then(resolve);
                 } else {
                     reject(new Error('User not found'));
                 }

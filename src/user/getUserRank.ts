@@ -17,19 +17,15 @@ function getGroupRank(group: number, user: number | string) {
 }
 
 export default function(group: number, user: number | string) {
-    return new Promise(async (resolve, _reject) => {
+    return new Promise(async (resolve, reject) => {
         if (Number(user)) {
-                    getGroupRank(group, user).then(finished => {
-                        resolve(finished);
-                    });
+                    getGroupRank(group, user).then(resolve).catch(reject);
         } else {
                 let wow = await getUser(user)
 
                 if (!wow) throw new TypeError("User was not found.")
 
-                getGroupRank(group, wow.id).then(finished => {
-                    resolve(finished);
-                });
+                getGroupRank(group, wow.id).then(resolve).catch(reject);
             
         };
     });
