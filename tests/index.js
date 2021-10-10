@@ -1,15 +1,10 @@
 const getUser = require("./getUser");
 const getUserRank = require("./getUserRank");
-const getGroupById = require("./getGroupById");
-const getGroupByName = require("./getGroupByName");
+const getGroup = require("./getGroup");
 
-getGroupById().then(wow => {
+getGroup().then(wow => {
     console.log(wow)
 });
-
-getGroupByName().then(wow => {
-    console.log(wow)
-})
 getUserRank().then(wow => {
     console.log(wow)
 })

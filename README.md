@@ -37,7 +37,7 @@ roblox.getUserRank("groupid", "userid").then(respon => {
 ```js
 const roblox = require("@mybot-rblx/funblox.js")
 
-roblox.getUser("fede1212156", "username").then(respon => {
+roblox.getUser("fede1212156").then(respon => {
     console.log(respon)
 }).catch(() => {
     console.log("ERR")
@@ -47,7 +47,7 @@ roblox.getUser("fede1212156", "username").then(respon => {
 ```js
 const roblox = require("@mybot-rblx/funblox.js")
 
-roblox.getUser("149556783", "id").then(respon => {
+roblox.getUser("149556783").then(respon => {
     console.log(respon)
 }).catch(() => {
     console.log("ERR")
@@ -58,7 +58,7 @@ roblox.getUser("149556783", "id").then(respon => {
 ```js
 const roblox = require("@mybot-rblx/funblox.js")
 
-roblox.getGroupByName("Iron Cafe", "name").then(res => {
+roblox.getGroup("Iron Cafe").then(res => {
     console.log(res);
 
 }).catch(console.error);
@@ -67,7 +67,7 @@ roblox.getGroupByName("Iron Cafe", "name").then(res => {
 ```js
 const roblox = require("@mybot-rblx/funblox.js")
 
-roblox.getGroupByID("10394589", "id").then(res => {
+roblox.getGroup("10394589").then(res => {
     console.log(res);
 
 }).catch(console.error);

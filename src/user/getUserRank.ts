@@ -1,12 +1,34 @@
-import { resolve } from "path/posix";
+import * as Promise from "bluebird";
 import { groups } from "../api";
-import GetUser from "./getUser";
+import getUser from "./getUser";
 
-const getUser = new GetUser()
+interface AxiosResponse {
+    // `data` is the response that was provided by the server
+    data: any,
+  
+    // `status` is the HTTP status code from the server response
+    status: number,
+  
+    // `statusText` is the HTTP status message from the server response
+    statusText: string,
+  
+    // `headers` the HTTP headers that the server responded with
+    // All header names are lower cased and can be accessed using the bracket notation.
+    // Example: `response.headers['content-type']`
+    headers: object,
+  
+    // `config` is the config that was provided to `axios` for the request
+    config: object,
+  
+    // `request` is the request that generated this response
+    // It is the last ClientRequest instance in node.js (in redirects)
+    // and an XMLHttpRequest instance in the browser
+    request: object
+}
 
-async function getGroupRank(group, user) {
+function getGroupRank(group: number, user: number | string) {
     return new Promise(async (resolve, reject) => {
-        let body = await groups.get(`v2/users/${user}/groups/roles`)
+        const body: AxiosResponse = await groups.get(`v2/users/${user}/groups/roles`)
 
         if (body.data.errors) {
             if (body.data.errors[0].code == 1) return reject("Not found. - getUserRank.js");
@@ -17,38 +39,18 @@ async function getGroupRank(group, user) {
         resolve(groupObject.role)
     })
 }
-export default class {
-    async byUsername(group: Number, user: String) {
-        if (!group) {
-            throw new TypeError("Please enter a valid GROUP_ID. The format is: roblox.getUserRank(groupid, userid)");
-        }
-        if (!user) {
-            throw new TypeError("Please enter a valid USER_ID. The format is: roblox.getUserRank(groupid, userid)");
-        }
 
-        let wow = await getUser.byUsername(user)
+export default function(group: number, user: number | string) {
+    return new Promise(async (resolve, reject) => {
+        if (Number(user)) {
+                    getGroupRank(group, user).then(resolve).catch(reject);
+        } else {
+                const wow = await getUser(user)
 
-        if (!wow) throw new TypeError("User was not found.")
+                if (!wow) throw new TypeError("User was not found.")
 
-        return new Promise(async (resolve, reject) => {
-            getGroupRank(group, wow.id).then(finished => {
-                resolve(finished);
-            });
-        })
-    }
-
-    byID(group: Number, user: Number) {
-        if (!group) {
-            throw new TypeError("Please enter a valid GROUP_ID. The format is: roblox.getUserRank(groupid, userid)");
-        }
-        if (!user) {
-            throw new TypeError("Please enter a valid USER_ID. The format is: roblox.getUserRank(groupid, userid)");
-        }
-
-        return new Promise(async (resolve, reject) => {
-            getGroupRank(group, user).then(finished => {
-                resolve(finished);
-            });
-        })
-    }
+                getGroupRank(group, wow.id).then(resolve).catch(reject);
+            
+        };
+    });
 }
