@@ -20,19 +20,8 @@
 ```
 npm i @mybot-rblx/funblox.js
 ```
-# Get group rank
 
-```js
-const roblox = require("@mybot-rblx/funblox.js")
-
-roblox.getUserRank("groupid", "userid").then(respon => {
-    console.log(respon)
-}).catch(() => {
-    console.log("ERR")
-})
-```
-
-# Getusername info
+# getUser Info
 
 ```js
 const roblox = require("@mybot-rblx/funblox.js")
@@ -53,7 +42,58 @@ roblox.getUser("149556783").then(respon => {
     console.log("ERR")
 })
 ```
-# Group Examples
+
+# getPlayerThumbnail
+
+
+
+```js
+const roblox = require("@mybot-rblx/funblox.js")
+
+roblox.getPlayerThumbnail("user_id", "size", "format", [isCircular (false, true)]).then(res => {
+    console.log(res);
+
+}).catch(console.error);
+
+```
+
+# getUserFavoriteGames
+
+```js
+const roblox = require("@mybot-rblx/funblox.js")
+
+roblox.getUserFavoriteGames("user_id").then(res => {
+    console.log(res);
+
+}).catch(console.error);
+
+```
+
+# getUserBundles
+
+```js
+const roblox = require("@mybot-rblx/funblox.js")
+
+roblox.getUserBundles("user_id").then(res => {
+    console.log(res);
+
+}).catch(console.error);
+
+```
+
+# getUserRank
+
+```js
+const roblox = require("@mybot-rblx/funblox.js")
+
+roblox.getUserRank("groupid", "userid").then(respon => {
+    console.log(respon)
+}).catch(() => {
+    console.log("ERR")
+})
+```
+
+# getGroup Info
 
 ```js
 const roblox = require("@mybot-rblx/funblox.js")
@@ -68,6 +108,42 @@ roblox.getGroup("Iron Cafe").then(res => {
 const roblox = require("@mybot-rblx/funblox.js")
 
 roblox.getGroup("10394589").then(res => {
+    console.log(res);
+
+}).catch(console.error);
+
+```
+
+# getCategories
+
+```js
+const roblox = require("@mybot-rblx/funblox.js")
+
+roblox.getCategories().then(res => {
+    console.log(res);
+
+}).catch(console.error);
+
+```
+
+# getFavoritesOfBundle
+
+```js
+const roblox = require("@mybot-rblx/funblox.js")
+
+roblox.getFavoritesOfBundle("bundleId").then(res => {
+    console.log(res);
+
+}).catch(console.error);
+
+```
+
+# getFavoritesOfItem
+
+```js
+const roblox = require("@mybot-rblx/funblox.js")
+
+roblox.getFavoritesOfItem("itemId").then(res => {
     console.log(res);
 
 }).catch(console.error);
