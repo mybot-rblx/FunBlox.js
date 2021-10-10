@@ -118,7 +118,7 @@ interface ShoutAuthor {
 async function wow(identifier: string | number) {
     let roleResponse: AxiosResponse = await groups.get(`v1/groups/${identifier}/roles`);
     let thumbnailResponse: AxiosResponse = await thumbnails.get(`v1/groups/icons?format=Png&groupIds=${identifier}&isCircular=false&size=420x420`);
-    let groupData: AxiosResponse = await groups.get(`v1/groups/${identifier}`)
+    let groupData: AxiosResponseGroup = await groups.get(`v1/groups/${identifier}`)
 
 
     // Time to return!

@@ -2,7 +2,7 @@ import * as Promise from 'bluebird';
 import { catalog } from '../api';
 
 async function getFavorites(bundleId: number | string) {
-    const favorites = await catalog.get(`v1/favorites/bundles/${bundleId}`);
+    const favorites = await catalog.get(`v1/favorites/bundles/${bundleId}/count`);
 
     return favorites.data;
 }

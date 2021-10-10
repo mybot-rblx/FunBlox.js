@@ -28,7 +28,7 @@ interface AxiosResponse {
 export default function getUserBundles(userId: string): Promise<any> {
     return new Promise(async (resolve, reject) => {
         try {
-            const result: AxiosResponse = await catalog.get(`/v1/users/${userId}/bundles`);
+            const result: AxiosResponse = await catalog.get(`v1/users/${Number(userId)}/bundles`);
 
             resolve(result.data.data);
         } catch (error) {

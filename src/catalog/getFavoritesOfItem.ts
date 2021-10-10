@@ -1,18 +1,13 @@
 import * as Promise from 'bluebird';
+import { log } from 'console';
 import { catalog } from '../api';
-
-async function getFavorites(itemId: number | string) {
-    const favorites = await catalog.get(`v1/favorites/assets/${itemId}`);
-
-    return favorites.data;
-}
 
 export default function getFavoritesOfItem(itemId: number | string): Promise<any> {
     return new Promise(async (resolve, reject) => {
         if (Number(itemId)) {
             try {
-                const favorites = await getFavorites(itemId);
-                resolve(favorites);
+                const favorites = await catalog.get(`v1/favorites/assets/${Number(itemId)}/count`);
+                resolve(favorites.data);
             } catch (error) {
                 reject(error);
             }
