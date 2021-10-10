@@ -4,6 +4,7 @@ import getUserRank from './user/getUserRank';
 import getUserFavoriteGames from './user/getUserFavoriteGames';
 import getCategories from './catalog/getCategories';
 import getFavoritesOfBundle from './catalog/getFavoritesOfBundle';
+import getFavoritesOfItem from './catalog/getFavoritesOfItem';
 import getPlayerThumbnail from './user/getPlayerThumbnail';
 import * as api from './api'
 
@@ -15,5 +16,6 @@ export {
     getUserFavoriteGames,
     getFavoritesOfBundle,
     getCategories,
-    getPlayerThumbnail
+    getPlayerThumbnail,
+    getFavoritesOfItem
 }
