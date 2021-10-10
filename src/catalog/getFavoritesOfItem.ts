@@ -1,5 +1,4 @@
 import * as Promise from 'bluebird';
-import { log } from 'console';
 import { catalog } from '../api';
 
 export default function getFavoritesOfItem(itemId: number | string): Promise<any> {
