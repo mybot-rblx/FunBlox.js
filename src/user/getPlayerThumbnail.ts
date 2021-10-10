@@ -2,6 +2,30 @@ import * as Promise from "bluebird";
 import { thumbnails } from "../api";
 import getUser from "./getUser";
 
+interface AxiosResponse {
+    // `data` is the response that was provided by the server
+    data: any,
+  
+    // `status` is the HTTP status code from the server response
+    status: number,
+  
+    // `statusText` is the HTTP status message from the server response
+    statusText: string,
+  
+    // `headers` the HTTP headers that the server responded with
+    // All header names are lower cased and can be accessed using the bracket notation.
+    // Example: `response.headers['content-type']`
+    headers: object,
+  
+    // `config` is the config that was provided to `axios` for the request
+    config: object,
+  
+    // `request` is the request that generated this response
+    // It is the last ClientRequest instance in node.js (in redirects)
+    // and an XMLHttpRequest instance in the browser
+    request: object
+}
+
 interface EligibleSizes {
     body: EligibleSizesData
     bust: EligibleSizesData
@@ -33,7 +57,7 @@ async function getUserThumb(user: number | string, size: string, format: string,
 
       cropType = cropType.toLowerCase()
       if (!Object.keys(eligibleSizes).includes(cropType)) {
-        throw new Error(`Invalid cropping type provided: ${cropType} | Use: ${Object.keys(eligibleSizes).join(', ')}`)
+        reject(`Invalid cropping type provided: ${cropType} | Use: ${Object.keys(eligibleSizes).join(', ')}`)
       }
       const { sizes, endpoint } = eligibleSizes[cropType]
       // Validate size
@@ -42,13 +66,13 @@ async function getUserThumb(user: number | string, size: string, format: string,
         size = `${size}x${size}`
       }
       if (!sizes.includes(size)) {
-        throw new Error(`Invalid size parameter provided: ${size} | [${cropType.toUpperCase()}] Use: ${sizes.join(', ')}`)
+        reject(`Invalid size parameter provided: ${size} | [${cropType.toUpperCase()}] Use: ${sizes.join(', ')}`)
       }
       if (format.toLowerCase() !== 'png' && format.toLowerCase() !== 'jpeg') {
-        throw new Error(`Invalid image type provided: ${format} | Use: png, jpeg`)
+        reject(`Invalid image type provided: ${format} | Use: png, jpeg`)
       }
 
-      let avatarResponse = await thumbnails.get(`v1/users/${endpoint}?userIds=${user}&size=${size}&format=${format}&isCircular=${isCircular}`)
+      const avatarResponse: AxiosResponse = await thumbnails.get(`v1/users/${endpoint}?userIds=${user}&size=${size}&format=${format}&isCircular=${isCircular}`)
 
 
       return resolve({
@@ -63,13 +87,12 @@ export default async function (user: number | string, size: string, format: stri
         if (Number(user)) {
             getUserThumb(user, size, format, isCircular, cropType).catch(reject).then(resolve);
         } else {
-            getUser(user).then(async (user) => {
-                if (user.id) {
-                    getUserThumb(user.id, size, format, isCircular,  cropType = 'body').catch(reject).then(resolve);
+                const userData = await getUser(user)
+                if (userData.id) {
+                    getUserThumb(userData.id, size, format, isCircular, cropType = 'body').catch(reject).then(resolve);
                 } else {
                     reject(new Error('User not found'));
                 }
-            });
         }
     })
 }
