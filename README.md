@@ -24,7 +24,7 @@ npm i @mybot-rblx/funblox.js
 # getUser Info
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getUser("fede1212156").then(respon => {
     console.log(respon)
@@ -34,7 +34,7 @@ roblox.getUser("fede1212156").then(respon => {
 ```
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getUser("149556783").then(respon => {
     console.log(respon)
@@ -48,7 +48,7 @@ roblox.getUser("149556783").then(respon => {
 
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getPlayerThumbnail("user_id", "size", "format", [isCircular (false, true)]).then(res => {
     console.log(res);
@@ -60,7 +60,7 @@ roblox.getPlayerThumbnail("user_id", "size", "format", [isCircular (false, true)
 # getUserFavoriteGames
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getUserFavoriteGames("user_id").then(res => {
     console.log(res);
@@ -72,7 +72,7 @@ roblox.getUserFavoriteGames("user_id").then(res => {
 # getUserBundles
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getUserBundles("user_id").then(res => {
     console.log(res);
@@ -84,7 +84,7 @@ roblox.getUserBundles("user_id").then(res => {
 # getUserRank
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getUserRank("groupid", "userid").then(respon => {
     console.log(respon)
@@ -96,7 +96,7 @@ roblox.getUserRank("groupid", "userid").then(respon => {
 # getGroup Info
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getGroup("Iron Cafe").then(res => {
     console.log(res);
@@ -105,7 +105,7 @@ roblox.getGroup("Iron Cafe").then(res => {
 ```
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getGroup("10394589").then(res => {
     console.log(res);
@@ -117,7 +117,7 @@ roblox.getGroup("10394589").then(res => {
 # getCategories
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getCategories().then(res => {
     console.log(res);
@@ -129,7 +129,7 @@ roblox.getCategories().then(res => {
 # getFavoritesOfBundle
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getFavoritesOfBundle("bundleId").then(res => {
     console.log(res);
@@ -141,7 +141,7 @@ roblox.getFavoritesOfBundle("bundleId").then(res => {
 # getFavoritesOfItem
 
 ```js
-const roblox = require("@mybot-rblx/funblox.js")
+const roblox = require("funblox.js")
 
 roblox.getFavoritesOfItem("itemId").then(res => {
     console.log(res);
