@@ -1,5 +1,4 @@
-
- <img src="https://i.ibb.co/QH6vbJP/20210717-185559-0000.png" width="200"/>
+<img src="https://i.ibb.co/QH6vbJP/20210717-185559-0000.png" width="200"/>
 
 # FunBlox
 **We are a roblox API on development! (Contact us : fedee#9606 / DinoChickenFlexJosh#0656)**
@@ -10,7 +9,8 @@
 **FunBlox is an API for ROBLOX that was developed at the time with JS after two months it was reverted to a package made with TS, today the developers work to add more functions.**
 
 
-[![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main)   [<img src="https://img.shields.io/discord/776614395722989599.svg?style=for-the-badge" width="100"/>](https://discord.gg/3PjNrKW4h7)  [![NPM](https://nodei.co/npm/@mybot-rblx/funblox.js.png)](https://nodei.co/npm/@mybot-rblx/funblox.js/)
+[![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox?ref=badge_shield)
+  [<img src="https://img.shields.io/discord/776614395722989599.svg?style=for-the-badge" width="100"/>](https://discord.gg/3PjNrKW4h7)  [![NPM](https://nodei.co/npm/@mybot-rblx/funblox.js.png)](https://nodei.co/npm/@mybot-rblx/funblox.js/)
 
 
 
@@ -162,5 +162,8 @@ This package is under license (MIT).
 License description:
 
 A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox?ref=badge_large)
 
 # More Coming Soon...
