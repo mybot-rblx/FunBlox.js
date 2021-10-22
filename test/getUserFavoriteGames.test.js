@@ -1,14 +1,12 @@
 const { doesNotMatch } = require("assert");
-const bloxfun = require("../dist");
+const wow = require("../dist");
 
 describe("FunBlox", () => {
     describe("#getUserFavpr", () => {
-        it("should return the user data via name", function (){
-            return bloxfun.getUser("joshuadl12")
-        })
-
         it("should return the user data via id", function () {
-            return bloxfun.getUser(156711358)
+            const data = await wow.getUserFavoriteGames(156711358)
+
+            expect(data).toBeInstanceOf(Array);
         })
     })
 })
