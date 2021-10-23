@@ -1,0 +1,38 @@
+{
+  "name": "funblox.js",
+  "version": "5.0.3",
+  "description": "This package made by fedee#9606 this a roblox API you may use it for your verification or something if you use our package give us credit <3.",
+  "main": "dist/index.js",
+  "module": "./esm.mjs",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build tsconfig.json",
+    "test": "jest",
+    "test:watch": "jest --watchAll --verbose"
+  },
+  "keywords": [
+    "roblox",
+    "api",
+    "rbx",
+    "funblox"
+  ],
+  "author": "Fede1212156",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mybot-rblx/FunBlox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mybot-rblx/FunBlox/issues"
+  },
+  "homepage": "https://github.com/mybot-rblx/FunBlox#readme",
+  "devDependencies": {
+    "@types/node": "16.10.3",
+    "jest": "27.3.1",
+    "typescript": "4.4.4"
+  },
+  "dependencies": {
+    "axios": "^0.23.0",
+    "bluebird": "^3.7.2"
+  }
+}
