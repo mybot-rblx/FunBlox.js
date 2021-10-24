@@ -7,6 +7,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsc --build tsconfig.json",
+    "build:watch": "tsc --build tsconfig.json --watch",
     "test": "jest",
     "test:watch": "jest --watchAll --verbose"
   },
@@ -34,5 +35,6 @@
   "dependencies": {
     "axios": "^0.23.0",
     "bluebird": "^3.7.2"
-  }
+  },
+  "packageManager": "yarn@3.0.2"
 }

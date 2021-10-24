@@ -7,17 +7,19 @@ import getFavoritesOfBundle from './catalog/getFavoritesOfBundle';
 import getFavoritesOfItem from './catalog/getFavoritesOfItem';
 import getPlayerThumbnail from './user/getPlayerThumbnail';
 import getUserBundles from './user/getUserBundles';
+import getPlaceInfo from './game/getPlaceInfo';
 import * as api from './api'
 
 export {
-    getGroup,
-    api,
-    getUser,
-    getUserRank,
-    getUserFavoriteGames,
-    getFavoritesOfBundle,
-    getCategories,
-    getPlayerThumbnail,
-    getFavoritesOfItem,
-    getUserBundles
+  getGroup,
+  api,
+  getUser,
+  getUserRank,
+  getUserFavoriteGames,
+  getFavoritesOfBundle,
+  getCategories,
+  getPlayerThumbnail,
+  getFavoritesOfItem,
+  getUserBundles,
+  getPlaceInfo
 }
