@@ -1,4 +1,3 @@
-const { isExportDeclaration } = require("typescript")
 const hello = require("../dist")
 
 describe("FunBlox", () => {
