@@ -1,4 +1,3 @@
-const { doesNotMatch } = require("assert");
 const wow = require("../dist");
 
 describe("FunBlox", () => {
