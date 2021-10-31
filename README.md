@@ -151,7 +151,7 @@ roblox.getFavoritesOfItem("itemId").then(res => {
 ```
 
 # Package information
-| Daily updates | ❌ |
+| Package information | ✅ |
 | ------- | ------ |
 | Maintained | ✅ |
 | Active Support | ✅|
