@@ -1,4 +1,4 @@
-<img src="https://i.ibb.co/QH6vbJP/20210717-185559-0000.png" width="200"/>
+<img src="https://raw.githubusercontent.com/mybot-rblx/FunBlox/main/FunBlox-Banner.png" width="500"/>
 
 # FunBlox
 **We are a roblox API on development! (Contact us : fedee#9606 / DinoChickenFlexJosh#0656)**
