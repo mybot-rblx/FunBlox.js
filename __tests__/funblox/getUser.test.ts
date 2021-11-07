@@ -1,4 +1,4 @@
-const {getUser} = require('../lib');
+import {getUser} from '../../packages/funblox';
 
 describe('FunBlox', () => {
   describe('#getUser', () => {

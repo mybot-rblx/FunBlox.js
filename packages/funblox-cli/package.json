@@ -1,0 +1,31 @@
+{
+  "name": "funblox-cli",
+  "version": "0.0.0",
+  "description": "FunBlox CLI",
+  "keywords": [
+    "funblox",
+    "typescript",
+    "roblox"
+  ],
+  "author": "joshuadl12 <47647612+joshuadl12@users.noreply.github.com>",
+  "homepage": "https://github.com/mybot-rblx/FunBlox#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mybot-rblx/FunBlox.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/mybot-rblx/FunBlox/issues"
+  }
+}

@@ -1,13 +1,13 @@
-const hello = require('../packages/funblox/lib');
+import {getGroup} from '../../packages/funblox';
 
 describe('FunBlox', () => {
   describe('#getGroup', () => {
     it('should return the group data via name', function() {
-      return hello.getGroup('Target Store');
+      return getGroup('Target Store');
     });
 
     it('should return the group data via id', function() {
-      return hello.getGroup('2700627');
+      return getGroup('2700627');
     });
   });
 });

@@ -1,4 +1,4 @@
-const {getPlayerThumbnail} = require('../packages/funblox/lib');
+import {getPlayerThumbnail} from '../../packages/funblox';
 
 describe('FunBlox', () => {
   describe('#getPlayerThumbnail', () => {

@@ -1,4 +1,4 @@
-const {getUserRank} = require('../packages/funblox/lib');
+import {getUserRank} from '../../packages/funblox';
 
 describe('FunBlox', () => {
   describe('#getUserRank', () => {

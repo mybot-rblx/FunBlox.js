@@ -8,7 +8,7 @@ import getFavoritesOfItem from './catalog/getFavoritesOfItem';
 import getPlayerThumbnail from './user/getPlayerThumbnail';
 import getUserBundles from './user/getUserBundles';
 import getPlaceInfo from './game/getPlaceInfo';
-import * as api from './api'
+import * as api from './api';
 
 export {
   getGroup,
@@ -21,5 +21,5 @@ export {
   getPlayerThumbnail,
   getFavoritesOfItem,
   getUserBundles,
-  getPlaceInfo
-}
+  getPlaceInfo,
+};
