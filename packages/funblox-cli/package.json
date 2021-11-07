@@ -1,6 +1,7 @@
 {
   "name": "funblox-cli",
   "version": "0.0.0",
+  "private": true,
   "description": "FunBlox CLI",
   "keywords": [
     "funblox",
