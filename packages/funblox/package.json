@@ -1,0 +1,42 @@
+{
+  "name": "funblox.js",
+  "version": "5.0.4",
+  "description": "This package made by fedee#9606 this a roblox API you may use it for your verification or something if you use our package give us credit <3.",
+  "source": "src/index.ts",
+  "main": "lib/index.js",
+  "module": "lib/module.js",
+  "types": "lib/types.d.ts",
+  "scripts": {
+    "build": "parcel build",
+    "build:watch": "parcel watch",
+    "watch": "parcel watch",
+    "test": "jest",
+    "test:watch": "jest --watchAll --verbose"
+  },
+  "keywords": [
+    "roblox",
+    "api",
+    "rbx",
+    "funblox"
+  ],
+  "author": "Fede1212156",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mybot-rblx/FunBlox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mybot-rblx/FunBlox/issues"
+  },
+  "homepage": "https://github.com/mybot-rblx/FunBlox#readme",
+  "devDependencies": {
+    "@types/bluebird": "^3.5.36",
+    "@types/node": "16.10.3",
+    "parcel": "^2.0.0",
+    "typescript": "4.4.4"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bluebird": "^3.7.2"
+  }
+}
