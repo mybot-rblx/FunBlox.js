@@ -6,7 +6,7 @@
 **Emails: joshuadl12@mybot-rblx.tk**
 
 # Project Information
-**FunBlox is an API for ROBLOX that was developed at the time with JS after two months it was reverted to a package made with TS, today the developers work to add more functions.**
+**FunBlox is an API wrapper for ROBLOX that was developed at the time with JS after two months it was reverted to a package made with TS, today the developers work to add more functions.**
 
 
 [![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox?ref=badge_shield)
@@ -18,7 +18,7 @@
 # Instructions
 
 ```
-npm i @mybot-rblx/funblox.js
+npm i funblox.js
 ```
 
 # getUser Info
