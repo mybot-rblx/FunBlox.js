@@ -2,9 +2,9 @@ name: 'Funblox CI: Node 16.x'
 
 on:
   push:
-    branches: [ ** ]
+    branches: [ main ]
   pull_request:
-    branches: [ ** ]
+    branches: [ main ]
 
 jobs:
   install:
