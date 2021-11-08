@@ -7,6 +7,7 @@
     "scripts": {
         "publish": "lerna publish",
         "build": "lerna run build",
+        "build:ci": "lerna run build:ci",
         "test": "jest"
     },
     "description": "A monorepo of funblox packages",

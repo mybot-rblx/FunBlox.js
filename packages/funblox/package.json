@@ -12,6 +12,7 @@
   "scripts": {
     "build": "parcel build",
     "build:watch": "parcel watch",
+    "build:ci": "parcel build ./packages/funblox",
     "watch": "parcel watch",
     "test": "jest",
     "test:watch": "jest --watchAll --verbose"
