@@ -10,7 +10,7 @@
     "@mybot-rblx:funblox.js": "https://gitlab.com/api/v4/projects/30710493/packages/npm/"
   },
   "scripts": {
-    "build": "parcel build",
+    "build": "../../node_modules/.bin/parcel build",
     "build:watch": "parcel watch",
     "build:ci": "parcel build ./packages/funblox",
     "watch": "parcel watch",
