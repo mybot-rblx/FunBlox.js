@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 jobs:
-  12.x:
+  node_12:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
       - name: Test project
         run: yarn run test
     
-  14.x:
+  node_14:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,7 @@ jobs:
         run: yarn run build
       - name: Test project
         run: yarn run test
-  16.x:
+  node_16:
     runs-on: ubuntu-latest
 
     steps:
