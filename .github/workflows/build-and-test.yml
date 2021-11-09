@@ -37,7 +37,7 @@ jobs:
         run: yarn
       - name: Build project
         run: yarn run build
-        - name: Test project
+      - name: Test project
         run: yarn run test
   16.x:
     runs-on: ubuntu-latest
