@@ -1,4 +1,4 @@
-name: 'Funblox CI: Node 16.x'
+name: 'Funblox CI: Build & Test'
 
 on:
   push:
@@ -8,7 +8,38 @@ on:
     branches: [ main ]
 
 jobs:
-  install:
+  12.x:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install dependencies
+        run: yarn
+      - name: Build project
+        run: yarn run build
+      - name: Test project
+        run: yarn run test
+    
+  14.x:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: Install dependencies
+        run: yarn
+      - name: Build project
+        run: yarn run build
+        - name: Test project
+        run: yarn run test
+  16.x:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,28 +50,7 @@ jobs:
           node-version: '16.x'
       - name: Install dependencies
         run: yarn
-    
-  build:
-    needs: install
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '16.x'
       - name: Build project
         run: yarn run build
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '16.x'
       - name: Test project
         run: yarn run test
