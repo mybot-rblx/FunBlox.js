@@ -1,4 +1,4 @@
-import {getFavoritesOfBundle} from '../../packages/funblox/lib/types';
+import {getFavoritesOfBundle} from '../../packages/funblox';
 
 describe('FunBlox', () => {
   describe('#getUserBundles', () => {
