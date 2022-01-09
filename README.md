@@ -1,9 +1,7 @@
 <img src="https://media.discordapp.net/attachments/700857793443528737/923246821583781908/png_20211222_131305_0000.png" width="800"/>
 
 # FunBlox
-**We are a roblox API wrapper on development! (Contact us : fedee#9606 / DinoChickenFlexJosh#0656)**
-
-**Emails: joshuadl12@mybot-rblx.tk**
+**We are a roblox API wrapper on development! (Contact us : fedee#9606 / DogeFlexJosh#0656)**
 
 # Project Information
 **FunBlox is an API wrapper for ROBLOX that was developed at the time with JS after two months it was reverted to a package made with TS, today the developers work to add more functions.**
