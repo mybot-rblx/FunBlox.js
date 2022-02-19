@@ -1,5 +1,7 @@
+/* eslint-disable max-len */
+/* eslint-disable require-jsdoc */
 import * as Promise from 'bluebird';
-import { games } from '../api'
+import {games} from '../api';
 
 interface AxiosResponse {
     data: any;
@@ -11,17 +13,17 @@ interface AxiosResponse {
 }
 
 export default function getUserFavoriteGames(userId: number | string, limit: number): Promise<Array<any>> {
-    return new Promise(async (resolve, reject) => {
-        if (Number(userId)) {
-            try {
-                const favoriteGames: AxiosResponse = await games.get(`v2/users/${userId}/favorite/games?accessFilter=All&limit=${limit}&sortOrder=Asc`)
+  return new Promise(async (resolve, reject) => {
+    if (Number(userId)) {
+      try {
+        const favoriteGames: AxiosResponse = await games.get(`v2/users/${userId}/favorite/games?accessFilter=All&limit=${limit}&sortOrder=Asc`);
 
-                resolve(favoriteGames.data.data)
-            } catch (error) {
-                reject(error);
-            }
-        } else {
-            reject(new Error('userId must be a number'));
-        }
-    });
+        resolve(favoriteGames.data.data);
+      } catch (error) {
+        reject(error);
+      }
+    } else {
+      reject(new Error('userId must be a number'));
+    }
+  });
 }

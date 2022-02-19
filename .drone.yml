@@ -1,10 +1,10 @@
 kind: pipeline
-name: default
+name: Test
 
 steps:
-    - name: test
-      image: node
-      commands:
-        - yarn
-        - yarn build
-        - yarn run test
+  - name: test
+    image: node
+    commands:
+      - yarn
+      - yarn build
+      - yarn run test

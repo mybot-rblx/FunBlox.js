@@ -1,5 +1,8 @@
-import * as Promise from 'bluebird';
-import { friends, thumbnails, users, api } from "../api";
+/* eslint-disable no-tabs */
+/* eslint-disable max-len */
+/* eslint-disable require-jsdoc */
+import * as Bluebird from 'bluebird';
+import {friends, thumbnails, users, api} from '../api';
 
 interface AxiosResponse {
   // `data` is the response that was provided by the server
@@ -26,77 +29,84 @@ interface AxiosResponse {
 }
 
 interface UserResponse {
-  "id": number,
-  "username": string,
-  "description": string,
-  "status": string,
-  "created": string,
-  "avatar_url": string,
-  "friends": {
-    "count": number,
-    "ids": Array<number>
+  'id': number,
+  'username': string,
+  'description': string,
+  'created': string,
+  'avatar_url': string,
+  'friends': {
+    'count': number,
+    'ids': Array<number>
   },
-  "followers": {
-    "count": number,
-    "ids": Array<number>
+  'followers': {
+    'count': number,
+    'ids': Array<number>
   },
-  "following": {
-    "count": number,
-    "ids": Array<number>
+  'following': {
+    'count': number,
+    'ids': Array<number>
   }
 }
 
 async function getUserDetails(userid: number | string): Promise<UserResponse> {
-  const basicData: AxiosResponse = await users.get(`v1/users/${userid}/`)
-  const statusResponse: AxiosResponse = await users.get(`v1/users/${userid}/status`)
-  const followersResponse: AxiosResponse = await friends.get(`v1/users/${userid}/followers`)
-  const friendsResponse: AxiosResponse = await friends.get(`v1/users/${userid}/friends`)
+  const basicData: AxiosResponse = await users.get(`v1/users/${userid}/`);
+  const followersResponse: AxiosResponse = await friends.get(`v1/users/${userid}/followers`);
+  const friendsResponse: AxiosResponse = await friends.get(`v1/users/${userid}/friends`);
   const followingResponse: AxiosResponse = await friends.get(`v1/users/${userid}/followings`);
-  const avatarResponse: AxiosResponse = await thumbnails.get(`v1/users/avatar?userIds=${userid}&size=720x720&format=Png&isCircular=false`)
+  const avatarResponse: AxiosResponse = await thumbnails.get(`v1/users/avatar?userIds=${userid}&size=720x720&format=Png&isCircular=false`);
 
-  let followersArr = [];
-  followersResponse.data.data.forEach(user => {
+  // Counter for followings, friends and followers
+  const followingCountResponse: AxiosResponse = await friends.get(`v1/users/${userid}/followings/count`);
+  const friendsCountResponse: AxiosResponse = await friends.get(`v1/users/${userid}/friends/count`);
+  const followersCountResponse: AxiosResponse = await friends.get(`v1/users/${userid}/followers/count`);
+
+  // Use raw data to get the numbers
+  const followingCount: number = followingCountResponse.data.count;
+  const friendsCount: number = friendsCountResponse.data.count;
+  const followersCount: number = followersCountResponse.data.count;
+
+  const followersArr = [];
+  followersResponse.data.data.forEach((user) => {
     followersArr.push(user.id);
   });
-  let friendsArr = [];
-  friendsResponse.data.data.forEach(user => {
+  const friendsArr = [];
+  friendsResponse.data.data.forEach((user) => {
     friendsArr.push(user.id);
   });
-  let followingArr = [];
-  followingResponse.data.data.forEach(user => {
+  const followingArr = [];
+  followingResponse.data.data.forEach((user) => {
     followingArr.push(user.id);
   });
 
   return {
-    "id": basicData.data.id,
-    "username": basicData.data.name,
-    "description": basicData.data.description,
-    "status": statusResponse.data.status,
-    "created": basicData.data.created,
-    "avatar_url": avatarResponse.data.data[0].imageUrl,
-    "friends": {
-      "count": friendsArr.length,
-      "ids": friendsArr
+    'id': basicData.data.id,
+    'username': basicData.data.name,
+    'description': basicData.data.description,
+    'created': basicData.data.created,
+    'avatar_url': avatarResponse.data.data[0].imageUrl,
+    'friends': {
+      'count': friendsCount,
+      'ids': friendsArr,
     },
-    "followers": {
-      "count": followersArr.length,
-      "ids": followersArr
+    'followers': {
+      'count': followersCount,
+      'ids': followersArr,
     },
-    "following": {
-      "count": followingArr.length,
-      "ids": followingArr
-    }
+    'following': {
+      'count': followingCount,
+      'ids': followingArr,
+    },
   };
 }
 
 export default async function(identifier: number | string): Promise<UserResponse> {
-  return new Promise(async (resolve, reject) => {
+  return new Bluebird(async (resolve, reject) => {
     if (Number(identifier)) {
       getUserDetails(identifier).then(resolve).catch(reject);
     } else {
-      const response: AxiosResponse = await api.get(`users/get-by-username?username=${identifier}`)
+      const response: AxiosResponse = await api.get(`users/get-by-username?username=${identifier}`);
 
-      if (response.data.success === false) return reject("Not found. - getUser.js");
+      if (response.data.success === false) return reject(new Error('Not found. - getUser.js'));
 
       getUserDetails(response.data.Id).then(resolve).catch(reject);
     }

@@ -6,12 +6,12 @@
         "moduleResolution": "node",
         "module": "commonjs",
         "allowJs": true,
-		"target": "es2020", // Node.js 14
+		"target": "es2020",
 		"lib": [
 			"esnext", "esnext.array", "esnext.asynciterable", "esnext.intl", "esnext.symbol"
-		],
+		]
 	},
 	"include": [
 		"src"
-],
+    ]
 }

@@ -10,7 +10,7 @@
     "@mybot-rblx:funblox.js": "https://gitlab.com/api/v4/projects/30710493/packages/npm/"
   },
   "scripts": {
-    "build": "../../node_modules/.bin/parcel build",
+    "build": "tsup src/index.ts",
     "build:watch": "parcel watch",
     "build:ci": "parcel build ./packages/funblox",
     "watch": "parcel watch",
@@ -36,11 +36,11 @@
   "devDependencies": {
     "@types/bluebird": "^3.5.36",
     "@types/node": "16.10.3",
-    "parcel": "^2.0.0",
+    "tsup": "^5.11.13",
     "typescript": "4.4.4"
   },
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^0.26.0",
     "bluebird": "^3.7.2"
   }
 }
