@@ -9,7 +9,7 @@ interface AxiosResponse {
 
 /**
  * @param {string} placeId
- * @return {Bluebird<Number>}
+ * @return {Promise<Number>}
 */
 export default function getUniverseId(placeId: number | string): Promise<number> {
   return new Bluebird(async (resolve, reject) => {

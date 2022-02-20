@@ -119,62 +119,53 @@ interface ShoutAuthor {
 
 /**
  *
- * @param {string | number} identifier
- * @return {Promise<GroupData>}
- */
-async function wow(identifier: string | number): Promise<GroupData> {
-  const roleResponse: AxiosResponse =
-    await groups.get(`v1/groups/${identifier}/roles`);
-  const thumbnailResponse: AxiosResponse = await thumbnails.get(`v1/groups/icons?format=Png&groupIds=${identifier}&isCircular=false&size=420x420`);
-  const groupData: AxiosResponseGroup = await groups.get(`v1/groups/${identifier}`);
-
-
-  // Time to return!
-  const returnable = {
-    id: groupData.data.id || null,
-    name: groupData.data.name || null,
-    description: groupData.data.description || null,
-    owner: groupData.data.owner || null,
-    membercount: groupData.data.memberCount || null,
-    thumbnail: thumbnailResponse.data.imageUrl || null,
-    shout: null,
-    roles: [],
-  };
-
-  if (groupData.data.shout) {
-    returnable.shout = {
-      content: groupData.data.shout.body,
-      created: groupData.data.shout.created,
-      author: {
-        id: groupData.data.shout.poster.userId,
-        username: groupData.data.shout.poster.username,
-        displayName: groupData.data.shout.poster.displayName,
-      },
-    };
-  }
-
-  for (const role of roleResponse.data.roles) {
-    const i = roleResponse.data.roles.indexOf(role);
-    returnable.roles.push({'id': role.id, 'name': role.name, 'membercount': role.memberCount});
-    if (i + 1 == roleResponse.data.roles.length) return returnable;
-  }
-}
-
-/**
- *
  * @param {number | string} identifier
  * @return {Promise<GroupData>}
  */
-export default function(identifier: number | string): Promise<GroupData> {
+export default function getGroup(identifier: number | string): Promise<GroupData> {
   return new Bluebird(async (resolve, reject) => {
     if (Number(identifier)) {
-      wow(identifier).then(resolve).catch(reject);
+      const roleResponse: AxiosResponse =
+    await groups.get(`v1/groups/${identifier}/roles`);
+      const thumbnailResponse: AxiosResponse = await thumbnails.get(`v1/groups/icons?format=Png&groupIds=${identifier}&isCircular=false&size=420x420`);
+      const groupData: AxiosResponseGroup = await groups.get(`v1/groups/${identifier}`);
+
+
+      // Time to return!
+      const returnable = {
+        id: groupData.data.id || null,
+        name: groupData.data.name || null,
+        description: groupData.data.description || null,
+        owner: groupData.data.owner || null,
+        membercount: groupData.data.memberCount || null,
+        thumbnail: thumbnailResponse.data.imageUrl || null,
+        shout: null,
+        roles: [],
+      };
+
+      if (groupData.data.shout) {
+        returnable.shout = {
+          content: groupData.data.shout.body,
+          created: groupData.data.shout.created,
+          author: {
+            id: groupData.data.shout.poster.userId,
+            username: groupData.data.shout.poster.username,
+            displayName: groupData.data.shout.poster.displayName,
+          },
+        };
+      }
+
+      for (const role of roleResponse.data.roles) {
+        const i = roleResponse.data.roles.indexOf(role);
+        returnable.roles.push({'id': role.id, 'name': role.name, 'membercount': role.memberCount});
+        if (i + 1 == roleResponse.data.roles.length) return returnable;
+      }
     } else {
       const searchRes: AxiosResponse = await groups.get(`v1/groups/search/lookup?groupName=${identifier}`);
 
       if (!searchRes.data.data.length) throw new Error('Group not found');
 
-      const data: Promise<GroupData> = wow(searchRes.data.data[0].id);
+      const data: Promise<GroupData> = getGroup(searchRes.data.data[0].id);
       if (data) {
         resolve(data);
       } else {

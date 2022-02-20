@@ -54,42 +54,36 @@ const eligibleSizes: EligibleSizes = {
   },
 };
 
-async function getUserThumb(user: number | string, size: string, format: string, isCircular: boolean, cropType: string) {
-  return new Bluebird(async (resolve, reject) => {
-    cropType = cropType.toLowerCase();
-    if (!Object.keys(eligibleSizes).includes(cropType)) {
-      reject(new TypeError(`Invalid cropping type provided: ${cropType} | Use: ${Object.keys(eligibleSizes).join(', ')}`));
-    }
-    const {sizes, endpoint} = eligibleSizes[cropType];
-    // Validate size
-    size = size || sizes[sizes.length - 1];
-    if (typeof size === 'number') {
-      size = `${size}x${size}`;
-    }
-    if (!sizes.includes(size)) {
-      reject(new TypeError(`Invalid size parameter provided: ${size} | [${cropType.toUpperCase()}] Use: ${sizes.join(', ')}`));
-    }
-    if (format.toLowerCase() !== 'png' && format.toLowerCase() !== 'jpeg') {
-      reject(new TypeError(`Invalid image type provided: ${format} | Use: png, jpeg`));
-    }
-
-    const avatarResponse: AxiosResponse = await thumbnails.get(`v1/users/${endpoint}?userIds=${user}&size=${size}&format=${format}&isCircular=${isCircular}`);
-
-
-    return resolve({
-      'Thumbnail': avatarResponse.data.data[0].imageUrl,
-    });
-  });
-}
-
-export default async function(user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<Object> {
+export default async function getUserThumb(user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<Object> {
   return new Bluebird(async (resolve, reject) => {
     if (Number(user)) {
-      getUserThumb(user, size, format, isCircular, cropType).catch(reject).then(resolve);
+      cropType = cropType.toLowerCase();
+      if (!Object.keys(eligibleSizes).includes(cropType)) {
+        reject(new TypeError(`Invalid cropping type provided: ${cropType} | Use: ${Object.keys(eligibleSizes).join(', ')}`));
+      }
+      const {sizes, endpoint} = eligibleSizes[cropType];
+      // Validate size
+      size = size || sizes[sizes.length - 1];
+      if (typeof size === 'number') {
+        size = `${size}x${size}`;
+      }
+      if (!sizes.includes(size)) {
+        reject(new TypeError(`Invalid size parameter provided: ${size} | [${cropType.toUpperCase()}] Use: ${sizes.join(', ')}`));
+      }
+      if (format.toLowerCase() !== 'png' && format.toLowerCase() !== 'jpeg') {
+        reject(new TypeError(`Invalid image type provided: ${format} | Use: png, jpeg`));
+      }
+
+      const avatarResponse: AxiosResponse = await thumbnails.get(`v1/users/${endpoint}?userIds=${user}&size=${size}&format=${format}&isCircular=${isCircular}`);
+
+
+      return resolve({
+        'Thumbnail': avatarResponse.data.data[0].imageUrl,
+      });
     } else {
       const userData = await getUser(user);
       if (userData.id) {
-        getUserThumb(userData.id, size, format, isCircular, cropType = 'body').catch(reject).then(resolve);
+        getUserThumb(userData.id, size, format, isCircular, cropType).catch(reject).then(resolve);
       } else {
         reject(new Error('User not found'));
       }
