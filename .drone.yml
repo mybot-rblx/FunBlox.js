@@ -1,6 +1,5 @@
 kind: pipeline
-type: docker
-name: Test
+name: default
 
 platform:
    os: linux
