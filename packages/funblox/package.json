@@ -1,6 +1,6 @@
 {
   "name": "funblox.js",
-  "version": "6.0.0",
+  "version": "6.0.0-canary.0",
   "description": "This package made by fedee#9606 this a roblox API you may use it for your verification or something if you use our package give us credit <3.",
   "source": "src/index.ts",
   "main": "lib/index.js",
@@ -40,7 +40,6 @@
     "typescript": "4.5.5"
   },
   "dependencies": {
-    "axios": "^0.26.0",
-    "undici": "^4.14.1"
+    "axios": "^0.26.0"
   }
 }

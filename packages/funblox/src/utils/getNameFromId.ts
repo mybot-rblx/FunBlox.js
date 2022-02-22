@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import {request} from 'undici';
+import {api} from '../api';
 
 interface IDFromUsername {
     Id: number;
@@ -12,14 +12,10 @@ interface IDFromUsername {
  */
 export default function getIdFromName(username: string): Promise<number> {
   return new Promise(async (resolve, reject) => {
-    const apiLink = 'https://api.roproxy.com';
-    const {
-      statusCode,
-      body,
-    } = await request(`${apiLink}/users/get-by-username?username=${username}`);
-    const data: IDFromUsername = await body.json();
+    const res = await api.get(`users/get-by-username?username=${username}`);
+    const data: IDFromUsername = await res.data;
 
-    if (statusCode !== 200) return reject(new Error('Not found. - getUser.js'));
+    if (res.status !== 200) return reject(new Error('Not found. - getUser.js'));
 
     resolve(data.Id);
   });
