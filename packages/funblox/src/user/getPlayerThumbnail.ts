@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
-import * as Bluebird from 'bluebird';
 import {thumbnails} from '../api';
 import getUser from './getUser';
 
@@ -55,7 +54,7 @@ const eligibleSizes: EligibleSizes = {
 };
 
 export default async function getUserThumb(user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<Object> {
-  return new Bluebird(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if (Number(user)) {
       cropType = cropType.toLowerCase();
       if (!Object.keys(eligibleSizes).includes(cropType)) {

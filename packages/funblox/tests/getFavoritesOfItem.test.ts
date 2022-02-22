@@ -1,4 +1,4 @@
-import {getFavoritesOfItem} from '../../packages/funblox';
+import {getFavoritesOfItem} from '../';
 
 describe('FunBlox', () => {
   describe('#getFavoritesOfItem', () => {

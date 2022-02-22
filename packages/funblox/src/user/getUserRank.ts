@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
-import * as Bluebird from 'bluebird';
 import {groups} from '../api';
-import getUser from './getUser';
+import getNameFromId from '../utils/getNameFromId';
 
 interface AxiosResponse {
     // `data` is the response that was provided by the server
@@ -34,13 +33,15 @@ interface RoleObject {
 }
 
 /**
+ * **getGroupRank**
  *
+ * Gets user's group rank within a group
  * @param {number | string} groupId
  * @param {number | string} user
- * @return {Promise<RoleObject>}
+ * @return {Promise<RoleObject>} A Promise that resolves to the user's role in the group
  */
 export default function getGroupRank(groupId: number | string, user: number | string): Promise<RoleObject> {
-  return new Bluebird(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if (Number(user)) {
       const body: AxiosResponse = await groups.get(`v2/users/${Number(user)}/groups/roles`);
 
@@ -54,11 +55,16 @@ export default function getGroupRank(groupId: number | string, user: number | st
 
       resolve(groupObject.role);
     } else {
-      const wow = await getUser(user);
+      // Ensure it is an acutal string and get the user's id
+      if (typeof user === 'string') {
+        const wow = await getNameFromId(user);
 
-      if (!wow) return reject(new TypeError('User was not found.'));
+        if (!wow) return reject(new TypeError('User was not found.'));
 
-      getGroupRank(groupId, wow.id).then(resolve).catch(reject);
+        const result = await getGroupRank(groupId, wow);
+
+        resolve(result);
+      }
     }
   });
 }

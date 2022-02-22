@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-import * as Bluebird from 'bluebird';
 import {catalog} from '../api';
 
 interface AxiosResponse {
@@ -44,7 +43,7 @@ interface BundleCreator {
  * @return {Promise<Array<any>>}
  */
 export default function getUserBundles(userId: string | number): Promise<Bundle> {
-  return new Bluebird(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       const result: AxiosResponse = await catalog.get(`v1/users/${Number(userId)}/bundles`);
 

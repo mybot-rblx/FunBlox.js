@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-import * as Bluebird from 'bluebird';
 import {catalog} from '../api';
 
 /**
@@ -8,7 +7,7 @@ import {catalog} from '../api';
  * @return {Promise<string>}
  */
 export default function getFavoritesOfItem(itemId: number | string): Promise<string> {
-  return new Bluebird(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if (Number(itemId)) {
       try {
         const favorites = await catalog.get(`v1/favorites/assets/${Number(itemId)}/count`);

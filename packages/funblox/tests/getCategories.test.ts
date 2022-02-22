@@ -1,4 +1,4 @@
-import {getCategories} from '../../packages/funblox';
+import {getCategories} from '../';
 
 describe('FunBlox', () => {
   describe('#getCategories', () => {

@@ -1,6 +1,6 @@
+/* eslint-disable new-cap */
 /* eslint-disable max-len */
 /* eslint-disable require-jsdoc */
-import * as Promise from 'bluebird';
 import {games} from '../api';
 
 interface AxiosResponse {

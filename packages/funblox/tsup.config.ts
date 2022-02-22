@@ -3,10 +3,14 @@ import {defineConfig} from 'tsup';
 export default defineConfig({
   entry: ['src/index.ts'],
   outDir: 'lib',
+  minify: true,
+  minifyIdentifiers: true,
+  minifyWhitespace: true,
+  minifySyntax: true,
   splitting: true,
   sourcemap: true,
-  clean: false,
+  clean: true,
   dts: true,
-  skipNodeModulesBundle: false,
+  bundle: true,
   format: ['esm', 'cjs'],
 });

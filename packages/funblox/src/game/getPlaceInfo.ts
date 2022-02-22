@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import {games, thumbnails} from '../api';
-import * as Promise from 'bluebird';
 
 interface GameData {
   id: number,

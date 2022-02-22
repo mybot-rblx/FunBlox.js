@@ -1,8 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable require-jsdoc */
 import {games} from '../api';
-import * as Bluebird from 'bluebird';
-
 // Types
 interface VotesData {
     upVotes: number;
@@ -20,7 +18,7 @@ export default function getGameVotes(id: number | string): Promise<VotesData> {
       return false;
     }
   }
-  return new Bluebird(async function(resolve, reject) {
+  return new Promise(async function(resolve, reject) {
     if (Number(id)) {
       const data = await games.get(`v1/games/votes?universeIds=${id}`);
       if (statusIs500(data.status)) {

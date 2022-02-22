@@ -1,4 +1,4 @@
-import {getUserBundles} from '../../packages/funblox';
+import {getUserBundles} from '../';
 
 describe('FunBlox', () => {
   describe('#getUserBundles', () => {

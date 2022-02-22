@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import * as Bluebird from 'bluebird';
+import {AxiosResponse} from 'axios';
 import {groups, thumbnails} from '../api';
 
 interface GroupData {
@@ -32,85 +32,6 @@ interface Shout {
     author: ShoutAuthor
 }
 
-interface OriginalShoutPosterData {
-    buildersClubMembershipType: string,
-    userId: number,
-    username: string,
-    displayName: string
-}
-interface OriginalShoutData {
-    body: string,
-    poster: OriginalShoutPosterData
-    created: string,
-    updated: string
-}
-
-interface OriginalGroupOwnerData {
-    buildersClubMembershipType: string,
-    userId: number,
-    username: string,
-    displayName: string
-}
-interface OriginalGroupData {
-    id: number,
-    name: string,
-    description: string,
-    owner: OriginalGroupOwnerData
-    shout: OriginalShoutData,
-    memberCount: number,
-    isBuildersClubOnly: boolean,
-    publicEntryAllowed: boolean,
-    isLocked: boolean
-}
-
-interface AxiosResponseGroup {
-    // `data` is the response that was provided by the server
-    data: OriginalGroupData,
-
-    // `status` is the HTTP status code from the server response
-    status: number,
-
-    // `statusText` is the HTTP status message from the server response
-    statusText: string,
-
-    // `headers` the HTTP headers that the server responded with
-    // eslint-disable-next-line max-len
-    // All header names are lower cased and can be accessed using the bracket notation.
-    // Example: `response.headers['content-type']`
-    headers: object,
-
-    // `config` is the config that was provided to `axios` for the request
-    config: object,
-
-    // `request` is the request that generated this response
-    // It is the last ClientRequest instance in node.js (in redirects)
-    // and an XMLHttpRequest instance in the browser
-    request: object
-}
-
-interface AxiosResponse {
-    // `data` is the response that was provided by the server
-    data: any,
-
-    // `status` is the HTTP status code from the server response
-    status: number,
-
-    // `statusText` is the HTTP status message from the server response
-    statusText: string,
-
-    // `headers` the HTTP headers that the server responded with
-    // All header names are lower cased and can be accessed using the bracket notation.
-    // Example: `response.headers['content-type']`
-    headers: object,
-
-    // `config` is the config that was provided to `axios` for the request
-    config: object,
-
-    // `request` is the request that generated this response
-    // It is the last ClientRequest instance in node.js (in redirects)
-    // and an XMLHttpRequest instance in the browser
-    request: object
-}
 interface ShoutAuthor {
     id: number,
     username: string
@@ -123,51 +44,56 @@ interface ShoutAuthor {
  * @return {Promise<GroupData>}
  */
 export default function getGroup(identifier: number | string): Promise<GroupData> {
-  return new Bluebird(async (resolve, reject) => {
-    if (Number(identifier)) {
-      const roleResponse: AxiosResponse =
-    await groups.get(`v1/groups/${identifier}/roles`);
+  return new Promise(async (resolve, reject) => {
+    if (typeof identifier === 'number') {
+      const roleResponse: AxiosResponse = await groups.get(`v1/groups/${identifier}/roles`);
       const thumbnailResponse: AxiosResponse = await thumbnails.get(`v1/groups/icons?format=Png&groupIds=${identifier}&isCircular=false&size=420x420`);
-      const groupData: AxiosResponseGroup = await groups.get(`v1/groups/${identifier}`);
+      const groupData: AxiosResponse = await groups.get(`v1/groups/${identifier}`);
+      const roles = await roleResponse.data;
+      const group = await groupData.data;
+      const thumbnail = await thumbnailResponse.data;
 
 
       // Time to return!
       const returnable = {
-        id: groupData.data.id || null,
-        name: groupData.data.name || null,
-        description: groupData.data.description || null,
-        owner: groupData.data.owner || null,
-        membercount: groupData.data.memberCount || null,
-        thumbnail: thumbnailResponse.data.imageUrl || null,
+        id: group.id || null,
+        name: group.name || null,
+        description: group.description || null,
+        owner: group.owner || null,
+        membercount: group.memberCount || null,
+        thumbnail: thumbnail.data[0].imageUrl || null,
         shout: null,
         roles: [],
       };
 
-      if (groupData.data.shout) {
+      if (group.shout) {
         returnable.shout = {
-          content: groupData.data.shout.body,
-          created: groupData.data.shout.created,
+          content: group.shout.body,
+          created: group.shout.created,
           author: {
-            id: groupData.data.shout.poster.userId,
-            username: groupData.data.shout.poster.username,
-            displayName: groupData.data.shout.poster.displayName,
+            id: group.shout.poster.userId,
+            username: group.shout.poster.username,
+            displayName: group.shout.poster.displayName,
           },
         };
       }
 
-      for (const role of roleResponse.data.roles) {
-        const i = roleResponse.data.roles.indexOf(role);
+      for (const role of roles.roles) {
+        const i = roles.roles.indexOf(role);
         returnable.roles.push({'id': role.id, 'name': role.name, 'membercount': role.memberCount});
-        if (i + 1 == roleResponse.data.roles.length) return returnable;
+        if (i + 1 == roles.roles.length) return resolve(returnable);
       }
+
+      return resolve(returnable);
     } else {
       const searchRes: AxiosResponse = await groups.get(`v1/groups/search/lookup?groupName=${identifier}`);
+      const search = await searchRes.data;
 
-      if (!searchRes.data.data.length) throw new Error('Group not found');
+      if (!search.data.length) throw new Error('Group not found');
 
-      const data: Promise<GroupData> = getGroup(searchRes.data.data[0].id);
+      const data: GroupData = await getGroup(search.data[0].id);
       if (data) {
-        resolve(data);
+        return resolve(data);
       } else {
         reject(new Error('Group not found'));
       }

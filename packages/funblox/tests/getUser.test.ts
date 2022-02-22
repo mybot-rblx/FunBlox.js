@@ -1,4 +1,4 @@
-import {getUser} from '../../packages/funblox';
+import {getUser} from '../';
 
 describe('FunBlox', () => {
   describe('#getUser', () => {

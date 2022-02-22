@@ -1,8 +1,9 @@
+/* eslint-disable no-new-wrappers */
 /* eslint-disable no-tabs */
 /* eslint-disable max-len */
 /* eslint-disable require-jsdoc */
-import * as Bluebird from 'bluebird';
-import {friends, thumbnails, users, api} from '../api';
+import {friends, thumbnails, users} from '../api';
+import getNameFromId from '../utils/getNameFromId';
 
 interface AxiosResponse {
     // `data` is the response that was provided by the server
@@ -53,9 +54,9 @@ interface UserResponse {
  * @param {number | string} identifier
  * @return {Promise<UserResponse>}
  */
-export default async function getUserDetails(identifier: number | string): Promise<UserResponse> {
-  return new Bluebird(async (resolve, reject) => {
-    if (Number(identifier)) {
+export default async function getUser(identifier: number | string): Promise<UserResponse> {
+  return new Promise(async (resolve, reject) => {
+    if (typeof identifier === 'number') {
       const userid = Number(identifier);
 
       const basicData: AxiosResponse = await users.get(`v1/users/${userid}/`);
@@ -87,7 +88,7 @@ export default async function getUserDetails(identifier: number | string): Promi
         followingArr.push(user.id);
       });
 
-      return {
+      resolve({
         'id': basicData.data.id,
         'username': basicData.data.name,
         'description': basicData.data.description,
@@ -105,13 +106,16 @@ export default async function getUserDetails(identifier: number | string): Promi
           'count': followingCount,
           'ids': followingArr,
         },
-      };
+      });
     } else {
-      const response: AxiosResponse = await api.get(`users/get-by-username?username=${identifier}`);
+      if (typeof identifier === 'string') {
+        const wow = await getNameFromId(identifier);
+        const bruh = await getUser(wow);
 
-      if (response.data.success === false) return reject(new Error('Not found. - getUser.js'));
-
-      getUserDetails(response.data.Id).then(resolve).catch(reject);
+        resolve(bruh);
+      } else {
+        reject(new TypeError('Identifier must be a number or a string'));
+      }
     }
   });
 }

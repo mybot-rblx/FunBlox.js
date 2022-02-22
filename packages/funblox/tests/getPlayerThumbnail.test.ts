@@ -1,4 +1,4 @@
-import {getPlayerThumbnail} from '../../packages/funblox';
+import {getPlayerThumbnail} from '../';
 
 describe('FunBlox', () => {
   describe('#getPlayerThumbnail', () => {
