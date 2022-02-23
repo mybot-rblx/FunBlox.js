@@ -10,7 +10,7 @@
 [![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox?ref=badge_shield)
   [<img src="https://img.shields.io/discord/776614395722989599.svg?style=for-the-badge" width="100"/>](https://discord.gg/3PjNrKW4h7)  [![NPM](https://nodei.co/npm/funblox.js.png)](https://nodei.co/npm/funblox.js/)
 
-
+[<img src="https://img.shields.io/npm/v/funblox.js.svg?style=flat-square" alt="NPM package"/>](https://www.npmjs.com/package/funblox.js)
 
 
 # Instructions
