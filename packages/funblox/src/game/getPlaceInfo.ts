@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import {Response} from 'got-cjs';
 import {games, thumbnails} from '../api';
 
 interface GameData {
@@ -27,14 +28,6 @@ interface OwnerObject {
   isRNVAccount: boolean,
 }
 
-interface AxiosResponse {
-  data: any,
-  status: number,
-  statusText: string,
-  headers: object,
-  config: object,
-  request: object
-}
 /**
  *
  * @param {number} identifier
@@ -44,24 +37,26 @@ export default function(identifier: number): Promise<GameData> {
   // eslint-disable-next-line require-jsdoc
   return new Promise(async (resolve, reject) => {
     if (Number(identifier)) {
-      const gameData: AxiosResponse = await games.get(`v1/games?universeIds=${identifier}`);
-      const thumbnailresponse: AxiosResponse = await thumbnails.get(`v1/places/gameicons?placeIds=${identifier}&size=128x128&format=Jpeg&isCircular=true`);
+      const gameData: Response<string> = await games.get(`v1/games?universeIds=${identifier}`);
+      const thumbnailresponse: Response<string> = await thumbnails.get(`v1/places/gameicons?placeIds=${identifier}&size=128x128&format=Jpeg&isCircular=true`);
+      const game = JSON.parse(JSON.stringify(gameData.body));
+      const thumbnail = JSON.parse(JSON.stringify(thumbnailresponse.body));
       resolve({
-        id: gameData.data.id || null,
-        name: gameData.data.name || null,
-        description: gameData.data.description || null,
-        creator: gameData.data.creator || null,
-        thumbnails: thumbnailresponse.data.imageUrl || null,
-        price: gameData.data.price || null,
-        allowedGearGenres: gameData.data.allowedGearGenres || null,
-        allowedGearCategories: gameData.data.allowedGearCategories || null,
-        playing: gameData.data.playing || null,
-        visits: gameData.data.visits || null,
-        maxPlayers: gameData.data.maxPlayers || null,
-        created: gameData.data.created || null,
-        updated: gameData.data.updated || null,
-        genres: gameData.data.genres || null,
-        favoritedCount: gameData.data.favoritedCount || null,
+        id: game.id || null,
+        name: game.name || null,
+        description: game.description || null,
+        creator: game.creator || null,
+        thumbnails: thumbnail.imageUrl || null,
+        price: game.price || null,
+        allowedGearGenres: game.allowedGearGenres || null,
+        allowedGearCategories: game.allowedGearCategories || null,
+        playing: game.playing || null,
+        visits: game.visits || null,
+        maxPlayers: game.maxPlayers || null,
+        created: game.created || null,
+        updated: game.updated || null,
+        genres: game.genres || null,
+        favoritedCount: game.favoritedCount || null,
       });
     } else {
       return reject(

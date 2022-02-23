@@ -1,10 +1,6 @@
 /* eslint-disable max-len */
+import {Response} from 'got-cjs';
 import {api} from '../api';
-
-interface AxiosResponse {
-  data: any,
-  request: object,
-}
 
 /**
  * @param {string} placeId
@@ -12,9 +8,10 @@ interface AxiosResponse {
 */
 export default function getUniverseId(placeId: number | string): Promise<number> {
   return new Promise(async (resolve, reject) => {
-    const data: AxiosResponse = await api.get(`universes/get-universe-containing-place?placeid=${placeId}`);
+    const res: Response<string> = await api.get(`universes/get-universe-containing-place?placeid=${placeId}`);
+    const data = JSON.parse(JSON.stringify(res.body));
 
-    if (data.data.success) {
+    if (data.body.success) {
       resolve(data.data.universeId);
     } else {
       reject(new Error(data.data.errors[0].message));

@@ -1,37 +1,49 @@
-import axios from 'axios';
+import got from 'got-cjs';
 
-axios.defaults.headers.get['Content-Type'] = 'application/json';
+export const apiCache = new Map();
+export const groupsCache = new Map();
+export const gamesCache = new Map();
+export const catalogCache = new Map();
+export const thumbnailsCache = new Map();
+export const usersCache = new Map();
 
-export const api = axios.create({
-  baseURL: 'https://api.roproxy.com/',
-  timeout: 3000,
+export const api = got.extend({
+  prefixUrl: 'https://rprxy.mybot-rblx.tk/api/',
+  responseType: 'json',
+  cache: apiCache,
 });
 
-export const groups = axios.create({
-  baseURL: 'https://groups.roproxy.com/',
-  timeout: 3000,
+export const groups = got.extend({
+  prefixUrl: 'https://rprxy.mybot-rblx.tk/groups/',
+  responseType: 'json',
+  cache: groupsCache,
 });
 
-export const games = axios.create({
-  baseURL: 'https://games.roproxy.com/',
-  timeout: 3000,
+export const games = got.extend({
+  prefixUrl: 'https://rprxy.mybot-rblx.tk/games/',
+  responseType: 'json',
+  cache: gamesCache,
 });
 
-export const catalog = axios.create({
-  baseURL: 'https://catalog.roblox.com/',
-  timeout: 3000,
+export const catalog = got.extend({
+  prefixUrl: 'https://rprxy.mybot-rblx.tk/catalog/',
+  responseType: 'json',
+  cache: catalogCache,
 });
 
-export const friends = axios.create({
-  baseURL: 'https://friends.roproxy.com/',
-  timeout: 3000,
+export const friends = got.extend({
+  prefixUrl: 'https://rprxy.mybot-rblx.tk/friends/',
+  responseType: 'json',
+  cache: catalogCache,
 });
-export const thumbnails = axios.create({
-  baseURL: 'https://thumbnails.roproxy.com/',
-  timeout: 3000,
+export const thumbnails = got.extend({
+  prefixUrl: 'https://rprxy.mybot-rblx.tk/thumbnails/',
+  responseType: 'json',
+  cache: thumbnailsCache,
 });
 
-export const users = axios.create({
-  baseURL: 'https://users.roblox.com/',
-  timeout: 3000,
+export const users = got.extend({
+  prefixUrl: 'https://rprxy.mybot-rblx.tk/users/',
+  responseType: 'json',
+  cache: usersCache,
 });
