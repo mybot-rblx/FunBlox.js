@@ -43,7 +43,7 @@ export const thumbnails = got.extend({
 });
 
 export const users = got.extend({
-  prefixUrl: 'https://users.roproxy.comß/',
+  prefixUrl: 'https://users.roproxy.com/',
   responseType: 'json',
   cache: usersCache,
 });

@@ -30,7 +30,16 @@ const eligibleSizes: EligibleSizes = {
   },
 };
 
-export default async function getPlayerThumbnail(user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<Object> {
+/**
+ * **getPlayerThumbnail**
+ * @param {number | string} user
+ * @param {string} size
+ * @param {string} format
+ * @param {boolean} isCircular
+ * @param {string} cropType
+ * @return {Promise<object>}
+ */
+export default async function getPlayerThumbnail(user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<object> {
   return new Promise(async (resolve, reject) => {
     if (Number(user)) {
       cropType = cropType.toLowerCase();
