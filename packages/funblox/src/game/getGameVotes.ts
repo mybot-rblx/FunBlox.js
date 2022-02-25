@@ -20,12 +20,13 @@ export default function getGameVotes(id: number | string): Promise<VotesData> {
   }
   return new Promise(async function(resolve, reject) {
     if (Number(id)) {
-      const data = await games.get(`v1/games/votes?universeIds=${id}`);
-      if (statusIs500(data.status)) {
-        reject(new Error(`${data.status}: ${data.statusText}`));
+      const bruh = await games.get(`v1/games/votes?universeIds=${id}`);
+      const data = JSON.parse(JSON.stringify(bruh.body));
+      if (statusIs500(bruh.statusCode)) {
+        reject(new Error(`${bruh.statusCode}: ${bruh.statusMessage}`));
       }
 
-      if (!data.data[0]) {
+      if (!data[0]) {
         reject(new TypeError(notUniversalId));
       }
 

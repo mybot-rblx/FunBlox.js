@@ -1,31 +1,8 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
+import {Response} from 'got-cjs';
 import {thumbnails} from '../api';
 import getUser from './getUser';
-
-interface AxiosResponse {
-    // `data` is the response that was provided by the server
-    data: any,
-
-    // `status` is the HTTP status code from the server response
-    status: number,
-
-    // `statusText` is the HTTP status message from the server response
-    statusText: string,
-
-    // `headers` the HTTP headers that the server responded with
-    // All header names are lower cased and can be accessed using the bracket notation.
-    // Example: `response.headers['content-type']`
-    headers: object,
-
-    // `config` is the config that was provided to `axios` for the request
-    config: object,
-
-    // `request` is the request that generated this response
-    // It is the last ClientRequest instance in node.js (in redirects)
-    // and an XMLHttpRequest instance in the browser
-    request: object
-}
 
 interface EligibleSizes {
     body: EligibleSizesData
@@ -36,6 +13,10 @@ interface EligibleSizes {
 interface EligibleSizesData {
     sizes: Array<string>,
     endpoint: string
+}
+
+interface PlayerThumbnail {
+    Thumbnail: string
 }
 
 const eligibleSizes: EligibleSizes = {
@@ -53,7 +34,16 @@ const eligibleSizes: EligibleSizes = {
   },
 };
 
-export default async function getUserThumb(user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<Object> {
+/**
+ * **getPlayerThumbnail**
+ * @param {number | string} user
+ * @param {string} size
+ * @param {string} format
+ * @param {boolean} isCircular
+ * @param {string} cropType
+ * @return {Promise<PlayerThumbnail>}
+ */
+export default async function getPlayerThumbnail(user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<PlayerThumbnail> {
   return new Promise(async (resolve, reject) => {
     if (Number(user)) {
       cropType = cropType.toLowerCase();
@@ -73,16 +63,17 @@ export default async function getUserThumb(user: number | string, size: string, 
         reject(new TypeError(`Invalid image type provided: ${format} | Use: png, jpeg`));
       }
 
-      const avatarResponse: AxiosResponse = await thumbnails.get(`v1/users/${endpoint}?userIds=${user}&size=${size}&format=${format}&isCircular=${isCircular}`);
-
+      const avatarResponse: Response<string> = await thumbnails.get(`v1/users/${endpoint}?userIds=${user}&size=${size}&format=${format}&isCircular=${isCircular}`);
+      const avatarData = JSON.parse(JSON.stringify(avatarResponse.body));
 
       return resolve({
-        'Thumbnail': avatarResponse.data.data[0].imageUrl,
+        'Thumbnail': avatarData.data[0].imageUrl,
       });
     } else {
       const userData = await getUser(user);
       if (userData.id) {
-        getUserThumb(userData.id, size, format, isCircular, cropType).catch(reject).then(resolve);
+        const bruh = await getPlayerThumbnail(userData.id, size, format, isCircular, cropType);
+        return resolve(bruh);
       } else {
         reject(new Error('User not found'));
       }

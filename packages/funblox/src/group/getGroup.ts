@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import {AxiosResponse} from 'axios';
+import {Response} from 'got-cjs';
 import {groups, thumbnails} from '../api';
 
 interface GroupData {
@@ -46,12 +46,12 @@ interface ShoutAuthor {
 export default function getGroup(identifier: number | string): Promise<GroupData> {
   return new Promise(async (resolve, reject) => {
     if (typeof identifier === 'number') {
-      const roleResponse: AxiosResponse = await groups.get(`v1/groups/${identifier}/roles`);
-      const thumbnailResponse: AxiosResponse = await thumbnails.get(`v1/groups/icons?format=Png&groupIds=${identifier}&isCircular=false&size=420x420`);
-      const groupData: AxiosResponse = await groups.get(`v1/groups/${identifier}`);
-      const roles = await roleResponse.data;
-      const group = await groupData.data;
-      const thumbnail = await thumbnailResponse.data;
+      const roleResponse: Response<string> = await groups.get(`v1/groups/${identifier}/roles`);
+      const thumbnailResponse: Response<string> = await thumbnails.get(`v1/groups/icons?format=Png&groupIds=${identifier}&isCircular=false&size=420x420`);
+      const groupData: Response<string> = await groups.get(`v1/groups/${identifier}`);
+      const roles = JSON.parse(JSON.stringify(roleResponse.body));
+      const group = JSON.parse(JSON.stringify(groupData.body));
+      const thumbnail = JSON.parse(JSON.stringify(thumbnailResponse.body));
 
 
       // Time to return!
@@ -86,8 +86,8 @@ export default function getGroup(identifier: number | string): Promise<GroupData
 
       return resolve(returnable);
     } else {
-      const searchRes: AxiosResponse = await groups.get(`v1/groups/search/lookup?groupName=${identifier}`);
-      const search = await searchRes.data;
+      const searchRes: Response<string> = await groups.get(`v1/groups/search/lookup?groupName=${identifier}`);
+      const search = JSON.parse(JSON.stringify(searchRes.body));
 
       if (!search.data.length) throw new Error('Group not found');
 

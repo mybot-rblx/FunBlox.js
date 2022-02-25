@@ -2,32 +2,9 @@
 /* eslint-disable no-tabs */
 /* eslint-disable max-len */
 /* eslint-disable require-jsdoc */
+import {Response} from 'got-cjs';
 import {friends, thumbnails, users} from '../api';
 import getNameFromId from '../utils/getNameFromId';
-
-interface AxiosResponse {
-    // `data` is the response that was provided by the server
-    data: any,
-
-    // `status` is the HTTP status code from the server response
-    status: number,
-
-    // `statusText` is the HTTP status message from the server response
-    statusText: string,
-
-    // `headers` the HTTP headers that the server responded with
-    // All header names are lower cased and can be accessed using the bracket notation.
-    // Example: `response.headers['content-type']`
-    headers: object,
-
-    // `config` is the config that was provided to `axios` for the request
-    config: object,
-
-    // `request` is the request that generated this response
-    // It is the last ClientRequest instance in node.js (in redirects)
-    // and an XMLHttpRequest instance in the browser
-    request: object
-}
 
 interface UserResponse {
     'id': number,
@@ -59,41 +36,52 @@ export default async function getUser(identifier: number | string): Promise<User
     if (typeof identifier === 'number') {
       const userid = Number(identifier);
 
-      const basicData: AxiosResponse = await users.get(`v1/users/${userid}/`);
-      const followersResponse: AxiosResponse = await friends.get(`v1/users/${userid}/followers`);
-      const friendsResponse: AxiosResponse = await friends.get(`v1/users/${userid}/friends`);
-      const followingResponse: AxiosResponse = await friends.get(`v1/users/${userid}/followings`);
-      const avatarResponse: AxiosResponse = await thumbnails.get(`v1/users/avatar?userIds=${userid}&size=720x720&format=Png&isCircular=false`);
+      const basicResponse: Response<string> = await users(`v1/users/${userid}/`);
+      const followersResponse: Response<string> = await friends(`v1/users/${userid}/followers`);
+      const friendsResponse: Response<string> = await friends(`v1/users/${userid}/friends`);
+      const followingResponse: Response<string> = await friends(`v1/users/${userid}/followings`);
+      const avatarResponse: Response<string> = await thumbnails(`v1/users/avatar?userIds=${userid}&size=720x720&format=Png&isCircular=false`);
 
       // Counter for followings, friends and followers
-      const followingCountResponse: AxiosResponse = await friends.get(`v1/users/${userid}/followings/count`);
-      const friendsCountResponse: AxiosResponse = await friends.get(`v1/users/${userid}/friends/count`);
-      const followersCountResponse: AxiosResponse = await friends.get(`v1/users/${userid}/followers/count`);
+      const followingCountResponse: Response<string> = await friends(`v1/users/${userid}/followings/count`);
+      const friendsCountResponse: Response<string> = await friends(`v1/users/${userid}/friends/count`);
+      const followersCountResponse: Response<string> = await friends(`v1/users/${userid}/followers/count`);
+
+      // I love parsing.com
+      const basicData = JSON.parse(JSON.stringify(basicResponse.body));
+      const followersData = JSON.parse(JSON.stringify(followersResponse.body));
+      const friendsData = JSON.parse(JSON.stringify(friendsResponse.body));
+      const followingData = JSON.parse(JSON.stringify(followingResponse.body));
+      const avatarData = JSON.parse(JSON.stringify(avatarResponse.body));
+
+      const followingCountData = JSON.parse(JSON.stringify(followingCountResponse.body));
+      const friendsCountData = JSON.parse(JSON.stringify(friendsCountResponse.body));
+      const followersCountData = JSON.parse(JSON.stringify(followersCountResponse.body));
 
       // Use raw data to get the numbers
-      const followingCount: number = followingCountResponse.data.count;
-      const friendsCount: number = friendsCountResponse.data.count;
-      const followersCount: number = followersCountResponse.data.count;
+      const followingCount: number = followingCountData.count;
+      const friendsCount: number = friendsCountData.count;
+      const followersCount: number = followersCountData.count;
 
       const followersArr = [];
-      followersResponse.data.data.forEach((user) => {
+      followersData.data.forEach((user) => {
         followersArr.push(user.id);
       });
       const friendsArr = [];
-      friendsResponse.data.data.forEach((user) => {
+      friendsData.data.forEach((user) => {
         friendsArr.push(user.id);
       });
       const followingArr = [];
-      followingResponse.data.data.forEach((user) => {
+      followingData.data.forEach((user) => {
         followingArr.push(user.id);
       });
 
       resolve({
-        'id': basicData.data.id,
-        'username': basicData.data.name,
-        'description': basicData.data.description,
-        'created': basicData.data.created,
-        'avatar_url': avatarResponse.data.data[0].imageUrl,
+        'id': basicData.id,
+        'username': basicData.name,
+        'description': basicData.description,
+        'created': basicData.created,
+        'avatar_url': avatarData.data[0].imageUrl,
         'friends': {
           'count': friendsCount,
           'ids': friendsArr,

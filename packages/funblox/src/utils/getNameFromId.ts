@@ -13,9 +13,9 @@ interface IDFromUsername {
 export default function getIdFromName(username: string): Promise<number> {
   return new Promise(async (resolve, reject) => {
     const res = await api.get(`users/get-by-username?username=${username}`);
-    const data: IDFromUsername = await res.data;
+    const data: IDFromUsername = JSON.parse(JSON.stringify(res.body));
 
-    if (res.status !== 200) return reject(new Error('Not found. - getUser.js'));
+    if (res.statusCode !== 200) return reject(new Error('Not found. - getUser.js'));
 
     resolve(data.Id);
   });

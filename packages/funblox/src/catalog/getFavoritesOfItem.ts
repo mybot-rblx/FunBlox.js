@@ -11,7 +11,7 @@ export default function getFavoritesOfItem(itemId: number | string): Promise<str
     if (Number(itemId)) {
       try {
         const favorites = await catalog.get(`v1/favorites/assets/${Number(itemId)}/count`);
-        resolve(favorites.data);
+        resolve(JSON.parse(JSON.stringify(favorites.body)));
       } catch (error) {
         reject(error);
       }

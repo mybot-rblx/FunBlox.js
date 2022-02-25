@@ -10,7 +10,9 @@
       ]
     },
     "test": {
-      "outputs": []
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "cache": false
     }
   }
 }
