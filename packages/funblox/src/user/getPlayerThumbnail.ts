@@ -15,6 +15,10 @@ interface EligibleSizesData {
     endpoint: string
 }
 
+interface PlayerThumbnail {
+    Thumbnail: string
+}
+
 const eligibleSizes: EligibleSizes = {
   body: {
     sizes: ['30x30', '48x48', '60x60', '75x75', '100x100', '110x110', '140x140', '150x150', '150x200', '180x180', '250x250', '352x352', '420x420', '720x720'],
@@ -37,9 +41,9 @@ const eligibleSizes: EligibleSizes = {
  * @param {string} format
  * @param {boolean} isCircular
  * @param {string} cropType
- * @return {Promise<object>}
+ * @return {Promise<PlayerThumbnail>}
  */
-export default async function getPlayerThumbnail(user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<object> {
+export default async function getPlayerThumbnail(user: number | string, size: string, format: string, isCircular: boolean, cropType = 'body'): Promise<PlayerThumbnail> {
   return new Promise(async (resolve, reject) => {
     if (Number(user)) {
       cropType = cropType.toLowerCase();
@@ -68,7 +72,8 @@ export default async function getPlayerThumbnail(user: number | string, size: st
     } else {
       const userData = await getUser(user);
       if (userData.id) {
-        getPlayerThumbnail(userData.id, size, format, isCircular, cropType).catch(reject).then(resolve);
+        const bruh = await getPlayerThumbnail(userData.id, size, format, isCircular, cropType);
+        return resolve(bruh);
       } else {
         reject(new Error('User not found'));
       }
