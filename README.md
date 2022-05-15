@@ -151,7 +151,7 @@ roblox.getFavoritesOfItem("itemId").then(res => {
 | ------- | ------ |
 | Maintained | ✅ |
 | Active Support | ✅|
-| Developers | [@fede1212156](https://www.roblox.com/users/835364986/profile), [@Joshuadl12](https://www.roblox.com/users/156711358/profile) |
+| Developers | [@fedeetide](https://www.roblox.com/users/835364986/profile), [@Joshuadl12](https://www.roblox.com/users/156711358/profile) |
 
 # [License](https://github.com/mybot-rblx/FunBlox/blob/main/LICENSE)
 This package is under license (MIT).
