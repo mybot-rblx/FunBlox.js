@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import {catalog} from '../api';
+import { catalog } from '../api';
 
 export default function getCategories(): Promise<Object> {
   return new Promise(async (resolve, reject) => {

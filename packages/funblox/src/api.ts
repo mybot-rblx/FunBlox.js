@@ -1,49 +1,66 @@
 import got from 'got-cjs';
+import jar from './utils/jar';
 
-export const apiCache = new Map();
-export const groupsCache = new Map();
-export const gamesCache = new Map();
-export const catalogCache = new Map();
-export const thumbnailsCache = new Map();
-export const usersCache = new Map();
+export const webCache = new Map();
 
 export const api = got.extend({
-  prefixUrl: 'https://api.roproxy.com/',
+  prefixUrl: 'https://api.roblox.com/',
   responseType: 'json',
-  cache: apiCache,
+  cookieJar: jar,
+  cache: webCache,
+});
+
+export const auth = got.extend({
+  prefixUrl: 'https://auth.roblox.com/',
+  responseType: 'json',
+  cookieJar: jar,
+  cache: webCache,
 });
 
 export const groups = got.extend({
-  prefixUrl: 'https://groups.roproxy.com/',
+  prefixUrl: 'https://groups.roblox.com/',
   responseType: 'json',
-  cache: groupsCache,
+  cookieJar: jar,
+  cache: webCache,
 });
 
 export const games = got.extend({
-  prefixUrl: 'https://games.roproxy.com/',
+  prefixUrl: 'https://games.roblox.com/',
   responseType: 'json',
-  cache: gamesCache,
+  cookieJar: jar,
+  cache: webCache,
 });
 
 export const catalog = got.extend({
-  prefixUrl: 'https://catalog.roproxy.com/',
+  prefixUrl: 'https://catalog.roblox.com/',
   responseType: 'json',
-  cache: catalogCache,
+  cookieJar: jar,
+  cache: webCache,
 });
 
 export const friends = got.extend({
-  prefixUrl: 'https://friends.roproxy.com/',
+  prefixUrl: 'https://friends.roblox.com/',
   responseType: 'json',
-  cache: catalogCache,
+  cookieJar: jar,
+  cache: webCache,
 });
 export const thumbnails = got.extend({
-  prefixUrl: 'https://thumbnails.roproxy.com/',
+  prefixUrl: 'https://thumbnails.roblox.com/',
   responseType: 'json',
-  cache: thumbnailsCache,
+  cookieJar: jar,
+  cache: webCache,
 });
 
 export const users = got.extend({
-  prefixUrl: 'https://users.roproxy.com/',
+  prefixUrl: 'https://users.roblox.com/',
   responseType: 'json',
-  cache: usersCache,
+  cookieJar: jar,
+  cache: webCache,
+});
+
+export const mobileAPI = got.extend({
+  prefixUrl: 'https://www.roblox.com/mobileapi/',
+  responseType: 'json',
+  cookieJar: jar,
+  cache: webCache,
 });

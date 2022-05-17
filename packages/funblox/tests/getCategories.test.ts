@@ -1,4 +1,4 @@
-import {getCategories} from '../';
+import { getCategories } from '../';
 
 describe('FunBlox', () => {
   describe('#getCategories', () => {

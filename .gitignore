@@ -4,3 +4,4 @@ lib/
 .turbo
 .swc/
 .DS_Store
+.cookie

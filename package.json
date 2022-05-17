@@ -2,7 +2,7 @@
   "name": "funblox-monorepo",
   "private": true,
   "workspaces": [
-    "packages/funblox"
+    "packages/*"
   ],
   "scripts": {
     "publish": "turbo publish",
@@ -13,20 +13,26 @@
   },
   "description": "A monorepo of funblox packages",
   "devDependencies": {
-    "@types/jest": "^27.4.0",
-    "@typescript-eslint/eslint-plugin": "^5.12.0",
-    "@typescript-eslint/parser": "^5.12.0",
-    "eslint": "^8.9.0",
+    "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "eslint": "^8.11.0",
     "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "jest": "^27.5.1",
     "lerna": "^4.0.0",
+    "prettier": "2.5.1",
     "ts-jest": "^27.1.3",
-    "ts-node": "^10.5.0",
-    "turbo": "^1.1.3",
-    "typescript": ">=4.5.5"
+    "ts-node": "^10.7.0",
+    "turbo": "^1.1.6",
+    "typescript": ">=4.6.2"
+  },
+  "dependencies": {
+    "funblox.js": "file:packages/funblox"
   }
 }

@@ -13,7 +13,9 @@ module.exports = {
   },
   'plugins': [
     '@typescript-eslint',
+    'prettier',
   ],
   'rules': {
+    'object-curly-spacing': 0,
   },
 };

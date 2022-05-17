@@ -1,4 +1,4 @@
-import {getUserFavoriteGames} from '../';
+import { getUserFavoriteGames } from '../';
 
 describe('FunBlox', () => {
   describe('#getUserFavpr', () => {

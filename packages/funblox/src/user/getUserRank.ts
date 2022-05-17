@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
-import {Response} from 'got-cjs';
-import {groups} from '../api';
+import { Response } from 'got-cjs';
+import { groups } from '../api';
 import getNameFromId from '../utils/getNameFromId';
 
 interface RoleObject {
-    id: number,
-    name: string,
-    rank: number
+  id: number;
+  name: string;
+  rank: number;
 }
 
 /**
@@ -17,17 +17,25 @@ interface RoleObject {
  * @param {number | string} user
  * @return {Promise<RoleObject>} A Promise that resolves to the user's role in the group
  */
-export default function getGroupRank(groupId: number | string, user: number | string): Promise<RoleObject> {
+export default function getGroupRank(
+  groupId: number | string,
+  user: number | string,
+): Promise<RoleObject> {
   return new Promise(async (resolve, reject) => {
     if (Number(user)) {
-      const body: Response<string> = await groups.get(`v2/users/${Number(user)}/groups/roles?groupid=${Number(groupId)}`);
+      const body: Response<string> = await groups.get(
+        `v2/users/${Number(user)}/groups/roles?groupid=${Number(groupId)}`,
+      );
       const parsedBody = JSON.parse(JSON.stringify(body.body));
 
       if (parsedBody.errors) {
-        if (parsedBody.errors[0].code == 1) return reject(new Error('Not found. - getUserRank.js'));
+        if (parsedBody.errors[0].code == 1)
+          return reject(new Error('Not found. - getUserRank.js'));
       }
 
-      const groupObject = parsedBody.data.find((info) => groupId === info.group.id);
+      const groupObject = parsedBody.data.find(
+        (info) => groupId === info.group.id,
+      );
 
       if (!groupObject) return reject(new Error('Not found. - getUserRank.js'));
 

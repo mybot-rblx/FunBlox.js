@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import {getUserRank} from '../';
+import { getUserRank } from '../';
 
 describe('FunBlox', () => {
   describe('#getUserRank', () => {

@@ -1,41 +1,41 @@
 /* eslint-disable max-len */
-import {Response} from 'got-cjs';
-import {groups, thumbnails} from '../api';
+import { Response } from 'got-cjs';
+import { groups, thumbnails } from '../api';
 
 interface GroupData {
-    id: number,
-    name: string,
-    description: string,
-    owner: OwnerObject,
-    membercount: number,
-    thumbnail: string,
-    shout: Shout,
-    roles: Array<RoleJSON>
+  id: number;
+  name: string;
+  description: string;
+  owner: OwnerObject;
+  membercount: number;
+  thumbnail: string;
+  shout: Shout;
+  roles: Array<RoleJSON>;
 }
 
 interface RoleJSON {
-    id: number,
-    name: string,
-    membercount: number
+  id: number;
+  name: string;
+  membercount: number;
 }
 
 interface OwnerObject {
-    buildersClubMembershipType: string,
-    userId: number,
-    username: string,
-    displayName: string
+  buildersClubMembershipType: string;
+  userId: number;
+  username: string;
+  displayName: string;
 }
 
 interface Shout {
-    content: string,
-    created: string,
-    author: ShoutAuthor
+  content: string;
+  created: string;
+  author: ShoutAuthor;
 }
 
 interface ShoutAuthor {
-    id: number,
-    username: string
-    displayName: string
+  id: number;
+  username: string;
+  displayName: string;
 }
 
 /**
@@ -43,16 +43,23 @@ interface ShoutAuthor {
  * @param {number | string} identifier
  * @return {Promise<GroupData>}
  */
-export default function getGroup(identifier: number | string): Promise<GroupData> {
+export default function getGroup(
+    identifier: number | string,
+): Promise<GroupData> {
   return new Promise(async (resolve, reject) => {
     if (typeof identifier === 'number') {
-      const roleResponse: Response<string> = await groups.get(`v1/groups/${identifier}/roles`);
-      const thumbnailResponse: Response<string> = await thumbnails.get(`v1/groups/icons?format=Png&groupIds=${identifier}&isCircular=false&size=420x420`);
-      const groupData: Response<string> = await groups.get(`v1/groups/${identifier}`);
+      const roleResponse: Response<string> = await groups.get(
+          `v1/groups/${identifier}/roles`,
+      );
+      const thumbnailResponse: Response<string> = await thumbnails.get(
+          `v1/groups/icons?format=Png&groupIds=${identifier}&isCircular=false&size=420x420`,
+      );
+      const groupData: Response<string> = await groups.get(
+          `v1/groups/${identifier}`,
+      );
       const roles = JSON.parse(JSON.stringify(roleResponse.body));
       const group = JSON.parse(JSON.stringify(groupData.body));
       const thumbnail = JSON.parse(JSON.stringify(thumbnailResponse.body));
-
 
       // Time to return!
       const returnable = {
@@ -80,13 +87,19 @@ export default function getGroup(identifier: number | string): Promise<GroupData
 
       for (const role of roles.roles) {
         const i = roles.roles.indexOf(role);
-        returnable.roles.push({'id': role.id, 'name': role.name, 'membercount': role.memberCount});
+        returnable.roles.push({
+          id: role.id,
+          name: role.name,
+          membercount: role.memberCount,
+        });
         if (i + 1 == roles.roles.length) return resolve(returnable);
       }
 
       return resolve(returnable);
     } else {
-      const searchRes: Response<string> = await groups.get(`v1/groups/search/lookup?groupName=${identifier}`);
+      const searchRes: Response<string> = await groups.get(
+          `v1/groups/search/lookup?groupName=${identifier}`,
+      );
       const search = JSON.parse(JSON.stringify(searchRes.body));
 
       if (!search.data.length) throw new Error('Group not found');

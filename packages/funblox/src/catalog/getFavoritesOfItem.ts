@@ -1,16 +1,20 @@
 /* eslint-disable max-len */
-import {catalog} from '../api';
+import { catalog } from '../api';
 
 /**
  *
  * @param {number | string} itemId
  * @return {Promise<string>}
  */
-export default function getFavoritesOfItem(itemId: number | string): Promise<string> {
+export default function getFavoritesOfItem(
+  itemId: number | string,
+): Promise<string> {
   return new Promise(async (resolve, reject) => {
     if (Number(itemId)) {
       try {
-        const favorites = await catalog.get(`v1/favorites/assets/${Number(itemId)}/count`);
+        const favorites = await catalog.get(
+          `v1/favorites/assets/${Number(itemId)}/count`,
+        );
         resolve(JSON.parse(JSON.stringify(favorites.body)));
       } catch (error) {
         reject(error);
