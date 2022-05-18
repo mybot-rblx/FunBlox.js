@@ -8,6 +8,9 @@ import getFavoritesOfItem from './catalog/getFavoritesOfItem';
 import getPlayerThumbnail from './user/getPlayerThumbnail';
 import getUserBundles from './user/getUserBundles';
 import getPlaceInfo from './game/getPlaceInfo';
+import getGameVotes from './game/getGameVotes';
+import getUniverseId from './game/getUniverseId';
+import setCookie from './user/setCookie';
 import * as api from './api';
 
 export {
@@ -22,4 +25,7 @@ export {
   getFavoritesOfItem,
   getUserBundles,
   getPlaceInfo,
+  getGameVotes,
+  getUniverseId,
+  setCookie,
 };
