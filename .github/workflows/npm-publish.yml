@@ -14,7 +14,7 @@ jobs:
             node_modules
             */*/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
       - run: yarn
       - run: yarn run build
   publish-npm:
@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 2
       - run: git checkout HEAD^
       # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org' 
@@ -45,7 +45,7 @@ jobs:
         with:
             fetch-depth: 2
       - run: git checkout HEAD^
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/ 
