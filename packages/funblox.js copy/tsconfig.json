@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "rootDir": "../funblox/src",
+    "outDir": "../funblox/dist",
+    "declaration": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "allowJs": true,
+    "target": "es2020",
+    "esModuleInterop": true,
+    "lib": [
+      "esnext",
+      "esnext.array",
+      "esnext.asynciterable",
+      "esnext.intl",
+      "esnext.symbol"
+    ]
+  },
+  "include": ["../funblox/src"]
+}
