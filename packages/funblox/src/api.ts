@@ -1,7 +1,6 @@
 import got from 'got-cjs';
 import jar from './utils/jar';
-
-export const webCache = new Map();
+import { webCache } from './utils/caches';
 
 export const api = got.extend({
   prefixUrl: 'https://api.roblox.com/',

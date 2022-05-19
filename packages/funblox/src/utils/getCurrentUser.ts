@@ -15,7 +15,7 @@ export default function getCurrentUser(jar?: string) {
         const Cookie = tough.Cookie;
         const bruh = Cookie.parse('.ROBLOSECURITY');
         bruh.value = jar;
-        cookieJar.setCookie(bruh, '*', async (err: boolean) => {
+        cookieJar.setCookie(bruh, 'https://roblox.com', async (err: boolean) => {
           switch (err) {
             case true:
               reject(err);
