@@ -6,31 +6,69 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: restore lerna
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             node_modules
             */*/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
       - run: yarn
       - run: yarn run build
-  publish-npm:
+
+  publish-funblox:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 2
       - run: git checkout HEAD^
       # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '12.x'
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org' 
-      - run: lerna publish
+      - run: cd packages/funblox
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-funblox-js:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - run: git checkout HEAD^
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org' 
+      - run: cd packages/funblox.js
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-npm-org:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - run: git checkout HEAD^
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org' 
+      - run: cd packages/@mybot-rblx/funblox.js-npm
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
  
@@ -41,14 +79,15 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
             fetch-depth: 2
       - run: git checkout HEAD^
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 18
           registry-url: https://npm.pkg.github.com/ 
-      - run: lerna publish --registry=https://npm.pkg.github.com/@mybot-rblx
+      - run: cd packages/@mybot-rblx/funblox.js-github
+      - run: yarn publish --registry=https://npm.pkg.github.com/@mybot-rblx
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
