@@ -10,6 +10,9 @@ import getUserBundles from './user/getUserBundles';
 import getPlaceInfo from './game/getPlaceInfo';
 import getGameVotes from './game/getGameVotes';
 import getUniverseId from './game/getUniverseId';
+import promote from './group/promote';
+import demote from './group/demote';
+import setRank from './group/setRank';
 import setCookie from './user/setCookie';
 import * as api from './api';
 
@@ -17,6 +20,9 @@ export {
   getGroup,
   api,
   getUser,
+  promote,
+  demote,
+  setRank,
   getUserRank,
   getUserFavoriteGames,
   getFavoritesOfBundle,
