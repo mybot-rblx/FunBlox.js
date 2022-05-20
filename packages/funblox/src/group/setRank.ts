@@ -11,7 +11,7 @@ import cookieJar from '../utils/jar';
  * @param { number } newrank
  * @return {Promise<Object>}
  */
-export default function setRank(groupid: number, user: number, newrank: number): Promise<Object> {
+export default function setRank(groupid: number, user: number, newrank: number): Promise<object> {
   return new Promise(async (resolve, reject) => {
     if (typeof groupid == 'number' && typeof user == 'number' && typeof newrank == 'number') {
       const userRank = await getGroupRank(groupid, user);

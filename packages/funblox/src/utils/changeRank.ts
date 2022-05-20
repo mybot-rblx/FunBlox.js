@@ -9,9 +9,9 @@ import setRank from '../group/setRank';
  * @param {number } groupid
  * @param { number | string } user
  * @param { number } method
- * @return {Promise<Object>}
+ * @return {Promise<object>}
  */
-export default function changeRank(groupid: number, user: number, method: number): Promise<Object> {
+export default function changeRank(groupid: number, user: number, method: number): Promise<object> {
   return new Promise(async (resolve, reject) => {
     const roleResponse1 = await groups.get(
         `v1/groups/${groupid}/roles`,

@@ -7,7 +7,7 @@ import getIdFromName from '../utils/getIdFromName';
  * @param { number | string } user
  * @return {Promise<Object>}
  */
-export default async function promote(groupid: number, user: string | number): Promise<Object> {
+export default async function promote(groupid: number, user: string | number): Promise<object> {
   return new Promise(async (resolve, reject) => {
     if (!isNaN(groupid)) {
       if (typeof user == 'number') {
