@@ -1,8 +1,7 @@
+/* eslint-disable max-len */
 import { groups } from '../api';
 import getGroupRank from '../user/getUserRank';
 import setRank from '../group/setRank';
-
-
 
 
 /**
@@ -12,42 +11,37 @@ import setRank from '../group/setRank';
  * @param { number } method
  * @return {Promise<Object>}
  */
-
-export default async function (groupid: number, user: number, method: number): Promise<Object> {
+export default function changeRank(groupid: number, user: number, method: number): Promise<Object> {
   return new Promise(async (resolve, reject) => {
-    const roleResponse = await groups.get(
-      `v1/groups/${groupid}/roles`,
-  );
- const userrank = await getGroupRank(groupid, user)
+    const roleResponse1 = await groups.get(
+        `v1/groups/${groupid}/roles`,
+    );
 
- for (let i = 0; i < roleResponse.roles.length; i++) {
-  const role = roleResponse.roles[i]
-  const Rank = role.id
+    const roleResponse = JSON.parse(JSON.stringify(roleResponse1.body));
+    const userrank = await getGroupRank(groupid, user);
 
-  if (Rank === userrank.id) {
-    const change = i + method
-    const nextrank = roleResponse.roles[change]
-    const index = roleResponse.roles.indexOf(nextrank)
-    const role = roleResponse.roles[index]
+    for (let i = 0; i < roleResponse.roles.length; i++) {
+      const role1 = roleResponse.roles[i];
+      const Rank = role1.id;
 
-    if(nextrank === 0) {
-      reject(TypeError("Can't demote someone to rank 0 (GUEST) unless I exile them..."))
-    }else if(!nextrank){
-      reject(TypeError("Can't find this user next rank..."))
+      if (Rank === userrank.id) {
+        const change = i + method;
+        const nextrank = roleResponse.roles[change];
+        const index = roleResponse.roles.indexOf(nextrank);
+        const role = roleResponse.roles[index];
 
-    }else if(nextrank > 0 && nextrank && nextrank < 255){
-      await setRank(groupid, user, index.rolese).then(async function() {
-
-        return resolve({ newRank: role, oldRank: userrank });
-      }).catch(function(err) {
-        reject(TypeError(err));
-      })
+        if (nextrank === 0) {
+          reject(new TypeError('Can\'t demote someone to rank 0 (GUEST) unless I exile them...'));
+        } else if (!nextrank) {
+          reject(new TypeError('Can\'t find this user next rank...'));
+        } else if (nextrank > 0 && nextrank && nextrank < 255) {
+          await setRank(groupid, user, index.rolese).then(async function() {
+            return resolve({ newRank: role, oldRank: userrank });
+          }).catch(function(err) {
+            reject(new TypeError(err));
+          });
+        }
+      }
     }
-  }
-}
-
-
-
-
-  })
+  });
 }

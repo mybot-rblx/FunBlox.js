@@ -7,11 +7,11 @@ import { api } from '../api';
  * @return {Promise<Number>}
  */
 export default function getUniverseId(
-  placeId: number | string,
+    placeId: number | string,
 ): Promise<number> {
   return new Promise(async (resolve, reject) => {
     const res: Response<string> = await api.get(
-      `universes/get-universe-containing-place?placeid=${placeId}`,
+        `universes/get-universe-containing-place?placeid=${placeId}`,
     );
     const data = JSON.parse(JSON.stringify(res.body));
 

@@ -20,12 +20,12 @@ interface BundleCreator {
  * @return {Promise<Array<any>>}
  */
 export default function getUserBundles(
-  userId: string | number,
+    userId: string | number,
 ): Promise<Bundle> {
   return new Promise(async (resolve, reject) => {
     try {
       const resultRes: Response<string> = await catalog.get(
-        `v1/users/${Number(userId)}/bundles`,
+          `v1/users/${Number(userId)}/bundles`,
       );
       const result = JSON.parse(JSON.stringify(resultRes.body));
 

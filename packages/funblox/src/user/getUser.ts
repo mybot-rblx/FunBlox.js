@@ -4,7 +4,7 @@
 /* eslint-disable require-jsdoc */
 import { Response } from 'got-cjs';
 import { friends, thumbnails, users } from '../api';
-import getNameFromId from '../utils/getNameFromId';
+import getNameFromId from '../utils/getIdFromName';
 
 interface UserResponse {
   id: number;
@@ -32,37 +32,37 @@ interface UserResponse {
  * @return {Promise<UserResponse>}
  */
 export default async function getUser(
-  identifier: number | string,
+    identifier: number | string,
 ): Promise<UserResponse> {
   return new Promise(async (resolve, reject) => {
     if (typeof identifier === 'number') {
       const userid = Number(identifier);
 
       const basicResponse: Response<string> = await users(
-        `v1/users/${userid}/`,
+          `v1/users/${userid}/`,
       );
       const followersResponse: Response<string> = await friends(
-        `v1/users/${userid}/followers`,
+          `v1/users/${userid}/followers`,
       );
       const friendsResponse: Response<string> = await friends(
-        `v1/users/${userid}/friends`,
+          `v1/users/${userid}/friends`,
       );
       const followingResponse: Response<string> = await friends(
-        `v1/users/${userid}/followings`,
+          `v1/users/${userid}/followings`,
       );
       const avatarResponse: Response<string> = await thumbnails(
-        `v1/users/avatar?userIds=${userid}&size=720x720&format=Png&isCircular=false`,
+          `v1/users/avatar?userIds=${userid}&size=720x720&format=Png&isCircular=false`,
       );
 
       // Counter for followings, friends and followers
       const followingCountResponse: Response<string> = await friends(
-        `v1/users/${userid}/followings/count`,
+          `v1/users/${userid}/followings/count`,
       );
       const friendsCountResponse: Response<string> = await friends(
-        `v1/users/${userid}/friends/count`,
+          `v1/users/${userid}/friends/count`,
       );
       const followersCountResponse: Response<string> = await friends(
-        `v1/users/${userid}/followers/count`,
+          `v1/users/${userid}/followers/count`,
       );
 
       // I love parsing.com
@@ -73,13 +73,13 @@ export default async function getUser(
       const avatarData = JSON.parse(JSON.stringify(avatarResponse.body));
 
       const followingCountData = JSON.parse(
-        JSON.stringify(followingCountResponse.body),
+          JSON.stringify(followingCountResponse.body),
       );
       const friendsCountData = JSON.parse(
-        JSON.stringify(friendsCountResponse.body),
+          JSON.stringify(friendsCountResponse.body),
       );
       const followersCountData = JSON.parse(
-        JSON.stringify(followersCountResponse.body),
+          JSON.stringify(followersCountResponse.body),
       );
 
       // Use raw data to get the numbers

@@ -32,14 +32,14 @@ interface PlaceRoot {
  * @return {Promise<Array<Game>>}
  */
 export default function getUserFavoriteGames(
-  userId: number | string,
-  limit: number,
+    userId: number | string,
+    limit: number,
 ): Promise<Array<Game>> {
   return new Promise(async (resolve, reject) => {
     if (Number(userId)) {
       try {
         const favoriteGamesRes: Response<string> = await games.get(
-          `v2/users/${userId}/favorite/games?accessFilter=All&limit=${limit}&sortOrder=Asc`,
+            `v2/users/${userId}/favorite/games?accessFilter=All&limit=${limit}&sortOrder=Asc`,
         );
         const favoriteGames = JSON.parse(JSON.stringify(favoriteGamesRes.body));
 
