@@ -19,7 +19,7 @@ import cookieJar from '../utils/jar';
     const data = JSON.stringify({ roleId: newrank })
 
   await groups.patch(`v1/groups/${groupid}/users/${user}`, {
-  cookieJar, body: data  
+  cookieJar, json: data  
   }).then(function() {
       resolve({ oldRank: userRank, newRank: newrank })
     }).catch(function(err){
