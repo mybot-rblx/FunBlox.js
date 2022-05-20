@@ -4,7 +4,7 @@
 **We are a roblox API wrapper on development! (Contact us : fedee#9606 / DogeFlexJosh#0656)**
 
 # Project Information
-**FunBlox is an API wrapper for ROBLOX that was developed at the time with JS after two months it was reverted to a package made with TS, today the developers work to add more functions.**
+**FunBlox is an API wrapper for ROBLOX that was developed at the time with JS after two months it was reverted to a package made with TS, today our developers work to add more functions.**
 
 
 [![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox?ref=badge_shield)
@@ -17,6 +17,62 @@
 npm i funblox.js
 ```
 
+# setCookie
+
+```js
+const roblox = require("funblox.js")
+
+roblox.setcookie("_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_").then(res => {
+    console.log(res);
+
+}).catch((err) => {
+    console.log(err)
+})
+
+```
+
+# Promote
+
+```js
+const roblox = require("funblox.js")
+
+roblox.promote("groupid", "username").then(res => {
+    console.log(res);
+
+}).catch((err) => {
+    console.log(err)
+})
+
+```
+
+# Demote
+
+```js
+const roblox = require("funblox.js")
+
+roblox.promote("groupid", "username").then(res => {
+    console.log(res);
+
+}).catch((err) => {
+    console.log(err)
+})
+
+```
+
+# setRank
+
+```js
+const roblox = require("funblox.js")
+
+roblox.setRank("groupid", "username").then(res => {
+    console.log(res);
+
+}).catch((err) => {
+    console.log(err)
+})
+
+```
+
 # getUser Info
 
 ```js
@@ -24,8 +80,8 @@ const roblox = require("funblox.js")
 
 roblox.getUser("fede1212156").then(respon => {
     console.log(respon)
-}).catch(() => {
-    console.log("ERR")
+}).catch((err) => {
+    console.log(err)
 })
 ```
 
@@ -34,8 +90,8 @@ const roblox = require("funblox.js")
 
 roblox.getUser("149556783").then(respon => {
     console.log(respon)
-}).catch(() => {
-    console.log("ERR")
+}).catch((err) => {
+    console.log(err)
 })
 ```
 
@@ -49,7 +105,9 @@ const roblox = require("funblox.js")
 roblox.getPlayerThumbnail("user_id", "size", "format", [isCircular (false, true)]).then(res => {
     console.log(res);
 
-}).catch(console.error);
+}).catch((err) => {
+    console.log(err)
+})
 
 ```
 
@@ -61,7 +119,9 @@ const roblox = require("funblox.js")
 roblox.getUserFavoriteGames("user_id").then(res => {
     console.log(res);
 
-}).catch(console.error);
+}).catch((err) => {
+    console.log(err)
+})
 
 ```
 
@@ -73,7 +133,9 @@ const roblox = require("funblox.js")
 roblox.getUserBundles("user_id").then(res => {
     console.log(res);
 
-}).catch(console.error);
+}).catch((err) => {
+    console.log(err)
+})
 
 ```
 
@@ -84,8 +146,8 @@ const roblox = require("funblox.js")
 
 roblox.getUserRank("groupid", "userid").then(respon => {
     console.log(respon)
-}).catch(() => {
-    console.log("ERR")
+}).catch((err) => {
+    console.log(err)
 })
 ```
 
@@ -97,7 +159,9 @@ const roblox = require("funblox.js")
 roblox.getGroup("Iron Cafe").then(res => {
     console.log(res);
 
-}).catch(console.error);
+}).catch((err) => {
+    console.log(err)
+})
 ```
 
 ```js
@@ -106,7 +170,9 @@ const roblox = require("funblox.js")
 roblox.getGroup("10394589").then(res => {
     console.log(res);
 
-}).catch(console.error);
+}).catch((err) => {
+    console.log(err)
+})
 
 ```
 
@@ -118,7 +184,9 @@ const roblox = require("funblox.js")
 roblox.getCategories().then(res => {
     console.log(res);
 
-}).catch(console.error);
+}).catch((err) => {
+    console.log(err)
+})
 
 ```
 
@@ -130,7 +198,9 @@ const roblox = require("funblox.js")
 roblox.getFavoritesOfBundle("bundleId").then(res => {
     console.log(res);
 
-}).catch(console.error);
+}).catch((err) => {
+    console.log(err)
+})
 
 ```
 
@@ -142,7 +212,9 @@ const roblox = require("funblox.js")
 roblox.getFavoritesOfItem("itemId").then(res => {
     console.log(res);
 
-}).catch(console.error);
+}).catch((err) => {
+    console.log(err)
+})
 
 ```
 
