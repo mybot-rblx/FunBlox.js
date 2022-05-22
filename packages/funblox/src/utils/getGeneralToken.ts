@@ -8,7 +8,7 @@ import { auth } from '../api';
  * @param {string} jar
  * @return {string}
  */
-export default function getGeneralToken() {
+export default function getGeneralToken(): Promise<string | string[]> {
   return new Promise(async (resolve, reject) => {
     if (generalCache.has('XCSRF')) {
       return resolve(generalCache.get('XCSRF'));
@@ -22,7 +22,7 @@ export default function getGeneralToken() {
       return reject(new Error('Authentication API returned an error: ' + res.statusCode));
     }
 
-    const csrfToken = res.headers['x-csrf-token'];
+    const csrfToken: string | string[] = res.headers['x-csrf-token'];
 
     if (!csrfToken) {
       return reject(new Error('Could not get XCSRF token!'));

@@ -2,7 +2,7 @@
 import { groups } from '../api';
 import getGroupRank from '../user/getUserRank';
 import cookieJar from '../utils/jar';
-
+import getGeneralToken from '../utils/getGeneralToken';
 
 /**
  * **setRank**
@@ -18,7 +18,7 @@ export default function setRank(groupid: number, user: number, newrank: number):
       const data = { roleId: newrank };
 
       await groups.patch(`v1/groups/${groupid}/users/${user}`, {
-        cookieJar, json: data,
+        cookieJar, json: data, headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': await getGeneralToken() },
       }).then(function() {
         resolve({ oldRank: userRank, newRank: newrank });
       }).catch(function(err) {
