@@ -2102,7 +2102,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.2.186":
+"@swc/core@npm:1.2.192":
   version: 1.2.192
   resolution: "@swc/core@npm:1.2.192"
   dependencies:
@@ -2297,7 +2297,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^27.5.1":
+"@types/jest@npm:27.5.1":
   version: 27.5.1
   resolution: "@types/jest@npm:27.5.1"
   dependencies:
@@ -2411,7 +2411,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.25.0":
+"@typescript-eslint/eslint-plugin@npm:5.26.0":
   version: 5.26.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.26.0"
   dependencies:
@@ -2434,7 +2434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.25.0":
+"@typescript-eslint/parser@npm:5.26.0":
   version: 5.26.0
   resolution: "@typescript-eslint/parser@npm:5.26.0"
   dependencies:
@@ -4325,7 +4325,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-google@npm:^0.14.0":
+"eslint-config-google@npm:0.14.0":
   version: 0.14.0
   resolution: "eslint-config-google@npm:0.14.0"
   peerDependencies:
@@ -4334,7 +4334,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^8.5.0":
+"eslint-config-prettier@npm:8.5.0":
   version: 8.5.0
   resolution: "eslint-config-prettier@npm:8.5.0"
   peerDependencies:
@@ -4345,7 +4345,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-standard@npm:^17.0.0":
+"eslint-config-standard@npm:17.0.0":
   version: 17.0.0
   resolution: "eslint-config-standard@npm:17.0.0"
   peerDependencies:
@@ -4389,7 +4389,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import@npm:^2.26.0":
+"eslint-plugin-import@npm:2.26.0":
   version: 2.26.0
   resolution: "eslint-plugin-import@npm:2.26.0"
   dependencies:
@@ -4412,7 +4412,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-node@npm:^11.1.0":
+"eslint-plugin-node@npm:11.1.0":
   version: 11.1.0
   resolution: "eslint-plugin-node@npm:11.1.0"
   dependencies:
@@ -4428,7 +4428,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:^4.0.0":
+"eslint-plugin-prettier@npm:4.0.0":
   version: 4.0.0
   resolution: "eslint-plugin-prettier@npm:4.0.0"
   dependencies:
@@ -4443,7 +4443,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-promise@npm:^6.0.0":
+"eslint-plugin-promise@npm:6.0.0":
   version: 6.0.0
   resolution: "eslint-plugin-promise@npm:6.0.0"
   peerDependencies:
@@ -4513,7 +4513,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.15.0":
+"eslint@npm:8.16.0":
   version: 8.16.0
   resolution: "eslint@npm:8.16.0"
   dependencies:
@@ -4908,7 +4908,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "funblox-cli@workspace:packages/funblox-cli"
   dependencies:
-    got-cjs: ^12.0.1
+    got-cjs: 12.0.1
   languageName: unknown
   linkType: soft
 
@@ -4916,36 +4916,36 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "funblox-monorepo@workspace:."
   dependencies:
-    "@types/jest": ^27.5.1
-    "@typescript-eslint/eslint-plugin": ^5.25.0
-    "@typescript-eslint/parser": ^5.25.0
-    eslint: ^8.15.0
-    eslint-config-google: ^0.14.0
-    eslint-config-prettier: ^8.5.0
-    eslint-config-standard: ^17.0.0
-    eslint-plugin-import: ^2.26.0
-    eslint-plugin-node: ^11.1.0
-    eslint-plugin-prettier: ^4.0.0
-    eslint-plugin-promise: ^6.0.0
+    "@types/jest": 27.5.1
+    "@typescript-eslint/eslint-plugin": 5.26.0
+    "@typescript-eslint/parser": 5.26.0
+    eslint: 8.16.0
+    eslint-config-google: 0.14.0
+    eslint-config-prettier: 8.5.0
+    eslint-config-standard: 17.0.0
+    eslint-plugin-import: 2.26.0
+    eslint-plugin-node: 11.1.0
+    eslint-plugin-prettier: 4.0.0
+    eslint-plugin-promise: 6.0.0
     funblox.js: "file:packages/funblox"
-    jest: ^28.1.0
-    lerna: ^4.0.0
+    jest: 28.1.0
+    lerna: 4.0.0
     prettier: 2.6.2
-    ts-jest: ^28.0.2
-    ts-node: ^10.7.0
-    turbo: ^1.2.9
-    typescript: ">=4.6.4"
+    ts-jest: 28.0.3
+    ts-node: 10.8.0
+    turbo: 1.2.12
+    typescript: 4.7.2
   languageName: unknown
   linkType: soft
 
 "funblox.js@file:packages/funblox::locator=funblox-monorepo%40workspace%3A.":
   version: 7.1.0
-  resolution: "funblox.js@file:packages/funblox#packages/funblox::hash=91427a&locator=funblox-monorepo%40workspace%3A."
+  resolution: "funblox.js@file:packages/funblox#packages/funblox::hash=982aaa&locator=funblox-monorepo%40workspace%3A."
   dependencies:
     got-cjs: ^12.0.4
     tough-cookie: ^4.0.0
     tough-cookie-file-store: ^2.0.3
-  checksum: b3c4a0c2ad3980c13b22bfb868ab3ae9982babc3cfb2e1cc5005f060eaa0f6b4424295825bdeef24c1dde83b150b979762b3e476a3c51c6373775b7f825cfbfe
+  checksum: 7d836c0d3d7c1012decf34c1d9f2bfd46a40b9ce1b7b5e7ed01d23aa8519ee983da3877ff2ef435ed16fac9e7936721a9dec0c9ae3ac2be2bc6e81ba5f4e6081
   languageName: node
   linkType: hard
 
@@ -4953,13 +4953,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "funblox.js@workspace:packages/funblox.js"
   dependencies:
-    "@swc/core": ^1.2.186
+    "@swc/core": 1.2.192
     "@types/node": 17.0.34
     got-cjs: ^12.0.4
     tough-cookie: ^4.0.0
     tough-cookie-file-store: ^2.0.3
-    tsup: ^5.12.8
-    typescript: 4.6.4
+    tsup: 6.0.1
+    typescript: 4.7.2
   languageName: unknown
   linkType: soft
 
@@ -4967,13 +4967,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "funblox@workspace:packages/funblox"
   dependencies:
-    "@swc/core": ^1.2.186
+    "@swc/core": 1.2.192
     "@types/node": 17.0.34
     got-cjs: ^12.0.4
     tough-cookie: ^4.0.0
     tough-cookie-file-store: ^2.0.3
-    tsup: ^5.12.8
-    typescript: 4.6.4
+    tsup: 6.0.1
+    typescript: 4.7.2
   languageName: unknown
   linkType: soft
 
@@ -5265,7 +5265,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"got-cjs@npm:^12.0.1":
+"got-cjs@npm:12.0.1":
   version: 12.0.1
   resolution: "got-cjs@npm:12.0.1"
   dependencies:
@@ -6464,7 +6464,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^28.1.0":
+"jest@npm:28.1.0":
   version: 28.1.0
   resolution: "jest@npm:28.1.0"
   dependencies:
@@ -6670,7 +6670,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lerna@npm:^4.0.0":
+"lerna@npm:4.0.0":
   version: 4.0.0
   resolution: "lerna@npm:4.0.0"
   dependencies:
@@ -9486,7 +9486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^28.0.2":
+"ts-jest@npm:28.0.3":
   version: 28.0.3
   resolution: "ts-jest@npm:28.0.3"
   dependencies:
@@ -9519,7 +9519,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.7.0":
+"ts-node@npm:10.8.0":
   version: 10.8.0
   resolution: "ts-node@npm:10.8.0"
   dependencies:
@@ -9576,9 +9576,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsup@npm:^5.12.8":
-  version: 5.12.9
-  resolution: "tsup@npm:5.12.9"
+"tsup@npm:6.0.1":
+  version: 6.0.1
+  resolution: "tsup@npm:6.0.1"
   dependencies:
     bundle-require: ^3.0.2
     cac: ^6.7.12
@@ -9608,7 +9608,7 @@ __metadata:
   bin:
     tsup: dist/cli-default.js
     tsup-node: dist/cli-node.js
-  checksum: 872b7d1b523cb2feb6cdfaf9d0d45c1dee835b4b0a38d4f18dfd619ee5abc312421cf201edc8957cac8ba0d1061e697dd6ad1ccb2b45dc200a78ef7d0dd2569d
+  checksum: 4630409533213b3b1953204b29fad514bd93bdb8635b18c12f76101d0dae745982ab7fe47be052111c3b99e23ef356eebce19e77ebd9f72d3769fda43cf9af6f
   languageName: node
   linkType: hard
 
@@ -9723,7 +9723,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo@npm:^1.2.9":
+"turbo@npm:1.2.12":
   version: 1.2.12
   resolution: "turbo@npm:1.2.12"
   dependencies:
@@ -9854,17 +9854,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.6.4":
-  version: 4.6.4
-  resolution: "typescript@npm:4.6.4"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: e7bfcc39cd4571a63a54e5ea21f16b8445268b9900bf55aee0e02ad981be576acc140eba24f1af5e3c1457767c96cea6d12861768fb386cf3ffb34013718631a
-  languageName: node
-  linkType: hard
-
-"typescript@npm:>=4.6.4":
+"typescript@npm:4.7.2":
   version: 4.7.2
   resolution: "typescript@npm:4.7.2"
   bin:
@@ -9874,17 +9864,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.6.4#~builtin<compat/typescript>":
-  version: 4.6.4
-  resolution: "typescript@patch:typescript@npm%3A4.6.4#~builtin<compat/typescript>::version=4.6.4&hash=7ad353"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 1cb434fbc637d347be90e3a0c6cd05e33c38f941713c8786d3031faf1842c2c148ba91d2fac01e7276b0ae3249b8633f1660e32686cc7a8c6a8fd5361dc52c66
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@>=4.6.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.7.2#~builtin<compat/typescript>":
   version: 4.7.2
   resolution: "typescript@patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"
   bin:
