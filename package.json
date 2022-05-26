@@ -34,5 +34,6 @@
   },
   "dependencies": {
     "funblox.js": "file:packages/funblox"
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }
