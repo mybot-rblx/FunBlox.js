@@ -1,6 +1,6 @@
 node_modules/
 lib/
-.yarn/
+.yarn/cache
 .turbo
 .swc/
 .DS_Store
