@@ -12,7 +12,7 @@ import getGroupFunds from './getGroupFunds';
  * @param { boolean } percentage
  * @return { Promise<Object> }
  */
-export default function groupPayout(groupid: number, userid: number, amount: number, recurring: boolean, percentage: boolean): Promise<Object> {
+export default function groupPayout(groupid: number, userid: number, amount: number, recurring?: boolean, percentage?: boolean): Promise<Object> {
   return new Promise(async (resolve, reject) => {
 
     if(typeof groupid === 'number' && typeof userid === 'number' && typeof amount === 'number'){
