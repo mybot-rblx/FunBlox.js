@@ -9,6 +9,13 @@ export const api = got.extend({
   cache: webCache,
 });
 
+export const economy = got.extend({
+  prefixUrl: 'https://economy.roblox.com/',
+  responseType: 'json',
+  cookieJar: jar,
+  cache: webCache,
+})
+
 export const auth = got.extend({
   prefixUrl: 'https://auth.roblox.com/',
   responseType: 'json',
