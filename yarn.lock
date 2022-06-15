@@ -4903,12 +4903,12 @@ __metadata:
 
 "funblox.js@file:packages/funblox::locator=funblox-monorepo%40workspace%3A.":
   version: 7.1.0
-  resolution: "funblox.js@file:packages/funblox#packages/funblox::hash=fdf406&locator=funblox-monorepo%40workspace%3A."
+  resolution: "funblox.js@file:packages/funblox#packages/funblox::hash=f1e67b&locator=funblox-monorepo%40workspace%3A."
   dependencies:
     got-cjs: ^12.0.4
     tough-cookie: ^4.0.0
     tough-cookie-file-store: ^2.0.3
-  checksum: 334a6a13c833c612d6270ccb4e111da3793f59491eba20fdf75154555852c122aadb6028b9899f65b0f2baf2b77ebd64013499966d3f7bdc001b890de85042e8
+  checksum: 04f39528cfac2be1ebc63cf9015816c42b92a2404d51b4a0f9c49c9a91035a3262668c5dcf63772c2e6841263081f4cee2e2e6ed2334630674bf84c7d4e51f3a
   languageName: node
   linkType: hard
 

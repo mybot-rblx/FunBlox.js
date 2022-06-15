@@ -15,13 +15,13 @@ interface GroupFunds {
 export default function getGroupFunds(groupid: number): Promise<GroupFunds> {
   return new Promise(async (resolve, reject) => {
     if(typeof groupid === 'number'){
-      await economy.get(`v1/groups/${groupid}/currency`, {
+      const response = await economy.get(`v1/groups/${groupid}/currency`, {
         cookieJar, headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': await getGeneralToken() },
-      }).then(function(data) {
-        return resolve(data);
-      }).catch(function(err) {
-        return reject(err);
-      });
+      })
+
+      if (response.statusCode !== 200) return reject(new Error(""))
+
+      return resolve(JSON.parse(JSON.stringify(response.body)));
     }
   })
 }

@@ -25,16 +25,14 @@ export default function groupPayout(groupid: number, userid: number, amount: num
          reject(new TypeError('The percentage must be a number from 1 to 100.'))
       }
 
-      await groups.post(`v1/groups/${groupid}/payouts${recurring ? '/recurring' : ''}`, {
-        cookieJar, json: { Recipients: array, PayoutType: `${percentage ? 'Percentage' : 'FixedAmount'}` }, headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': await getGeneralToken() },
-      }).then(async function() {
+      
+      const response = await groups.post(`v1/groups/${groupid}/payouts${recurring ? '/recurring' : ''}`, {
+        cookieJar, json: { recipients: array, PayoutType: `${percentage ? 'Percentage' : 'FixedAmount'}` }, headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': await getGeneralToken() },
+      })
+
+      if (response.statusCode !== 200) return reject(new Error(""))
         
-        return resolve(await getGroupFunds(groupid));
-      }).catch(function(err) {
-        return reject(err);
-      });
-
-
+      return resolve(await getGroupFunds(groupid));
       }
 
   })
