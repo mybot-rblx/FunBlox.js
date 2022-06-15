@@ -36,7 +36,7 @@ roblox.setcookie("_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone
 ```js
 const roblox = require("funblox.js")
 
-roblox.promote("groupid", "username").then(res => {
+roblox.promote(groupid, "username", newrank).then(res => {
     console.log(res);
 
 }).catch((err) => {
