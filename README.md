@@ -17,6 +17,36 @@
 npm i funblox.js
 ```
 
+# groupPayout
+
+```js
+
+const roblox = require("funblox.js")
+
+roblox.groupPayout(groupid, userid, amount, "recurring - must be a boolean (true/false)", "percentage - must be a boolean (true/false)").then(res => {
+    console.log(res);
+
+}).catch((err) => {
+    console.log(err)
+})
+
+```
+
+# getGroupFunds
+
+```js
+
+const roblox = require("funblox.js")
+
+roblox.getGroupFunds(groupid).then(res => {
+    console.log(res);
+
+}).catch((err) => {
+    console.log(err)
+})
+
+```
+
 # setCookie
 
 ```js
@@ -36,7 +66,7 @@ roblox.setcookie("_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone
 ```js
 const roblox = require("funblox.js")
 
-roblox.promote(groupid, "username", newrank).then(res => {
+roblox.promote(groupid, "username").then(res => {
     console.log(res);
 
 }).catch((err) => {
@@ -64,7 +94,7 @@ roblox.promote("groupid", "username").then(res => {
 ```js
 const roblox = require("funblox.js")
 
-roblox.setRank("groupid", "username").then(res => {
+roblox.setRank(groupid, "username", newRank).then(res => {
     console.log(res);
 
 }).catch((err) => {
