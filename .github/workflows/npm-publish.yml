@@ -32,7 +32,7 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org' 
       - run: cd packages/funblox
-      - run: yarn publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -50,7 +50,7 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org' 
       - run: cd packages/funblox.js
-      - run: yarn publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -68,7 +68,7 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org' 
       - run: cd packages/@mybot-rblx/funblox.js-npm
-      - run: yarn publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
  
@@ -88,6 +88,6 @@ jobs:
           node-version: 18
           registry-url: https://npm.pkg.github.com/ 
       - run: cd packages/@mybot-rblx/funblox.js-github
-      - run: yarn publish --registry=https://npm.pkg.github.com/@mybot-rblx
+      - run: npm publish --registry=https://npm.pkg.github.com/@mybot-rblx
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
