@@ -12,12 +12,21 @@
 
 
 # Instructions
-
+*How install FunBlox using NPM?*
 ```
 npm i funblox.js
 ```
 
-# setCookie
+# Documentation Information
+```
+If the variable contains "!" means you can use string too. (Groupname/username)
+If the variable containes "?" means it's an optional variable
+If the variable containes "*" means you the value should be a boolean. (true, false)
+```
+
+# Login functions
+
+**setCookie**
 
 ```js
 const roblox = require("funblox.js")
@@ -31,78 +40,28 @@ roblox.setcookie("_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone
 
 ```
 
-# Promote
+
+# User Functions
+
+**getUser**
 
 ```js
 const roblox = require("funblox.js")
 
-roblox.promote("groupid", "username").then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-
-```
-
-# Demote
-
-```js
-const roblox = require("funblox.js")
-
-roblox.promote("groupid", "username").then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-
-```
-
-# setRank
-
-```js
-const roblox = require("funblox.js")
-
-roblox.setRank("groupid", "username").then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-
-```
-
-# getUser Info
-
-```js
-const roblox = require("funblox.js")
-
-roblox.getUser("fede1212156").then(respon => {
+roblox.getUser("!user_id").then(respon => {
     console.log(respon)
 }).catch((err) => {
     console.log(err)
 })
 ```
 
-```js
-const roblox = require("funblox.js")
 
-roblox.getUser("149556783").then(respon => {
-    console.log(respon)
-}).catch((err) => {
-    console.log(err)
-})
-```
-
-# getPlayerThumbnail
-
-
+**getPlayerThumbnail**
 
 ```js
 const roblox = require("funblox.js")
 
-roblox.getPlayerThumbnail("user_id", "size", "format", [isCircular (false, true)]).then(res => {
+roblox.getPlayerThumbnail("!user_id", "size", "format", "*isCircular?").then(res => {
     console.log(res);
 
 }).catch((err) => {
@@ -111,7 +70,7 @@ roblox.getPlayerThumbnail("user_id", "size", "format", [isCircular (false, true)
 
 ```
 
-# getUserFavoriteGames
+**getUserFavoriteGames**
 
 ```js
 const roblox = require("funblox.js")
@@ -125,7 +84,7 @@ roblox.getUserFavoriteGames("user_id").then(res => {
 
 ```
 
-# getUserBundles
+**getUserBundles**
 
 ```js
 const roblox = require("funblox.js")
@@ -139,24 +98,26 @@ roblox.getUserBundles("user_id").then(res => {
 
 ```
 
-# getUserRank
+**getUserRank**
 
 ```js
 const roblox = require("funblox.js")
 
-roblox.getUserRank("groupid", "userid").then(respon => {
+roblox.getUserRank("groupid", "!userid").then(respon => {
     console.log(respon)
 }).catch((err) => {
     console.log(err)
 })
 ```
 
-# getGroup Info
+# Group Functions
+
+**getGroup**
 
 ```js
 const roblox = require("funblox.js")
 
-roblox.getGroup("Iron Cafe").then(res => {
+roblox.getGroup("!groupid").then(res => {
     console.log(res);
 
 }).catch((err) => {
@@ -164,10 +125,12 @@ roblox.getGroup("Iron Cafe").then(res => {
 })
 ```
 
+**Promote**
+
 ```js
 const roblox = require("funblox.js")
 
-roblox.getGroup("10394589").then(res => {
+roblox.promote("groupid", "!username").then(res => {
     console.log(res);
 
 }).catch((err) => {
@@ -176,7 +139,65 @@ roblox.getGroup("10394589").then(res => {
 
 ```
 
-# getCategories
+**Demote**
+
+```js
+const roblox = require("funblox.js")
+
+roblox.demote("groupid", "!username").then(res => {
+    console.log(res);
+
+}).catch((err) => {
+    console.log(err)
+})
+
+```
+
+**setRank**
+
+```js
+const roblox = require("funblox.js")
+
+roblox.setRank("groupid", "username", "newRankId").then(res => {
+    console.log(res);
+
+}).catch((err) => {
+    console.log(err)
+})
+
+```
+
+**groupPayout**
+
+```js
+const roblox = require("funblox.js")
+
+roblox.groupPayout("groupid", "userid", "amount", "*recurring?", "*percentage?").then(res => {
+    console.log(res);
+
+}).catch((err) => {
+    console.log(err)
+})
+
+```
+
+**groupPayout**
+
+```js
+const roblox = require("funblox.js")
+
+roblox.getGroupFunds("groupid").then(res => {
+    console.log(res);
+
+}).catch((err) => {
+    console.log(err)
+})
+
+```
+
+
+# Category Functions
+**getCategories**
 
 ```js
 const roblox = require("funblox.js")
@@ -190,7 +211,7 @@ roblox.getCategories().then(res => {
 
 ```
 
-# getFavoritesOfBundle
+**getFavoritesOfBundle**
 
 ```js
 const roblox = require("funblox.js")
@@ -204,7 +225,7 @@ roblox.getFavoritesOfBundle("bundleId").then(res => {
 
 ```
 
-# getFavoritesOfItem
+**getFavoritesOfItem**
 
 ```js
 const roblox = require("funblox.js")
@@ -225,7 +246,7 @@ roblox.getFavoritesOfItem("itemId").then(res => {
 | Active Support | ✅|
 | Developers | [@fedeetide](https://www.roblox.com/users/835364986/profile), [@Joshuadl12](https://www.roblox.com/users/156711358/profile) |
 
-# [License](https://github.com/mybot-rblx/FunBlox/blob/main/LICENSE)
+**[License](https://github.com/mybot-rblx/FunBlox/blob/main/LICENSE)** | 
 This package is under license (MIT).
 License description:
 
@@ -234,4 +255,3 @@ A short and simple permissive license with conditions only requiring preservatio
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox?ref=badge_large)
 
-# More Coming Soon...
