@@ -1,7 +1,7 @@
 <img src="https://user-images.githubusercontent.com/72459034/168478419-50f69a42-f776-4062-84fa-8f198920cb5e.png" width="800"/>
 
 # FunBlox
-**We are a roblox API wrapper on development! (Contact us : fedee#9606 / DogeFlexJosh#0656)**
+**We are a Roblox API wrapper on development! (Contact us : fedee#9606 / DogeFlexJosh#0656)**
 
 # Project Information
 **FunBlox is an API wrapper for ROBLOX that was developed at the time with JS after two months it was reverted to a package made with TS, today our developers work to add more functions.**
@@ -20,8 +20,8 @@ npm i funblox.js
 # Documentation Information
 ```
 If the variable contains "!" means you can use string too. (Groupname/username)
-If the variable containes "?" means it's an optional variable
-If the variable containes "*" means you the value should be a boolean. (true, false)
+If the variable contains "?" means it's an optional variable
+If the variable contains "*" means the value should be a boolean. (true, false)
 ```
 
 # Login functions
@@ -254,4 +254,3 @@ A short and simple permissive license with conditions only requiring preservatio
 
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox?ref=badge_large)
-
