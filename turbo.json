@@ -13,6 +13,11 @@
       "dependsOn": ["^build"],
       "outputs": [],
       "cache": false
+    },
+    "publish": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "cache": false
     }
   }
 }

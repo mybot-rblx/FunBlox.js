@@ -18,7 +18,7 @@ jobs:
       - run: yarn
       - run: yarn run build
 
-  publish-funblox:
+  publish-packages:
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -31,63 +31,7 @@ jobs:
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org' 
-      - run: cd packages/funblox
-      - run: npm publish
+      - run: yarn run publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  publish-funblox-js:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-      - run: git checkout HEAD^
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          registry-url: 'https://registry.npmjs.org' 
-      - run: cd packages/funblox.js
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  publish-npm-org:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-      - run: git checkout HEAD^
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          registry-url: 'https://registry.npmjs.org' 
-      - run: cd packages/@mybot-rblx/funblox.js-npm
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
- 
-  publish-gpr:
-    runs-on: ubuntu-latest
-    needs: build
-    permissions:
-      packages: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v3
-        with:
-            fetch-depth: 2
-      - run: git checkout HEAD^
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          registry-url: https://npm.pkg.github.com/ 
-      - run: cd packages/@mybot-rblx/funblox.js-github
-      - run: npm publish --registry=https://npm.pkg.github.com/@mybot-rblx
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
