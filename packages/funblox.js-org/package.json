@@ -13,7 +13,6 @@
     "build": "tsup src/index.ts",
     "build:watch": "parcel watch",
     "build:ci": "parcel build ./packages/funblox",
-    "publish": "yarn publish",
     "watch": "parcel watch",
     "test": "jest",
     "test:watch": "jest --watchAll --verbose"

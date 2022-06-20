@@ -28,13 +28,23 @@ jobs:
         run: yarn
       - name: Build project
         run: yarn run build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
       - name: Test project
         run: yarn run test
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
   node_16:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+            - uses: actions/checkout@v3
       - name: restore lerna
         uses: actions/cache@v3
         with:
@@ -42,16 +52,18 @@ jobs:
             node_modules
             */*/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
       - name: Install dependencies
         run: yarn
       - name: Build project
         run: yarn run build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
       - name: Test project
         run: yarn run test
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
 
   node_18:
     runs-on: ubuntu-latest
@@ -62,9 +74,23 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+            - uses: actions/checkout@v3
+      - name: restore lerna
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         run: yarn
       - name: Build project
         run: yarn run build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
       - name: Test project
         run: yarn run test
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
