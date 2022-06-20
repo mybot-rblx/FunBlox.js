@@ -17,6 +17,9 @@ jobs:
       - uses: actions/setup-node@v3
       - run: yarn
       - run: yarn run build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
 
   publish-packages:
     runs-on: ubuntu-latest
