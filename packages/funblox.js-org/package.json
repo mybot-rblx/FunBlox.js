@@ -13,9 +13,7 @@
     "build": "tsup src/index.ts",
     "build:watch": "parcel watch",
     "build:ci": "parcel build ./packages/funblox",
-    "watch": "parcel watch",
-    "test": "jest",
-    "test:watch": "jest --watchAll --verbose"
+    "watch": "parcel watch"
   },
   "keywords": [
     "roblox",
