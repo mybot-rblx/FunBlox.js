@@ -13,6 +13,7 @@
     "build": "tsup src/index.ts",
     "build:watch": "parcel watch",
     "build:ci": "parcel build ./packages/funblox",
+    "publish": "npm publish",
     "watch": "parcel watch"
   },
   "keywords": [

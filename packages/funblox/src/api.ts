@@ -14,7 +14,7 @@ export const economy = got.extend({
   responseType: 'json',
   cookieJar: jar,
   cache: webCache,
-})
+});
 
 export const auth = got.extend({
   prefixUrl: 'https://auth.roblox.com/',
