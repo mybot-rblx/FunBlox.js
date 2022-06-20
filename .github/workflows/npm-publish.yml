@@ -3,27 +3,8 @@ on:
   release:
     types: [created]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: restore lerna
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - uses: actions/setup-node@v3
-      - run: yarn
-      - run: yarn run build
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
-
   publish-packages:
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - uses: actions/checkout@v3
         with:
@@ -41,6 +22,10 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org' 
       - run: yarn
+      - run: yarn run build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
       # Setup .npmrc file to publish to npm
       - run: yarn run publish
         env:
