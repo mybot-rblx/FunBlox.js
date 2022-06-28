@@ -7,9 +7,9 @@ describe('FunBlox', () => {
       const result = await getUserRank(2700627, 156711358);
 
       expect(result).toEqual({
-        id: 20474600,
-        name: 'Management Intern',
-        rank: 237,
+        id: 20441571,
+        name: 'Store Supervisor',
+        rank: 243,
       });
     });
 
@@ -17,9 +17,9 @@ describe('FunBlox', () => {
       const result = await getUserRank(2700627, 'joshuadl12');
 
       expect(result).toEqual({
-        id: 20474600,
-        name: 'Management Intern',
-        rank: 237,
+        id: 20441571,
+        name: 'Store Supervisor',
+        rank: 243,
       });
     });
   });
