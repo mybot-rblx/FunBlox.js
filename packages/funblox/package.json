@@ -1,6 +1,6 @@
 {
   "name": "funblox",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "description": "This package made by fedee#9606 this a roblox API you may use it for your verification or something if you use our package give us credit <3.",
   "source": "src/index.ts",
   "main": "lib/index.js",
