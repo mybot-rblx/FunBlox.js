@@ -27,7 +27,7 @@ export default function getCurrentUser(jar?: string) {
               if (resA.statusCode !== 200) {
                 reject(new Error('You are not logged in!'));
               }
-              resolve(resA.body);
+              resolve(JSON.parse(JSON.stringify(resA.body)));
           }
         });
         break;
