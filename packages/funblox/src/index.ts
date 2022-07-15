@@ -14,10 +14,12 @@ import promote from './group/promote';
 import demote from './group/demote';
 import setRank from './group/setRank';
 import setCookie from './user/setCookie';
+import getGroups from './user/getGroups';
 import * as api from './api';
 
 export {
   getGroup,
+  getGroups,
   api,
   getUser,
   promote,
