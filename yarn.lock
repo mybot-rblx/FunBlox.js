@@ -6788,30 +6788,30 @@
   dependencies:
     "tslib" "^1.8.1"
 
-"turbo-linux-64@1.4.0":
-  "integrity" "sha512-1+WyeJ1CBOnXNQl+Qke4NWvy3Zymp0NoxmJcZAmVBhwqAqGyERypeDznMfFmFtpG99/ZhmT7xwilz3Bw3Eyukw=="
-  "resolved" "https://registry.npmjs.org/turbo-linux-64/-/turbo-linux-64-1.4.0.tgz"
-  "version" "1.4.0"
+"turbo-linux-64@1.4.2":
+  "integrity" "sha512-t7gGxp1ILmGwzymcf72Lw4Ca916Bi9j2C4xPnJ2CAqxMWQOJKCRvyOuUHC/uy1kFDjR2yszxMb+ZJL6P3nccfA=="
+  "resolved" "https://registry.npmjs.org/turbo-linux-64/-/turbo-linux-64-1.4.2.tgz"
+  "version" "1.4.2"
 
-"turbo@1.4.0":
-  "integrity" "sha512-k2x8QqunK/96tqzB7aRCQ601H7N2PnxTcrEH9NoJjN5sJeymnfn/dQ8l6HrSyuYrW259W3N/AWAAUhpXnUyitA=="
-  "resolved" "https://registry.npmjs.org/turbo/-/turbo-1.4.0.tgz"
-  "version" "1.4.0"
+"turbo@1.4.2":
+  "integrity" "sha512-ry1vUs5oHCIM+Sef8HED2XsbL28YAeclCrOtDp9zbZZMUX1r5s01COqOJjFJZfDiv2zSlUge9IIQXprM8BfrtA=="
+  "resolved" "https://registry.npmjs.org/turbo/-/turbo-1.4.2.tgz"
+  "version" "1.4.2"
   optionalDependencies:
-    "turbo-android-arm64" "1.4.0"
-    "turbo-darwin-64" "1.4.0"
-    "turbo-darwin-arm64" "1.4.0"
-    "turbo-freebsd-64" "1.4.0"
-    "turbo-freebsd-arm64" "1.4.0"
-    "turbo-linux-32" "1.4.0"
-    "turbo-linux-64" "1.4.0"
-    "turbo-linux-arm" "1.4.0"
-    "turbo-linux-arm64" "1.4.0"
-    "turbo-linux-mips64le" "1.4.0"
-    "turbo-linux-ppc64le" "1.4.0"
-    "turbo-windows-32" "1.4.0"
-    "turbo-windows-64" "1.4.0"
-    "turbo-windows-arm64" "1.4.0"
+    "turbo-android-arm64" "1.4.2"
+    "turbo-darwin-64" "1.4.2"
+    "turbo-darwin-arm64" "1.4.2"
+    "turbo-freebsd-64" "1.4.2"
+    "turbo-freebsd-arm64" "1.4.2"
+    "turbo-linux-32" "1.4.2"
+    "turbo-linux-64" "1.4.2"
+    "turbo-linux-arm" "1.4.2"
+    "turbo-linux-arm64" "1.4.2"
+    "turbo-linux-mips64le" "1.4.2"
+    "turbo-linux-ppc64le" "1.4.2"
+    "turbo-windows-32" "1.4.2"
+    "turbo-windows-64" "1.4.2"
+    "turbo-windows-arm64" "1.4.2"
 
 "type-check@^0.4.0", "type-check@~0.4.0":
   "integrity" "sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew=="
