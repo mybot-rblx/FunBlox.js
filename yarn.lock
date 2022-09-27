@@ -1567,7 +1567,7 @@
   "resolved" "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.24.21.tgz"
   "version" "0.24.21"
 
-"@sindresorhus/is@^4.6.0":
+"@sindresorhus/is@^4.6.0", "@sindresorhus/is@4.6.0":
   "integrity" "sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw=="
   "resolved" "https://registry.npmjs.org/@sindresorhus/is/-/is-4.6.0.tgz"
   "version" "4.6.0"
@@ -3088,8 +3088,6 @@
     "regexpp" "^3.0.0"
 
 "eslint-plugin-es@^4.1.0":
-  "integrity" "sha512-GILhQTnjYE2WorX5Jyi5i4dz5ALWxBIdQECVQavL6s7cI76IZTDWleTHkxz/QT3kvcs2QlGHvKLYsSlPOlPXnQ=="
-  "resolved" "https://registry.npmjs.org/eslint-plugin-es/-/eslint-plugin-es-4.1.0.tgz"
   "version" "4.1.0"
   dependencies:
     "eslint-utils" "^2.0.0"
@@ -3115,17 +3113,15 @@
     "tsconfig-paths" "^3.14.1"
 
 "eslint-plugin-n@^15.0.0":
-  "integrity" "sha512-tjnVMv2fiXYMnuiIFI8QMtyUFI42SckEEWvi8h68SWGWshfqO6SSCASy24dGMGAiy7NUk6DZt90DM0iNUsmQ5w=="
-  "resolved" "https://registry.npmjs.org/eslint-plugin-n/-/eslint-plugin-n-15.2.4.tgz"
-  "version" "15.2.4"
+  "version" "15.3.0"
   dependencies:
     "builtins" "^5.0.1"
     "eslint-plugin-es" "^4.1.0"
     "eslint-utils" "^3.0.0"
     "ignore" "^5.1.1"
-    "is-core-module" "^2.9.0"
+    "is-core-module" "^2.10.0"
     "minimatch" "^3.1.2"
-    "resolve" "^1.10.1"
+    "resolve" "^1.22.1"
     "semver" "^7.3.7"
 
 "eslint-plugin-node@11.1.0":
@@ -3443,6 +3439,9 @@
   "resolved" "https://registry.npmjs.org/form-data-encoder/-/form-data-encoder-1.7.1.tgz"
   "version" "1.7.1"
 
+"form-data-encoder@1.7.2":
+  "version" "1.7.2"
+
 "fs-extra@^9.1.0":
   "integrity" "sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ=="
   "resolved" "https://registry.npmjs.org/fs-extra/-/fs-extra-9.1.0.tgz"
@@ -3721,7 +3720,24 @@
     "merge2" "^1.4.1"
     "slash" "^3.0.0"
 
-"got-cjs@^12.0.4", "got-cjs@12.0.4":
+"got-cjs@^12.0.4":
+  "version" "12.3.1"
+  dependencies:
+    "@sindresorhus/is" "4.6.0"
+    "@szmarczak/http-timer" "4.0.6"
+    "@types/cacheable-request" "^6.0.2"
+    "@types/responselike" "^1.0.0"
+    "cacheable-lookup" "^6.0.4"
+    "cacheable-request" "^7.0.2"
+    "decompress-response" "^6.0.0"
+    "form-data-encoder" "1.7.2"
+    "get-stream" "^6.0.1"
+    "http2-wrapper" "^2.1.10"
+    "lowercase-keys" "2.0.0"
+    "p-cancelable" "2.1.1"
+    "responselike" "^2.0.0"
+
+"got-cjs@12.0.4":
   "integrity" "sha512-dnbXGRnjOhpdvE5jWMTUgdvqFD9uyCD4H18ZVUj+hPR0QLKKMRGb6Cp+b49yek5d29vGgMMJ0RtgD97UU8S5Tw=="
   "resolved" "https://registry.npmjs.org/got-cjs/-/got-cjs-12.0.4.tgz"
   "version" "12.0.4"
@@ -4050,10 +4066,8 @@
   dependencies:
     "ci-info" "^2.0.0"
 
-"is-core-module@^2.5.0", "is-core-module@^2.8.1", "is-core-module@^2.9.0":
-  "integrity" "sha512-+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A=="
-  "resolved" "https://registry.npmjs.org/is-core-module/-/is-core-module-2.9.0.tgz"
-  "version" "2.9.0"
+"is-core-module@^2.10.0", "is-core-module@^2.5.0", "is-core-module@^2.8.1", "is-core-module@^2.9.0":
+  "version" "2.10.0"
   dependencies:
     "has" "^1.0.3"
 
@@ -6106,12 +6120,10 @@
   "resolved" "https://registry.npmjs.org/resolve.exports/-/resolve.exports-1.1.0.tgz"
   "version" "1.1.0"
 
-"resolve@^1.10.0", "resolve@^1.10.1", "resolve@^1.20.0", "resolve@^1.22.0":
-  "integrity" "sha512-Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw=="
-  "resolved" "https://registry.npmjs.org/resolve/-/resolve-1.22.0.tgz"
-  "version" "1.22.0"
+"resolve@^1.10.0", "resolve@^1.10.1", "resolve@^1.20.0", "resolve@^1.22.0", "resolve@^1.22.1":
+  "version" "1.22.1"
   dependencies:
-    "is-core-module" "^2.8.1"
+    "is-core-module" "^2.9.0"
     "path-parse" "^1.0.7"
     "supports-preserve-symlinks-flag" "^1.0.0"
 
@@ -6727,10 +6739,10 @@
     "semver" "7.x"
     "yargs-parser" "^21.0.1"
 
-"ts-node@>=9.0.0", "ts-node@10.8.1":
-  "integrity" "sha512-Wwsnao4DQoJsN034wePSg5nZiw4YKXf56mPIAeD6wVmiv+RytNSWqc2f3fKvcUoV+Yn2+yocD71VOfQHbmVX4g=="
-  "resolved" "https://registry.npmjs.org/ts-node/-/ts-node-10.8.1.tgz"
-  "version" "10.8.1"
+"ts-node@>=9.0.0", "ts-node@10.9.1":
+  "integrity" "sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw=="
+  "resolved" "https://registry.npmjs.org/ts-node/-/ts-node-10.9.1.tgz"
+  "version" "10.9.1"
   dependencies:
     "@cspotcode/source-map-support" "^0.8.0"
     "@tsconfig/node10" "^1.0.7"
