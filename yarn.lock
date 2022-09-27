@@ -3115,17 +3115,17 @@
     "tsconfig-paths" "^3.14.1"
 
 "eslint-plugin-n@^15.0.0":
-  "integrity" "sha512-tjnVMv2fiXYMnuiIFI8QMtyUFI42SckEEWvi8h68SWGWshfqO6SSCASy24dGMGAiy7NUk6DZt90DM0iNUsmQ5w=="
-  "resolved" "https://registry.npmjs.org/eslint-plugin-n/-/eslint-plugin-n-15.2.4.tgz"
-  "version" "15.2.4"
+  "integrity" "sha512-IyzPnEWHypCWasDpxeJnim60jhlumbmq0pubL6IOcnk8u2y53s5QfT8JnXy7skjHJ44yWHRb11PLtDHuu1kg/Q=="
+  "resolved" "https://registry.npmjs.org/eslint-plugin-n/-/eslint-plugin-n-15.3.0.tgz"
+  "version" "15.3.0"
   dependencies:
     "builtins" "^5.0.1"
     "eslint-plugin-es" "^4.1.0"
     "eslint-utils" "^3.0.0"
     "ignore" "^5.1.1"
-    "is-core-module" "^2.9.0"
+    "is-core-module" "^2.10.0"
     "minimatch" "^3.1.2"
-    "resolve" "^1.10.1"
+    "resolve" "^1.22.1"
     "semver" "^7.3.7"
 
 "eslint-plugin-node@11.1.0":
@@ -4050,10 +4050,10 @@
   dependencies:
     "ci-info" "^2.0.0"
 
-"is-core-module@^2.5.0", "is-core-module@^2.8.1", "is-core-module@^2.9.0":
-  "integrity" "sha512-+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A=="
-  "resolved" "https://registry.npmjs.org/is-core-module/-/is-core-module-2.9.0.tgz"
-  "version" "2.9.0"
+"is-core-module@^2.10.0", "is-core-module@^2.5.0", "is-core-module@^2.8.1", "is-core-module@^2.9.0":
+  "integrity" "sha512-Erxj2n/LDAZ7H8WNJXd9tw38GYM3dv8rk8Zcs+jJuxYTW7sozH+SS8NtrSjVL1/vpLvWi1hxy96IzjJ3EHTJJg=="
+  "resolved" "https://registry.npmjs.org/is-core-module/-/is-core-module-2.10.0.tgz"
+  "version" "2.10.0"
   dependencies:
     "has" "^1.0.3"
 
@@ -6106,12 +6106,12 @@
   "resolved" "https://registry.npmjs.org/resolve.exports/-/resolve.exports-1.1.0.tgz"
   "version" "1.1.0"
 
-"resolve@^1.10.0", "resolve@^1.10.1", "resolve@^1.20.0", "resolve@^1.22.0":
-  "integrity" "sha512-Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw=="
-  "resolved" "https://registry.npmjs.org/resolve/-/resolve-1.22.0.tgz"
-  "version" "1.22.0"
+"resolve@^1.10.0", "resolve@^1.10.1", "resolve@^1.20.0", "resolve@^1.22.0", "resolve@^1.22.1":
+  "integrity" "sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw=="
+  "resolved" "https://registry.npmjs.org/resolve/-/resolve-1.22.1.tgz"
+  "version" "1.22.1"
   dependencies:
-    "is-core-module" "^2.8.1"
+    "is-core-module" "^2.9.0"
     "path-parse" "^1.0.7"
     "supports-preserve-symlinks-flag" "^1.0.0"
 
@@ -6788,30 +6788,22 @@
   dependencies:
     "tslib" "^1.8.1"
 
-"turbo-linux-64@1.4.0":
-  "integrity" "sha512-1+WyeJ1CBOnXNQl+Qke4NWvy3Zymp0NoxmJcZAmVBhwqAqGyERypeDznMfFmFtpG99/ZhmT7xwilz3Bw3Eyukw=="
-  "resolved" "https://registry.npmjs.org/turbo-linux-64/-/turbo-linux-64-1.4.0.tgz"
-  "version" "1.4.0"
+"turbo-linux-64@1.5.4":
+  "integrity" "sha512-FbsXHOIkFnjX4Qu7ZtoCimmy5GlnTYuy66TO2re3i+jy+a59XOAnhU8tT/+FcA73oDAnSv/SAbz1gbsknCU4PA=="
+  "resolved" "https://registry.npmjs.org/turbo-linux-64/-/turbo-linux-64-1.5.4.tgz"
+  "version" "1.5.4"
 
-"turbo@1.4.0":
-  "integrity" "sha512-k2x8QqunK/96tqzB7aRCQ601H7N2PnxTcrEH9NoJjN5sJeymnfn/dQ8l6HrSyuYrW259W3N/AWAAUhpXnUyitA=="
-  "resolved" "https://registry.npmjs.org/turbo/-/turbo-1.4.0.tgz"
-  "version" "1.4.0"
+"turbo@1.5.4":
+  "integrity" "sha512-8txVfU6J4H5ZkSxr6N6Qn7H+W2Cpr0Uh67VeCH4/ZIbH4u24qPFZA9emlGcss0tI1pZHKGJ0+KjoSzC7vWqN2g=="
+  "resolved" "https://registry.npmjs.org/turbo/-/turbo-1.5.4.tgz"
+  "version" "1.5.4"
   optionalDependencies:
-    "turbo-android-arm64" "1.4.0"
-    "turbo-darwin-64" "1.4.0"
-    "turbo-darwin-arm64" "1.4.0"
-    "turbo-freebsd-64" "1.4.0"
-    "turbo-freebsd-arm64" "1.4.0"
-    "turbo-linux-32" "1.4.0"
-    "turbo-linux-64" "1.4.0"
-    "turbo-linux-arm" "1.4.0"
-    "turbo-linux-arm64" "1.4.0"
-    "turbo-linux-mips64le" "1.4.0"
-    "turbo-linux-ppc64le" "1.4.0"
-    "turbo-windows-32" "1.4.0"
-    "turbo-windows-64" "1.4.0"
-    "turbo-windows-arm64" "1.4.0"
+    "turbo-darwin-64" "1.5.4"
+    "turbo-darwin-arm64" "1.5.4"
+    "turbo-linux-64" "1.5.4"
+    "turbo-linux-arm64" "1.5.4"
+    "turbo-windows-64" "1.5.4"
+    "turbo-windows-arm64" "1.5.4"
 
 "type-check@^0.4.0", "type-check@~0.4.0":
   "integrity" "sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew=="
