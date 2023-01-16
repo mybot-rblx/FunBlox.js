@@ -3088,8 +3088,6 @@
     "regexpp" "^3.0.0"
 
 "eslint-plugin-es@^4.1.0":
-  "integrity" "sha512-GILhQTnjYE2WorX5Jyi5i4dz5ALWxBIdQECVQavL6s7cI76IZTDWleTHkxz/QT3kvcs2QlGHvKLYsSlPOlPXnQ=="
-  "resolved" "https://registry.npmjs.org/eslint-plugin-es/-/eslint-plugin-es-4.1.0.tgz"
   "version" "4.1.0"
   dependencies:
     "eslint-utils" "^2.0.0"
@@ -3115,8 +3113,6 @@
     "tsconfig-paths" "^3.14.1"
 
 "eslint-plugin-n@^15.0.0":
-  "integrity" "sha512-R9xw9OtCRxxaxaszTQmQAlPgM+RdGjaL1akWuY/Fv9fRAi8Wj4CUKc6iYVG8QNRjRuo8/BqVYIpfqberJUEacA=="
-  "resolved" "https://registry.npmjs.org/eslint-plugin-n/-/eslint-plugin-n-15.6.1.tgz"
   "version" "15.6.1"
   dependencies:
     "builtins" "^5.0.1"
@@ -3140,10 +3136,10 @@
     "resolve" "^1.10.1"
     "semver" "^6.1.0"
 
-"eslint-plugin-prettier@4.1.0":
-  "integrity" "sha512-A3AXIEfTnq3D5qDFjWJdQ9c4BLhw/TqhSR+6+SVaoPJBAWciFEuJiNQh275OnjRrAi7yssZzuWBRw66VG2g6UA=="
-  "resolved" "https://registry.npmjs.org/eslint-plugin-prettier/-/eslint-plugin-prettier-4.1.0.tgz"
-  "version" "4.1.0"
+"eslint-plugin-prettier@4.2.1":
+  "integrity" "sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ=="
+  "resolved" "https://registry.npmjs.org/eslint-plugin-prettier/-/eslint-plugin-prettier-4.2.1.tgz"
+  "version" "4.2.1"
   dependencies:
     "prettier-linter-helpers" "^1.0.0"
 
@@ -6216,8 +6212,6 @@
     "lru-cache" "^6.0.0"
 
 "semver@^7.3.8":
-  "integrity" "sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A=="
-  "resolved" "https://registry.npmjs.org/semver/-/semver-7.3.8.tgz"
   "version" "7.3.8"
   dependencies:
     "lru-cache" "^6.0.0"
