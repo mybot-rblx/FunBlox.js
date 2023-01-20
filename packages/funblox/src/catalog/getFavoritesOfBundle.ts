@@ -7,13 +7,13 @@ import { catalog } from '../api';
  * @return {Promise<string>}
  */
 export default function getFavoritesOfBundle(
-  bundleId: number | string,
+    bundleId: number | string,
 ): Promise<string> {
   return new Promise(async (resolve, reject) => {
     if (Number(bundleId)) {
       try {
         const favorites = await catalog.get(
-          `v1/favorites/bundles/${bundleId}/count`,
+            `v1/favorites/bundles/${bundleId}/count`,
         );
         resolve(JSON.parse(JSON.stringify(favorites.body)));
       } catch (error) {

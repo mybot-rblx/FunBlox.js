@@ -7,13 +7,13 @@ import { catalog } from '../api';
  * @return {Promise<string>}
  */
 export default function getFavoritesOfItem(
-  itemId: number | string,
+    itemId: number | string,
 ): Promise<string> {
   return new Promise(async (resolve, reject) => {
     if (Number(itemId)) {
       try {
         const favorites = await catalog.get(
-          `v1/favorites/assets/${Number(itemId)}/count`,
+            `v1/favorites/assets/${Number(itemId)}/count`,
         );
         resolve(JSON.parse(JSON.stringify(favorites.body)));
       } catch (error) {
