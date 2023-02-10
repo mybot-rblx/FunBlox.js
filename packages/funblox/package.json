@@ -1,5 +1,5 @@
 {
-  "name": "funblox",
+  "name": "@funblox/funblox.js",
   "version": "8.1.1",
   "description": "This package made by fedee#9606 this a roblox API you may use it for your verification or something if you use our package give us credit <3.",
   "source": "src/index.ts",
@@ -11,8 +11,6 @@
   },
   "scripts": {
     "build": "tsup src/index.ts",
-    "build:watch": "parcel watch",
-    "build:ci": "parcel build ./packages/funblox",
     "publish": "yarn publish",
     "watch": "parcel watch",
     "test": "jest",
@@ -44,7 +42,7 @@
     "@swc/core": "1.2.204",
     "@types/node": "18.0.0",
     "tsup": "6.1.2",
-    "typescript": "4.7.4"
+    "typescript": "4.9.4"
   },
   "dependencies": {
     "got-cjs": "^12.0.4",
