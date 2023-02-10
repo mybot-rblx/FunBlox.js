@@ -15,11 +15,17 @@ import demote from './group/demote';
 import setRank from './group/setRank';
 import setCookie from './user/setCookie';
 import getGroups from './user/getGroups';
+import deletePost from './group/deletePost';
+import deletePostBySpecificUser from './group/deletePostBySpecificUser';
+import getGroupWall from './group/getGroupWall';
 import * as api from './api';
 
 export {
   getGroup,
   getGroups,
+  getGroupWall,
+  deletePost,
+  deletePostBySpecificUser,
   api,
   getUser,
   promote,
