@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/mybot-rblx/FunBlox#readme",
   "devDependencies": {
-    "@swc/core": "1.2.204",
+    "@swc/core": "1.3.42",
     "@types/node": "18.0.0",
     "tsup": "6.1.2",
     "typescript": "4.9.4"
