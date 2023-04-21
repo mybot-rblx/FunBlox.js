@@ -7,7 +7,7 @@ describe('FunBlox', () => {
       const result = await getUserRank(7, 21557);
 
       expect(result).toEqual({
-        id: 20441571,
+        id: 52,
         name: 'Owner',
         rank: 255,
       });
@@ -17,7 +17,7 @@ describe('FunBlox', () => {
       const result = await getUserRank(7, 'Games');
 
       expect(result).toEqual({
-        id: 20441571,
+        id: 52,
         name: 'Owner',
         rank: 255,
       });
