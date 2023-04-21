@@ -5,3 +5,5 @@ lib/
 .swc/
 .DS_Store
 .cookie
+yarn-error.log
+npm-error.log
