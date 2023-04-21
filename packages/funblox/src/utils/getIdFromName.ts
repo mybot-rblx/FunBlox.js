@@ -9,7 +9,7 @@ import type { SearchUserAPIResponse } from './APITypes';
  */
 export default function getIdFromName(username: string, showBannedUsers?: boolean): Promise<number> {
   return new Promise(async (resolve, reject) => {
-    const res = await users.post(`v1/usernames/users`, { 
+    const res = await users.post('v1/usernames/users', { 
       json: {
         "usernames": [username],
         "excludeBannedUsers": showBannedUsers || false
