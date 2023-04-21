@@ -44,7 +44,7 @@ export default function getGroupRank(
     } else {
       // Ensure it is an acutal string and get the user's id
       if (typeof user === 'string') {
-        const wow = await getNameFromId(user);
+        const wow = await getNameFromId(user, false);
 
         if (!wow) return reject(new TypeError('User was not found.'));
 

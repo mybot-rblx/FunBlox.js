@@ -7,7 +7,7 @@
   "scripts": {
     "publish": "turbo run publish",
     "build": "turbo run build",
-    "build:ci": "lerna run build:ci",
+    "build:ci": "turbo run build:ci",
     "test": "turbo run test",
     "lint": "eslint ."
   },

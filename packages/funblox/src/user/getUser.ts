@@ -35,7 +35,7 @@ export default async function getUser(
     identifier: number | string,
 ): Promise<UserResponse> {
   return new Promise(async (resolve, reject) => {
-    if (typeof identifier === 'number') {
+    if (!isNaN(identifier as number)) {
       const userid = Number(identifier);
 
       const basicResponse: Response<string> = await users(

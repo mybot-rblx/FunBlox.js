@@ -1,24 +1,30 @@
 /* eslint-disable max-len */
-import { api } from '../api';
-
-interface IDFromUsername {
-  Id: number;
-}
+import { users } from '../api';
+import type { SearchUserAPIResponse } from './APITypes';
 
 /**
  *
  * @param {String | string} username
  * @return {Promise<number>}
  */
-export default function getIdFromName(username: string): Promise<number> {
+export default function getIdFromName(username: string, showBannedUsers?: boolean): Promise<number> {
   return new Promise(async (resolve, reject) => {
-    const res = await api.get(`users/get-by-username?username=${username}`);
-    const data: IDFromUsername = JSON.parse(JSON.stringify(res.body));
+    const res = await users.post(`v1/usernames/users`, { 
+      json: {
+        "usernames": [username],
+        "excludeBannedUsers": showBannedUsers || false
+      },
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json"
+      }
+    });
+    const data: SearchUserAPIResponse = JSON.parse(JSON.stringify(res.body));
 
     if (res.statusCode !== 200) {
-      return reject(new Error('Not found. - getUser.js'));
+      return reject(new Error('Not found. - utils/getIdFromName.js'));
     }
 
-    resolve(data.Id);
+    resolve(data.data[0].id);
   });
 }

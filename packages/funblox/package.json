@@ -6,11 +6,8 @@
   "main": "lib/index.js",
   "module": "lib/index.mjs",
   "types": "lib/index.d.ts",
-  "publishConfig": {
-    "@mybot-rblx:funblox.js": "https://gitlab.com/api/v4/projects/30710493/packages/npm/"
-  },
   "scripts": {
-    "build": "npm install -g tsup && tsup src/index.ts",
+    "build": "tsup src/index.ts",
     "publish": "yarn publish",
     "test": "jest",
     "test:watch": "jest --watchAll --verbose"
@@ -40,6 +37,7 @@
   "devDependencies": {
     "@swc/core": "1.3.53",
     "@types/node": "18.15.13",
+    "ts-jest": "^29.1.0",
     "tsup": "6.7.0",
     "typescript": "5.0.4"
   },
