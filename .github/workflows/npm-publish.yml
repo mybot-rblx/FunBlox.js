@@ -3,7 +3,7 @@ on:
   release:
     types: [created]
 jobs:
-  publish-packages:
+  publish-npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,15 +19,39 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
           registry-url: 'https://registry.npmjs.org' 
       - run: yarn
       - run: yarn run build
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
       # Setup .npmrc file to publish to npm
       - run: yarn run publish
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
+  publish-github:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: read
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - run: git checkout HEAD^
+      - name: restore lerna
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          registry-url: 'https://npm.pkg.github.com' 
+      - run: yarn
+      - run: yarn run build
+      # Setup .npmrc file to publish to npm
+      - run: yarn run publish
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
