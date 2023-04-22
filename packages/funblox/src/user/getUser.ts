@@ -9,6 +9,7 @@ import getNameFromId from '../utils/getIdFromName';
 interface UserResponse {
   id: number;
   username: string;
+  displayName: string;
   description: string;
   created: string;
   avatar_url: string;
