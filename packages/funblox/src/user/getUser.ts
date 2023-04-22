@@ -103,6 +103,7 @@ export default async function getUser(
       resolve({
         id: basicData.id,
         username: basicData.name,
+        displayName: basicData.displayName,
         description: basicData.description,
         created: basicData.created,
         avatar_url: avatarData.data[0].imageUrl,
