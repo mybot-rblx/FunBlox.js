@@ -18,6 +18,7 @@ import getGroups from './user/getGroups';
 import deletePost from './group/deletePost';
 import deletePostBySpecificUser from './group/deletePostBySpecificUser';
 import getGroupWall from './group/getGroupWall';
+import getGroupGames from './group/getGroupGames';
 import * as api from './api';
 
 export {
@@ -41,5 +42,6 @@ export {
   getPlaceInfo,
   getGameVotes,
   getUniverseId,
+  getGroupGames,
   setCookie,
 };
