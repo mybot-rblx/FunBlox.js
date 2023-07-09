@@ -8,7 +8,6 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsup src/index.ts",
-    "publish": "npm publish && exit 0",
     "test": "jest",
     "test:watch": "jest --watchAll --verbose"
   },
@@ -45,5 +44,6 @@
     "got-cjs": "^12.5.4",
     "tough-cookie": "^4.1.2",
     "tough-cookie-file-store": "^2.0.3"
-  }
+  },
+  "gitHead": "f6ebd656f4d7ff3f9fbc5032a0a8f2511c257da1"
 }
