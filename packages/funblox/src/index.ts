@@ -25,6 +25,7 @@ export {
   getGroup,
   getGroups,
   getGroupWall,
+  getGroupGames,
   deletePost,
   deletePostBySpecificUser,
   api,
@@ -42,6 +43,5 @@ export {
   getPlaceInfo,
   getGameVotes,
   getUniverseId,
-  getGroupGames,
   setCookie,
 };

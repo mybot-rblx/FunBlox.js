@@ -6,7 +6,8 @@ import type { GroupGamesAPIResponse } from "../utils/APITypes";
 type GroupGame = {
   id: number,
   name: string,
-
+  description: string,
+  placeVisits: number
 }
 
 export default function getGroupGames(groupId: string | number): Promise<GroupGame[]> {
