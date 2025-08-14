@@ -3419,7 +3419,7 @@ fsevents@^2.3.2, fsevents@~2.3.2:
   version "8.3.7"
   dependencies:
     got-cjs "^12.5.4"
-    tough-cookie "^4.1.2"
+    tough-cookie "^6.0.0"
     tough-cookie-file-store "^2.0.3"
 
 function-bind@^1.1.1:
@@ -7159,6 +7159,18 @@ through@2, "through@>=2.2.7 <3", through@^2.3.4, through@^2.3.6:
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==
 
+tldts-core@^7.0.11:
+  version "7.0.11"
+  resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-7.0.11.tgz#d464529ecd7d89c5805cc171d15a01b2ac807d75"
+  integrity sha512-65eeOpBwWBabh0XqT+zB0vEllq/V3XcrF2fhgMXWWFfNw1yxEjeYg9Vv/B/UNozd0CTR/TohO1ubfn6O6mBW3w==
+
+tldts@^7.0.5:
+  version "7.0.11"
+  resolved "https://registry.yarnpkg.com/tldts/-/tldts-7.0.11.tgz#821f823c61e957df8a30d8333957ad9168ec710b"
+  integrity sha512-7k7JV/LZpGhFUu2t+YDaMZ1wdPPRNpaCYNQ0NQbSLY3Rbgy+XbCdkXyqRiS9TLXiYAsrv0yiA0OvnxmgRFCdNA==
+  dependencies:
+    tldts-core "^7.0.11"
+
 tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
@@ -7197,7 +7209,7 @@ tough-cookie-file-store@^2.0.3:
   dependencies:
     tough-cookie "^4.0.0"
 
-tough-cookie@^4.0.0, tough-cookie@^4.1.2:
+tough-cookie@^4.0.0:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-4.1.3.tgz#97b9adb0728b42280aa3d814b6b999b2ff0318bf"
   integrity sha512-aX/y5pVRkfRnfmuX+OdbSdXvPe6ieKX/G2s7e98f4poJHnqH3281gDPm/metm6E/WRamfx7WC4HUqkWHfQHprw==
@@ -7206,6 +7218,13 @@ tough-cookie@^4.0.0, tough-cookie@^4.1.2:
     punycode "^2.1.1"
     universalify "^0.2.0"
     url-parse "^1.5.3"
+
+tough-cookie@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-6.0.0.tgz#11e418b7864a2c0d874702bc8ce0f011261940e5"
+  integrity sha512-kXuRi1mtaKMrsLUxz3sQYvVl37B0Ns6MzfrtV5DvJceE9bPyspOqk9xxv7XbZWcfLWbFmm997vl83qUWVJA64w==
+  dependencies:
+    tldts "^7.0.5"
 
 tr46@^1.0.1:
   version "1.0.1"
