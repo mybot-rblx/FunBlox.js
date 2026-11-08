@@ -30,5 +30,5 @@
   "dependencies": {
     "funblox.js": "file:packages/funblox"
   },
-  "packageManager": "npm@10.8.2"
+  "packageManager": "npm@10.9.10"
 }
