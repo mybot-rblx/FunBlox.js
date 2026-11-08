@@ -1,6 +1,6 @@
 {
   "name": "funblox.js",
-  "version": "9.1.1",
+  "version": "9.1.2",
   "description": "Updated Roblox API wrapper with Open Cloud support (originally by Fede1212156). Modernized dependencies and fixed critical bugs. Use with caution as Roblox APIs change frequently.",
   "source": "src/index.ts",
   "main": "lib/index.js",
