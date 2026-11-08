@@ -1,7 +1,7 @@
 {
   "name": "funblox.js",
-  "version": "8.3.7",
-  "description": "This package made by fedee#9606 this a roblox API you may use it for your verification or something if you use our package give us credit <3.",
+  "version": "9.1.0",
+  "description": "Updated Roblox API wrapper with Open Cloud support (originally by Fede1212156). Modernized dependencies and fixed critical bugs. Use with caution as Roblox APIs change frequently.",
   "source": "src/index.ts",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
@@ -34,16 +34,14 @@
   },
   "homepage": "https://github.com/mybot-rblx/FunBlox#readme",
   "devDependencies": {
-    "@swc/core": "1.3.53",
-    "@types/node": "18.15.13",
-    "ts-jest": "^29.1.0",
-    "tsup": "6.7.0",
-    "typescript": "5.0.4"
+    "@types/node": "^20.14.0",
+    "ts-jest": "^29.2.0",
+    "tsup": "^8.2.0",
+    "typescript": "^5.5.0"
   },
   "dependencies": {
-    "got-cjs": "^12.5.4",
-    "tough-cookie": "^4.1.2",
+    "got-cjs": "12.5.4",
+    "tough-cookie": "^5.0.0",
     "tough-cookie-file-store": "^2.0.3"
-  },
-  "gitHead": "793132d99a3fd78483fd5899e58194d2e461242f"
+  }
 }

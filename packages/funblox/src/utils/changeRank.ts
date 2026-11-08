@@ -2,6 +2,7 @@
 import { groups } from '../api';
 import getGroupRank from '../user/getUserRank';
 import setRank from '../group/setRank';
+import { DualModeOptions } from './requestOptions';
 
 
 /**
@@ -11,7 +12,7 @@ import setRank from '../group/setRank';
  * @param { number } method
  * @return {Promise<object>}
  */
-export default function changeRank(groupid: number, user: number, method: number): Promise<object> {
+export default function changeRank(groupid: number, user: number, method: number, options?: DualModeOptions): Promise<object> {
   return new Promise(async (resolve, reject) => {
     const roleResponse1 = await groups.get(
         `v1/groups/${groupid}/roles`,
@@ -35,7 +36,7 @@ export default function changeRank(groupid: number, user: number, method: number
         } else if (!nextrank) {
           reject(new TypeError('Can\'t find this user next rank...'));
         } else if (nextrank > 0 && nextrank && nextrank < 255) {
-          await setRank(groupid, user, index.rolese).then(async function() {
+          await setRank(groupid, user, nextrank.id, options).then(async function() {
             return resolve({ newRank: role, oldRank: userrank });
           }).catch(function(err) {
             reject(new TypeError(err));

@@ -1,4 +1,4 @@
-import { getGroup } from '../';
+import { getGroup } from '../src';
 
 describe('FunBlox', () => {
   describe('#getGroup', () => {

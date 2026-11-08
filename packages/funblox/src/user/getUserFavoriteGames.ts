@@ -25,30 +25,29 @@ interface PlaceRoot {
   type: string;
   name: string;
 }
+
 /**
- *
- * @param {number | string} userId
- * @param {number} limit
- * @return {Promise<Array<Game>>}
+ * Get a user's favorite games.
+ * Roblox has restricted this endpoint; on failure returns an empty array.
  */
 export default function getUserFavoriteGames(
     userId: number | string,
     limit: number,
 ): Promise<Array<Game>> {
   return new Promise(async (resolve, reject) => {
-    if (Number(userId)) {
-      try {
-        const favoriteGamesRes: Response<string> = await games.get(
-            `v2/users/${userId}/favorite/games?accessFilter=All&limit=${limit}&sortOrder=Asc`,
-        );
-        const favoriteGames = JSON.parse(JSON.stringify(favoriteGamesRes.body));
-
-        resolve(favoriteGames.data);
-      } catch (error) {
-        reject(error);
-      }
-    } else {
+    if (!Number(userId)) {
       reject(new Error('userId must be a number'));
+      return;
+    }
+    try {
+      const favoriteGamesRes: Response<string> = await games.get(
+          `v2/users/${userId}/favorite/games?accessFilter=2&limit=${limit}&sortOrder=Asc`,
+      );
+      const favoriteGames = JSON.parse(JSON.stringify(favoriteGamesRes.body));
+      resolve(favoriteGames.data || []);
+    } catch {
+      // Endpoint often returns 400/401 now; degrade gracefully
+      resolve([]);
     }
   });
 }

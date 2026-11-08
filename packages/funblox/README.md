@@ -1,237 +1,202 @@
-<img src="https://user-images.githubusercontent.com/72459034/168478419-50f69a42-f776-4062-84fa-8f198920cb5e.png" width="800"/>
+<img src="./img/FunBlox-Banner.png" width="800"/>
 
-# FunBlox
-**We are a roblox API wrapper on development! (Contact us : fedee#9606 / DogeFlexJosh#0656)**
+# FunBlox.js
 
-# Project Information
-**FunBlox is an API wrapper for ROBLOX that was developed at the time with JS after two months it was reverted to a package made with TS, today our developers work to add more functions.**
+Roblox API wrapper for Node.js (TypeScript).
 
+Supports **legacy cookie-based APIs** (`*.roblox.com`) and **Open Cloud** (`apis.roblox.com`).
 
-[![CircleCI](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main.svg?style=svg)](https://circleci.com/gh/mybot-rblx/FunBlox/tree/main) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox?ref=badge_shield)
-  [<img src="https://img.shields.io/discord/776614395722989599.svg?style=for-the-badge" width="100"/>](https://discord.gg/3PjNrKW4h7) [<img src="https://img.shields.io/npm/v/funblox.js.svg?style=flat-square" alt="NPM package"/>](https://www.npmjs.com/package/funblox.js)
+> Original: [mybot-rblx/FunBlox.js](https://github.com/mybot-rblx/FunBlox.js)  
+> Authors: Fede1212156 / @fedeetide & Joshuadl12
 
+---
 
-# Instructions
+## Install
 
-```
+```bash
 npm i funblox.js
 ```
 
-# setCookie
+## Quick start
 
 ```js
-const roblox = require("funblox.js")
+const roblox = require("funblox.js");
 
-roblox.setcookie("_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_").then(res => {
-    console.log(res);
+// Legacy (cookie)
+await roblox.setCookie("_|WARNING:-DO-NOT-SHARE-THIS...|_");
 
-}).catch((err) => {
-    console.log(err)
-})
-
+// Open Cloud (API key)
+roblox.setOpenCloudKey(process.env.ROBLOX_CLOUD_KEY);
 ```
 
-# Promote
+---
+
+## Authentication
+
+### Legacy — `.ROBLOSECURITY` cookie
+
+Required for most `*.roblox.com` endpoints (groups rank changes, etc.).
 
 ```js
-const roblox = require("funblox.js")
+const { setCookie } = require("funblox.js");
 
-roblox.promote(groupid, "username", newrank).then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-
+await setCookie("_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_");
 ```
 
-# Demote
+### Open Cloud — API key (recommended)
+
+Create a key in the [Creator Dashboard → API Keys](https://create.roblox.com/dashboard/credentials?activeTab=ApiKeysTab).
 
 ```js
-const roblox = require("funblox.js")
+const { setOpenCloudKey, OpenCloudClient } = require("funblox.js");
 
-roblox.promote("groupid", "username").then(res => {
-    console.log(res);
+// Default client
+setOpenCloudKey(process.env.ROBLOX_CLOUD_KEY);
 
-}).catch((err) => {
-    console.log(err)
-})
-
+// Or your own instance
+const cloud = new OpenCloudClient({
+  apiKey: process.env.ROBLOX_CLOUD_KEY,
+  // accessToken: "oauth-bearer-token", // optional OAuth
+});
 ```
 
-# setRank
+You can use both in the same process.
+
+---
+
+## Dual mode (legacy vs Open Cloud)
+
+Many group and user functions accept an optional options object:
 
 ```js
-const roblox = require("funblox.js")
+const { getGroup, getRoles, setRank, promote, demote, getUser } = require("funblox.js");
 
-roblox.setRank("groupid", "username").then(res => {
-    console.log(res);
+// Legacy (cookie)
+const group = await getGroup(123456);
 
-}).catch((err) => {
-    console.log(err)
-})
+// Open Cloud
+const groupCloud = await getGroup(123456, { useOpenCloud: true });
+const roles     = await getRoles(123456, { useOpenCloud: true });
+const user      = await getUser(15671158, { useOpenCloud: true });
 
+// Rank change without cookie / CSRF
+await setRank(123456, 987654, 111222, { useOpenCloud: true });
+await promote(123456, 987654, { useOpenCloud: true });
+await demote(123456, 987654, { useOpenCloud: true });
 ```
 
-# getUser Info
+| Function | Open Cloud option | Notes |
+|----------|-------------------|-------|
+| `getGroup` | `{ useOpenCloud: true }` | Uses `/cloud/v2/groups/{id}` |
+| `getRoles` | `{ useOpenCloud: true }` | Uses `/cloud/v2/groups/{id}/roles` |
+| `getUser` | `{ useOpenCloud: true }` | Uses `/cloud/v2/users/{id}` |
+| `setRank` | `{ useOpenCloud: true }` | Assigns role via membership |
+| `promote` / `demote` | `{ useOpenCloud: true }` | Forwards the flag |
+
+**Typical scopes:** `group:read`, `group:write` (for role changes).
+
+---
+
+## Open Cloud methods
 
 ```js
-const roblox = require("funblox.js")
+const { opencloud } = require("funblox.js");
 
-roblox.getUser("fede1212156").then(respon => {
-    console.log(respon)
-}).catch((err) => {
-    console.log(err)
-})
+// Universes & messaging
+await opencloud.getUniverse(123456789);
+await opencloud.publishMessage(123456789, "announcements", "Hello from FunBlox!");
+
+// Data stores
+await opencloud.listDataStores(123456789);
+await opencloud.getDataStoreEntry(123456789, "Inventory", "user_42");
+await opencloud.setDataStoreEntry(123456789, "Inventory", "user_42", { coins: 100 });
+
+// Users
+await opencloud.getUser(15671158);
+
+// Groups
+await opencloud.getGroup(123456);
+await opencloud.listGroupRoles(123456);
+await opencloud.listGroupMemberships(123456);
+await opencloud.assignRole(123456, "membership-id", 111222);
+await opencloud.unassignRole(123456, "membership-id", 111222);
+await opencloud.setRank(123456, 987654, 111222);
+await opencloud.listJoinRequests(123456);
+await opencloud.acceptJoinRequest(123456, 987654);
+await opencloud.declineJoinRequest(123456, 987654);
+
+// Any Open Cloud path
+await opencloud.request("/cloud/v2/universes/123456789/places/987654321");
 ```
+
+---
+
+## Legacy methods
+
+### Users
 
 ```js
-const roblox = require("funblox.js")
+const { getUser, getPlayerThumbnail, getUserFavoriteGames, getGroups } = require("funblox.js");
 
-roblox.getUser("149556783").then(respon => {
-    console.log(respon)
-}).catch((err) => {
-    console.log(err)
-})
+await getUser("username");          // or numeric id
+await getUser(15671158);
+await getPlayerThumbnail(15671158, "420x420", "Png", false);
+await getUserFavoriteGames(15671158);
+await getGroups(15671158);
 ```
 
-# getPlayerThumbnail
-
-
+### Groups
 
 ```js
-const roblox = require("funblox.js")
+const { getGroup, getRoles, setRank, promote, demote, getGroupGames, getGroupWall } = require("funblox.js");
 
-roblox.getPlayerThumbnail("user_id", "size", "format", [isCircular (false, true)]).then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-
+await getGroup(123456);
+await getRoles(123456);
+await setRank(123456, 987654, 111222);   // requires cookie
+await promote(123456, 987654);           // requires cookie
+await demote(123456, 987654);            // requires cookie
+await getGroupGames(123456);
+await getGroupWall(123456);
 ```
 
-# getUserFavoriteGames
+### Games / Catalog
 
 ```js
-const roblox = require("funblox.js")
+const { getPlaceInfo, getGameVotes, getUniverseId, getCategories } = require("funblox.js");
 
-roblox.getUserFavoriteGames("user_id").then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-
+await getPlaceInfo(123456);
+await getGameVotes(123456);
+await getUniverseId(123456);
+await getCategories();
 ```
 
-# getUserBundles
+---
 
-```js
-const roblox = require("funblox.js")
+## TypeScript
 
-roblox.getUserBundles("user_id").then(res => {
-    console.log(res);
+```ts
+import {
+  setCookie,
+  setOpenCloudKey,
+  getGroup,
+  opencloud,
+  OpenCloudClient,
+  type DualModeOptions,
+} from "funblox.js";
 
-}).catch((err) => {
-    console.log(err)
-})
-
+const opts: DualModeOptions = { useOpenCloud: true };
+const group = await getGroup(123456, opts);
 ```
 
-# getUserRank
+---
 
-```js
-const roblox = require("funblox.js")
+## Notes
 
-roblox.getUserRank("groupid", "userid").then(respon => {
-    console.log(respon)
-}).catch((err) => {
-    console.log(err)
-})
-```
+- Prefer **Open Cloud** for production when an endpoint exists — it has stronger stability guarantees.
+- Cookie-based APIs can break without notice and have tighter rate limits.
+- Always respect `Set-Cookie` updates from Roblox.
+- This is an unofficial wrapper, not affiliated with Roblox.
 
-# getGroup Info
+## License
 
-```js
-const roblox = require("funblox.js")
-
-roblox.getGroup("Iron Cafe").then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-```
-
-```js
-const roblox = require("funblox.js")
-
-roblox.getGroup("10394589").then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-
-```
-
-# getCategories
-
-```js
-const roblox = require("funblox.js")
-
-roblox.getCategories().then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-
-```
-
-# getFavoritesOfBundle
-
-```js
-const roblox = require("funblox.js")
-
-roblox.getFavoritesOfBundle("bundleId").then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-
-```
-
-# getFavoritesOfItem
-
-```js
-const roblox = require("funblox.js")
-
-roblox.getFavoritesOfItem("itemId").then(res => {
-    console.log(res);
-
-}).catch((err) => {
-    console.log(err)
-})
-
-```
-
-# Package information
-| Package information | ✅ |
-| ------- | ------ |
-| Maintained | ✅ |
-| Active Support | ✅|
-| Developers | [@fedeetide](https://www.roblox.com/users/835364986/profile), [@Joshuadl12](https://www.roblox.com/users/156711358/profile) |
-
-# [License](https://github.com/mybot-rblx/FunBlox/blob/main/LICENSE)
-This package is under license (MIT).
-License description:
-
-A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
-
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmybot-rblx%2FFunBlox?ref=badge_large)
-
-# More Coming Soon...
+MIT

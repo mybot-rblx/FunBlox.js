@@ -1,45 +1,33 @@
 /* eslint-disable max-len */
 import { mobileAPI } from '../api';
-import tough from 'tough-cookie';
+import { Cookie } from 'tough-cookie';
 import cookieJar from './jar';
 
 /**
  * Get the current user's data. (Utility only)
  * @param {string} jar
-* @return {Promise<Object>}
+ * @return {Promise<Object>}
  */
-export default function getCurrentUser(jar?: string) {
-  return new Promise(async function(resolve, reject) {
-    switch (jar) {
-      case jar:
-        const Cookie = tough.Cookie;
-        const bruh = Cookie.parse('.ROBLOSECURITY');
-        bruh.value = jar;
-        cookieJar.setCookie(bruh, 'https://roblox.com', async (err: boolean) => {
-          switch (err) {
-            case true:
-              reject(err);
-              break;
-            default:
-              const resA = await mobileAPI.get('userinfo', {
-                cookieJar,
-              });
-              if (resA.statusCode !== 200) {
-                reject(new Error('You are not logged in!'));
-              }
-              resolve(JSON.parse(JSON.stringify(resA.body)));
-          }
-        });
-        break;
-      default:
-        const resB = await mobileAPI.get('userinfo', {
-          cookieJar,
-        });
-        if (resB.statusCode !== 200) {
-          reject(new Error('You are not logged in!'));
+export default function getCurrentUser(jar?: string): Promise<object> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (jar) {
+        const cookie = Cookie.parse('.ROBLOSECURITY=' + jar);
+        if (!cookie) {
+          reject(new Error('Invalid cookie'));
+          return;
         }
-        resolve(resB.body);
-        break;
+        await cookieJar.setCookie(cookie, 'https://roblox.com');
+      }
+
+      const res = await mobileAPI.get('userinfo', { cookieJar });
+      if (res.statusCode !== 200) {
+        reject(new Error('You are not logged in!'));
+        return;
+      }
+      resolve(JSON.parse(JSON.stringify(res.body)));
+    } catch (err) {
+      reject(err);
     }
   });
 }

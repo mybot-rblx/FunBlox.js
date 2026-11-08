@@ -1,4 +1,4 @@
-import { getUser } from '../';
+import { getUser } from '../src';
 
 describe('FunBlox', () => {
   describe('#getUser', () => {

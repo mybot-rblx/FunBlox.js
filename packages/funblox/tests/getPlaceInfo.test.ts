@@ -1,4 +1,4 @@
-import { getPlaceInfo } from '../';
+import { getPlaceInfo } from '../src';
 
 describe('FunBlox', () => {
   describe('#getPlaceInfo', () => {

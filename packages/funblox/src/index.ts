@@ -45,3 +45,18 @@ export {
   getUniverseId,
   setCookie,
 };
+
+// Open Cloud support
+export {
+  OpenCloudClient,
+  configureOpenCloud,
+  getDefaultOpenCloud,
+  setDefaultOpenCloud,
+  setOpenCloudKey,
+  openCloudRequest,
+  opencloud,
+  type OpenCloudOptions,
+  type RequestOptions,
+} from './opencloud';
+
+export { type DualModeOptions } from './utils/requestOptions';

@@ -1,4 +1,4 @@
-import { getGroupGames } from '../';
+import { getGroupGames } from '../src';
 
 describe('FunBlox', () => {
   describe('#getGroupGames', () => {

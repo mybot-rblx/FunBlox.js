@@ -5,6 +5,8 @@
 import { Response } from 'got-cjs';
 import { friends, thumbnails, users } from '../api';
 import getNameFromId from '../utils/getIdFromName';
+import { DualModeOptions, wantsOpenCloud } from '../utils/requestOptions';
+import { getDefaultOpenCloud } from '../opencloud/client';
 
 interface UserResponse {
   id: number;
@@ -34,37 +36,34 @@ interface UserResponse {
  */
 export default async function getUser(
     identifier: number | string,
-): Promise<UserResponse> {
+    options?: DualModeOptions,
+): Promise<UserResponse | any> {
+  if (wantsOpenCloud(options)) {
+    return getDefaultOpenCloud().getUser(identifier);
+  }
   return new Promise(async (resolve, reject) => {
     if (!isNaN(identifier as number)) {
       const userid = Number(identifier);
 
+      const safeGet = async (client: any, path: string) => {
+        try {
+          return await client(path);
+        } catch {
+          return { body: { data: [], count: 0 } };
+        }
+      };
+
       const basicResponse: Response<string> = await users(
           `v1/users/${userid}/`,
       );
-      const followersResponse: Response<string> = await friends(
-          `v1/users/${userid}/followers`,
-      );
-      const friendsResponse: Response<string> = await friends(
-          `v1/users/${userid}/friends`,
-      );
-      const followingResponse: Response<string> = await friends(
-          `v1/users/${userid}/followings`,
-      );
-      const avatarResponse: Response<string> = await thumbnails(
-          `v1/users/avatar?userIds=${userid}&size=720x720&format=Png&isCircular=false`,
-      );
+      const followersResponse = await safeGet(friends, `v1/users/${userid}/followers`);
+      const friendsResponse = await safeGet(friends, `v1/users/${userid}/friends`);
+      const followingResponse = await safeGet(friends, `v1/users/${userid}/followings`);
+      const avatarResponse = await safeGet(thumbnails, `v1/users/avatar?userIds=${userid}&size=720x720&format=Png&isCircular=false`);
 
-      // Counter for followings, friends and followers
-      const followingCountResponse: Response<string> = await friends(
-          `v1/users/${userid}/followings/count`,
-      );
-      const friendsCountResponse: Response<string> = await friends(
-          `v1/users/${userid}/friends/count`,
-      );
-      const followersCountResponse: Response<string> = await friends(
-          `v1/users/${userid}/followers/count`,
-      );
+      const followingCountResponse = await safeGet(friends, `v1/users/${userid}/followings/count`);
+      const friendsCountResponse = await safeGet(friends, `v1/users/${userid}/friends/count`);
+      const followersCountResponse = await safeGet(friends, `v1/users/${userid}/followers/count`);
 
       // I love parsing.com
       const basicData = JSON.parse(JSON.stringify(basicResponse.body));
@@ -89,15 +88,15 @@ export default async function getUser(
       const followersCount: number = followersCountData.count;
 
       const followersArr = [];
-      followersData.data.forEach((user) => {
+      (followersData.data || []).forEach((user) => {
         followersArr.push(user.id);
       });
       const friendsArr = [];
-      friendsData.data.forEach((user) => {
+      (friendsData.data || []).forEach((user) => {
         friendsArr.push(user.id);
       });
       const followingArr = [];
-      followingData.data.forEach((user) => {
+      (followingData.data || []).forEach((user) => {
         followingArr.push(user.id);
       });
 
@@ -107,7 +106,7 @@ export default async function getUser(
         displayName: basicData.displayName,
         description: basicData.description,
         created: basicData.created,
-        avatar_url: avatarData.data[0].imageUrl,
+        avatar_url: avatarData.data?.[0]?.imageUrl || null,
         friends: {
           count: friendsCount,
           ids: friendsArr,

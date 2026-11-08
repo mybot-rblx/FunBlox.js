@@ -1,4 +1,4 @@
-import { getFavoritesOfBundle } from '../';
+import { getFavoritesOfBundle } from '../src';
 
 describe('FunBlox', () => {
   describe('#getUserBundles', () => {
