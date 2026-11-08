@@ -1,21 +1,21 @@
 module.exports = {
-  'env': {
-    'es2021': true,
-    'node': true,
+  env: {
+    es2021: true,
+    node: true,
   },
-  'extends': [
-    'google',
+  extends: [
+    'prettier',
   ],
-  'parser': '@typescript-eslint/parser',
-  'parserOptions': {
-    'ecmaVersion': 12,
-    'sourceType': 'module',
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
   },
-  'plugins': [
+  plugins: [
     '@typescript-eslint',
     'prettier',
   ],
-  'rules': {
+  rules: {
     'object-curly-spacing': 0,
   },
 };
