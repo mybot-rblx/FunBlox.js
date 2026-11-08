@@ -1,56 +1,50 @@
-name: Node.js Package
+name: Publish packages
+
 on:
   release:
     types: [created]
+
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-      - run: git checkout HEAD^
-      - name: restore lerna
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org' 
-      - run: yarn
-      - run: yarn run build
-      # Setup .npmrc file to publish to npm
-      - run: yarn run publish
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+      - name: Install
+        run: npm install
+      - name: Build
+        run: npm run build --workspace=funblox.js
+      - name: Publish to npm
+        working-directory: packages/funblox
+        run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
   publish-github:
     runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-      - run: git checkout HEAD^
-      - name: restore lerna
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com' 
-      - run: yarn
-      - run: yarn run build
-      # Setup .npmrc file to publish to npm
-      - run: cd packages/funb
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@mybot-rblx'
+          cache: 'npm'
+      - name: Install
+        run: npm install
+      - name: Build
+        run: npm run build --workspace=funblox.js
+      - name: Publish to GitHub Packages
+        working-directory: packages/funblox
+        run: |
+          npm pkg set name=@mybot-rblx/funblox.js
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ github.token }}
