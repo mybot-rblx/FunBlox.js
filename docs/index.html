@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FunBlox.js — Roblox API wrapper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --card: #12151c;
+      --border: #1e2430;
+      --text: #e8eaef;
+      --muted: #8b93a7;
+      --accent: #5b8cff;
+      --accent-2: #7c5cff;
+      --warn: #f5a524;
+      --green: #3dd68c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      padding: 72px 24px 48px;
+      text-align: center;
+      background: radial-gradient(ellipse at top, #1a2140 0%, transparent 60%);
+      border-bottom: 1px solid var(--border);
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0 0 8px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    header p { color: var(--muted); font-size: 1.15rem; max-width: 640px; margin: 0 auto 24px; }
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+    }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    main { max-width: 880px; margin: 0 auto; padding: 40px 24px 80px; }
+    h2 { margin-top: 48px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    h3 { margin-top: 28px; color: var(--accent); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 12px 0;
+    }
+    .warn {
+      border-color: #5a4318;
+      background: #1c160c;
+      color: #f5d7a1;
+    }
+    code, pre {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.88rem;
+    }
+    pre {
+      background: #0e1118;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      margin: 10px 0 16px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #1a2238;
+      color: var(--accent);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .tag.legacy { background: #2a2218; color: #f5a524; }
+    footer { text-align: center; color: var(--muted); padding: 32px; border-top: 1px solid var(--border); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FunBlox.js</h1>
+    <p>Unofficial Roblox API wrapper for Node.js. Cookie auth and Open Cloud in the same library.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://www.npmjs.com/package/funblox.js">npm</a>
+      <a class="btn" href="https://github.com/mybot-rblx/FunBlox.js">GitHub</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="card warn">
+      <strong>Warning.</strong> This is an unofficial wrapper. Roblox APIs change without notice.
+      Prefer Open Cloud when the endpoint exists. Never share your cookie or API key.
+      Not affiliated with Roblox.
+    </div>
+
+    <h2>Install</h2>
+    <pre><code>npm i funblox.js</code></pre>
+
+    <h2>Setup</h2>
+    <h3>Legacy (cookie)</h3>
+    <pre><code>const { setCookie } = require("funblox.js");
+
+await setCookie("_|WARNING:-DO-NOT-SHARE-THIS...|_");</code></pre>
+
+    <h3>Open Cloud (API key)</h3>
+    <pre><code>const { setOpenCloudKey } = require("funblox.js");
+
+setOpenCloudKey(process.env.ROBLOX_CLOUD_KEY);</code></pre>
+
+    <h3>Dual mode</h3>
+    <p>Pass <code>{ useOpenCloud: true }</code> on supported functions to use Open Cloud instead of cookies.</p>
+    <pre><code>const { getGroup } = require("funblox.js");
+
+const group = await getGroup(123456, { useOpenCloud: true });</code></pre>
+
+    <h2>Users</h2>
+
+    <h3>getUser <span class="tag">dual</span></h3>
+    <pre><code>const { getUser } = require("funblox.js");
+
+const user = await getUser("builderman");
+const userById = await getUser(156);
+const cloud = await getUser(156, { useOpenCloud: true });</code></pre>
+
+    <h3>getUserRank</h3>
+    <pre><code>const { getUserRank } = require("funblox.js");
+
+const rank = await getUserRank(123456, 987654); // groupId, userId</code></pre>
+
+    <h3>getGroups</h3>
+    <pre><code>const { getGroups } = require("funblox.js");
+
+const groups = await getGroups(156);</code></pre>
+
+    <h3>getPlayerThumbnail</h3>
+    <pre><code>const { getPlayerThumbnail } = require("funblox.js");
+
+const thumb = await getPlayerThumbnail(156);</code></pre>
+
+    <h3>getUserBundles</h3>
+    <pre><code>const { getUserBundles } = require("funblox.js");
+
+const bundles = await getUserBundles(156);</code></pre>
+
+    <h3>getUserFavoriteGames</h3>
+    <pre><code>const { getUserFavoriteGames } = require("funblox.js");
+
+const games = await getUserFavoriteGames(156, 10);</code></pre>
+
+    <h2>Groups</h2>
+
+    <h3>getGroup <span class="tag">dual</span></h3>
+    <pre><code>const { getGroup } = require("funblox.js");
+
+const byId = await getGroup(2700627);
+const byName = await getGroup("Target Store");
+const cloud = await getGroup(2700627, { useOpenCloud: true });</code></pre>
+
+    <h3>getGroupGames</h3>
+    <pre><code>const { getGroupGames } = require("funblox.js");
+
+const games = await getGroupGames(2700627);</code></pre>
+
+    <h3>getGroupWall</h3>
+    <pre><code>const { getGroupWall } = require("funblox.js");
+
+const wall = await getGroupWall(2700627);</code></pre>
+
+    <h3>setRank <span class="tag">dual</span></h3>
+    <pre><code>const { setRank } = require("funblox.js");
+
+// Legacy (cookie)
+await setRank(123456, 987654, 111222);
+
+// Open Cloud
+await setRank(123456, 987654, 111222, { useOpenCloud: true });</code></pre>
+
+    <h3>promote / demote</h3>
+    <pre><code>const { promote, demote } = require("funblox.js");
+
+await promote(123456, 987654);
+await demote(123456, 987654);</code></pre>
+
+    <h3>deletePost / deletePostBySpecificUser</h3>
+    <pre><code>const { deletePost, deletePostBySpecificUser } = require("funblox.js");
+
+await deletePost(123456, 555);
+await deletePostBySpecificUser(123456, 987654);</code></pre>
+
+    <h2>Games</h2>
+
+    <h3>getPlaceInfo</h3>
+    <pre><code>const { getPlaceInfo } = require("funblox.js");
+
+const place = await getPlaceInfo(1818);</code></pre>
+
+    <h3>getGameVotes</h3>
+    <pre><code>const { getGameVotes } = require("funblox.js");
+
+const votes = await getGameVotes(1818);</code></pre>
+
+    <h3>getUniverseId</h3>
+    <pre><code>const { getUniverseId } = require("funblox.js");
+
+const universeId = await getUniverseId(1818);</code></pre>
+
+    <h2>Catalog</h2>
+
+    <h3>getCategories</h3>
+    <pre><code>const { getCategories } = require("funblox.js");
+
+const categories = await getCategories();</code></pre>
+
+    <h3>getFavoritesOfItem / getFavoritesOfBundle</h3>
+    <pre><code>const { getFavoritesOfItem, getFavoritesOfBundle } = require("funblox.js");
+
+const itemFavs = await getFavoritesOfItem(1028595);
+const bundleFavs = await getFavoritesOfBundle(192);</code></pre>
+
+    <h2>Open Cloud direct</h2>
+    <p>Use <code>opencloud</code> for endpoints that don't have a legacy twin.</p>
+
+    <h3>Universes & messaging</h3>
+    <pre><code>const { opencloud } = require("funblox.js");
+
+const universe = await opencloud.getUniverse(123456789);
+await opencloud.publishMessage(123456789, "announcements", "Hello!");</code></pre>
+
+    <h3>Data stores</h3>
+    <pre><code>const stores = await opencloud.listDataStores(123456789);
+const entry = await opencloud.getDataStoreEntry(123456789, "PlayerData", "user_156");
+await opencloud.setDataStoreEntry(123456789, "PlayerData", "user_156", { coins: 100 });</code></pre>
+
+    <h3>Group roles & memberships</h3>
+    <pre><code>const roles = await opencloud.listGroupRoles(123456);
+const members = await opencloud.listGroupMemberships(123456);
+
+await opencloud.assignRole(123456, "membership-id", 111222);
+await opencloud.unassignRole(123456, "membership-id", 111222);
+await opencloud.setRank(123456, 987654, 111222);</code></pre>
+
+    <h3>Join requests</h3>
+    <pre><code>const requests = await opencloud.listJoinRequests(123456);
+await opencloud.acceptJoinRequest(123456, 987654);
+await opencloud.declineJoinRequest(123456, 987654);</code></pre>
+
+    <h3>Generic request</h3>
+    <pre><code>const { openCloudRequest } = require("funblox.js");
+
+const data = await openCloudRequest("/cloud/v2/groups/123456");</code></pre>
+
+    <h2>Questions / bugs</h2>
+    <p>
+      Something broke, missing a method, or you just want to complain about an endpoint?
+      Reply on the <a href="https://devforum.roblox.com">DevForum post</a> or open an issue on
+      <a href="https://github.com/mybot-rblx/FunBlox.js/issues">GitHub</a>. I'm around.
+    </p>
+  </main>
+
+  <footer>
+    FunBlox.js · MIT · Unofficial, not affiliated with Roblox
+  </footer>
+</body>
+</html>
