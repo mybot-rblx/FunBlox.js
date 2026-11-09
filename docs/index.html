@@ -3,269 +3,668 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FunBlox.js — Docs</title>
+  <title>FunBlox.js</title>
+  <link rel="icon" href="img/icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0b0d12;
-      --card: #12151c;
-      --border: #1e2430;
-      --text: #e8eaef;
-      --muted: #8b93a7;
-      --accent: #5b8cff;
-      --accent-2: #7c5cff;
+      --bg: #0e1116;
+      --panel: #151922;
+      --panel-2: #1b2130;
+      --line: #2a3142;
+      --text: #e7ebf3;
+      --muted: #8d97ab;
+      --accent: #6d7dff;
+      --cyan: #3ec8ff;
+      --purple: #a06bff;
+      --ok: #3dd68c;
+      --warn: #f5a524;
+      --bad: #ff6b7a;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-    a { color: var(--accent); text-decoration: none; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    a { color: var(--cyan); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
-    nav {
+    .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+    aside {
       position: sticky; top: 0; height: 100vh; overflow: auto;
-      border-right: 1px solid var(--border); padding: 24px 16px;
-      background: #0e1118;
+      background: #10141c; border-right: 1px solid var(--line); padding: 18px 14px 40px;
     }
-    nav h1 { font-size: 1.2rem; margin: 0 0 4px; }
-    nav .sub { color: var(--muted); font-size: 0.8rem; margin-bottom: 20px; }
-    nav h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 18px 0 8px; }
-    nav a { display: block; color: var(--text); padding: 4px 8px; border-radius: 6px; font-size: 0.9rem; }
-    nav a:hover { background: #1a2030; text-decoration: none; }
-    main { padding: 40px 48px 80px; max-width: 860px; }
-    h2 { margin-top: 48px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-    h3 { margin-top: 32px; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; margin: 12px 0; }
-    .warn { border-color: #5a4318; background: #1c160c; color: #f5d7a1; }
-    .what { color: var(--muted); margin: 6px 0 10px; }
-    .tag { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; background: #1a2238; color: var(--accent); margin-left: 8px; vertical-align: middle; }
-    .tag.legacy { background: #2a2218; color: #f5a524; }
-    .tag.cloud { background: #15281f; color: #3dd68c; }
-    pre { background: #0e1118; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.85rem; }
-    code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.88em; }
-    .catalog { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 32px; }
-    .catalog a { display: block; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; color: var(--text); }
-    .catalog a:hover { border-color: var(--accent); text-decoration: none; }
-    .catalog strong { display: block; }
-    .catalog span { color: var(--muted); font-size: 0.85rem; }
-    @media (max-width: 800px) {
-      .layout { grid-template-columns: 1fr; }
-      nav { position: relative; height: auto; border-right: 0; border-bottom: 1px solid var(--border); }
-      main { padding: 24px 16px 60px; }
-      .catalog { grid-template-columns: 1fr; }
+    .brand { display: flex; gap: 10px; align-items: center; padding: 6px 8px 16px; }
+    .brand img { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; }
+    .brand strong { display: block; font-size: 1.05rem; }
+    .brand span { color: var(--muted); font-size: 0.75rem; }
+    .search {
+      width: 100%; background: #0c1017; color: var(--text); border: 1px solid var(--line);
+      border-radius: 8px; padding: 8px 10px; margin-bottom: 14px; font: inherit;
+    }
+    aside h4 { margin: 16px 8px 6px; font-size: 0.72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    aside a.nav {
+      display: block; color: #c9d0de; padding: 5px 8px; border-radius: 6px; font-size: 0.88rem; font-family: "JetBrains Mono", monospace;
+    }
+    aside a.nav:hover, aside a.nav.active { background: #1c2436; text-decoration: none; color: #fff; }
+    main { padding: 0 0 80px; }
+    .hero {
+      padding: 48px 48px 36px;
+      background:
+        radial-gradient(600px 220px at 12% 0%, rgba(160,107,255,.28), transparent 70%),
+        radial-gradient(500px 200px at 80% 0%, rgba(62,200,255,.18), transparent 70%),
+        #10141c;
+      border-bottom: 1px solid var(--line);
+      display: grid; grid-template-columns: 1fr 180px; gap: 20px; align-items: center;
+    }
+    .hero h1 {
+      margin: 0 0 8px; font-size: 2.6rem;
+      background: linear-gradient(90deg, #b07bff, #4fd2ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p { margin: 0 0 16px; color: var(--muted); max-width: 640px; }
+    .hero .mark { width: 150px; border-radius: 28px; justify-self: end; }
+    .pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill { border: 1px solid var(--line); background: #151b28; color: var(--text); border-radius: 999px; padding: 6px 12px; font-size: .85rem; }
+    .wrap { padding: 8px 48px 0; max-width: 980px; }
+    h2 { margin: 42px 0 8px; font-size: 1.4rem; }
+    .lead { color: var(--muted); margin-top: 0; }
+    .warn { background: #241c10; border: 1px solid #5a4318; color: #f6d7a4; border-radius: 12px; padding: 12px 14px; }
+    pre, .sig {
+      font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .84rem;
+    }
+    pre {
+      background: #0b0f16; border: 1px solid var(--line); border-radius: 10px;
+      padding: 14px 16px; overflow-x: auto; margin: 8px 0 0;
+    }
+    .fn {
+      margin: 22px 0; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    }
+    .sig {
+      padding: 12px 16px; background: linear-gradient(90deg, #1a1530, #122033);
+      border-bottom: 1px solid var(--line); color: #dbe4ff;
+    }
+    .sig .name { color: #fff; font-weight: 600; }
+    .sig .ret { color: var(--cyan); }
+    .body { padding: 14px 16px 16px; }
+    .desc { margin: 0 0 12px; }
+    .badges { display: flex; gap: 6px; margin-bottom: 10px; }
+    .badge { font-size: .7rem; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+    .b-pub { background: #123024; color: var(--ok); }
+    .b-cookie { background: #2a2214; color: var(--warn); }
+    .b-cloud { background: #142433; color: var(--cyan); }
+    .b-dual { background: #221838; color: #c9a6ff; }
+    h5 { margin: 14px 0 6px; font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 500; font-size: .75rem; text-transform: uppercase; }
+    td code, .mono { font-family: "JetBrains Mono", monospace; font-size: .82rem; }
+    .err { color: #ffb4bc; }
+    .ok { color: #b8f3d4; }
+    footer { color: var(--muted); padding: 28px 48px; border-top: 1px solid var(--line); font-size: .85rem; }
+    @media (max-width: 860px) {
+      .app { grid-template-columns: 1fr; }
+      aside { position: relative; height: auto; }
+      .hero, .wrap, footer { padding-left: 16px; padding-right: 16px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero .mark { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="layout">
-    <nav>
-      <h1>FunBlox.js</h1>
-      <div class="sub">Roblox API wrapper</div>
-      <a href="#start">Start</a>
-      <a href="#auth">Auth</a>
-      <h2>Catalog</h2>
-      <a href="#users">Users</a>
-      <a href="#groups">Groups</a>
-      <a href="#games">Games</a>
-      <a href="#catalog">Catalog</a>
-      <a href="#opencloud">Open Cloud</a>
-      <h2>Links</h2>
-      <a href="https://www.npmjs.com/package/funblox.js">npm</a>
-      <a href="https://github.com/mybot-rblx/FunBlox.js">GitHub</a>
-    </nav>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <img src="img/icon.png" alt="FunBlox" />
+        <div><strong>FunBlox.js</strong><span>v9.1.2 docs</span></div>
+      </div>
+      <input class="search" id="q" placeholder="Filter functions…" />
+      <h4>Start</h4>
+      <a class="nav" href="#install">install</a>
+      <a class="nav" href="#auth">auth</a>
+      <h4>Users</h4>
+      <a class="nav" href="#getUser">getUser</a>
+      <a class="nav" href="#getUserRank">getUserRank</a>
+      <a class="nav" href="#getGroups">getGroups</a>
+      <a class="nav" href="#getPlayerThumbnail">getPlayerThumbnail</a>
+      <a class="nav" href="#getUserBundles">getUserBundles</a>
+      <a class="nav" href="#getUserFavoriteGames">getUserFavoriteGames</a>
+      <h4>Groups</h4>
+      <a class="nav" href="#getGroup">getGroup</a>
+      <a class="nav" href="#getGroupGames">getGroupGames</a>
+      <a class="nav" href="#getGroupWall">getGroupWall</a>
+      <a class="nav" href="#setRank">setRank</a>
+      <a class="nav" href="#promote">promote</a>
+      <a class="nav" href="#demote">demote</a>
+      <a class="nav" href="#deletePost">deletePost</a>
+      <a class="nav" href="#deletePostBySpecificUser">deletePostBySpecificUser</a>
+      <h4>Games</h4>
+      <a class="nav" href="#getPlaceInfo">getPlaceInfo</a>
+      <a class="nav" href="#getGameVotes">getGameVotes</a>
+      <a class="nav" href="#getUniverseId">getUniverseId</a>
+      <h4>Catalog</h4>
+      <a class="nav" href="#getCategories">getCategories</a>
+      <a class="nav" href="#getFavoritesOfItem">getFavoritesOfItem</a>
+      <a class="nav" href="#getFavoritesOfBundle">getFavoritesOfBundle</a>
+      <h4>Open Cloud</h4>
+      <a class="nav" href="#publishMessage">publishMessage</a>
+      <a class="nav" href="#datastores">data stores</a>
+      <a class="nav" href="#roles">roles & memberships</a>
+      <a class="nav" href="#join">join requests</a>
+      <a class="nav" href="#openCloudRequest">openCloudRequest</a>
+    </aside>
 
     <main>
-      <h2 id="start">What this is</h2>
-      <p>FunBlox.js is an unofficial Node.js wrapper for the Roblox API. You can talk to Roblox with the old cookie method, with Open Cloud (API key), or both at the same time.</p>
-      <div class="card warn">
-        <strong>Warning.</strong> Roblox APIs change without notice. Prefer Open Cloud when the endpoint exists. Never share your cookie or API key. Not affiliated with Roblox.
-      </div>
-      <pre><code>npm i funblox.js</code></pre>
+      <section class="hero">
+        <div>
+          <h1>FunBlox.js</h1>
+          <p>Unofficial Node.js wrapper for the Roblox API. Cookie auth and Open Cloud in the same library. Each function below lists what it does, what it returns, and what it rejects.</p>
+          <div class="pills">
+            <a class="pill" href="https://www.npmjs.com/package/funblox.js">npm</a>
+            <a class="pill" href="https://github.com/mybot-rblx/FunBlox.js">GitHub</a>
+            <span class="pill">MIT</span>
+          </div>
+        </div>
+        <img class="mark" src="img/funblox.png" alt="" />
+      </section>
 
-      <h2>Catalog</h2>
-      <div class="catalog">
-        <a href="#users"><strong>Users</strong><span>Profile, rank, thumbnails, bundles</span></a>
-        <a href="#groups"><strong>Groups</strong><span>Info, ranks, wall, promote/demote</span></a>
-        <a href="#games"><strong>Games</strong><span>Place info, votes, universe id</span></a>
-        <a href="#catalog"><strong>Catalog</strong><span>Categories and favorites</span></a>
-        <a href="#opencloud"><strong>Open Cloud</strong><span>Messaging, data stores, join requests</span></a>
-      </div>
+      <div class="wrap">
+        <h2 id="install">Install</h2>
+        <pre><code>npm i funblox.js</code></pre>
+        <p class="lead">CommonJS and ESM both work. Types ship with the package.</p>
+        <div class="warn">Roblox changes endpoints without notice. Prefer Open Cloud when it exists. Never share a <code>.ROBLOSECURITY</code> cookie or an API key. Not affiliated with Roblox.</div>
 
-      <h2 id="auth">Auth</h2>
-      <h3>Cookie <span class="tag legacy">legacy</span></h3>
-      <p class="what">Logs the library in with a <code>.ROBLOSECURITY</code> cookie. Needed for legacy endpoints that require you to be logged in (rank changes, wall deletes, etc.).</p>
-      <pre><code>const { setCookie } = require("funblox.js");
-await setCookie("_|WARNING:-DO-NOT-SHARE-THIS...|_");</code></pre>
+        <h2 id="auth">Auth</h2>
 
-      <h3>Open Cloud <span class="tag cloud">recommended</span></h3>
-      <p class="what">Sets the API key used by Open Cloud. More stable than cookies. Create the key in the Creator Dashboard.</p>
-      <pre><code>const { setOpenCloudKey } = require("funblox.js");
+        <article class="fn" id="setCookie" data-name="setcookie">
+          <div class="sig"><span class="name">setCookie</span>(cookie) → <span class="ret">Promise<LoggedInUser></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cookie">cookie</span></div>
+            <p class="desc">Stores a <code>.ROBLOSECURITY</code> cookie and returns the logged-in user. Required for legacy writes (rank, wall deletes).</p>
+            <h5>Parameters</h5>
+            <table><tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              <tr><td><code>cookie</code></td><td>string</td><td>Full Roblox security cookie, including the warning prefix.</td></tr>
+            </table>
+            <h5>Returns</h5>
+            <p class="ok mono">{ id, name, displayName }</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>Error: You are not logged in!</code> — cookie invalid or expired.</li><li><code>HTTPError 401</code> — Roblox rejected the session.</li></ul>
+            <pre><code>const { setCookie } = require("funblox.js");
+const me = await setCookie(process.env.ROBLOX_COOKIE);</code></pre>
+          </div>
+        </article>
+
+        <article class="fn" id="setOpenCloudKey" data-name="setopencloudkey">
+          <div class="sig"><span class="name">setOpenCloudKey</span>(apiKey, accessToken?) → <span class="ret">OpenCloudClient</span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cloud">open cloud</span></div>
+            <p class="desc">Sets the API key (and optional OAuth token) used by every Open Cloud call.</p>
+            <h5>Parameters</h5>
+            <table><tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              <tr><td><code>apiKey</code></td><td>string</td><td>Sent as <code>x-api-key</code>.</td></tr>
+              <tr><td><code>accessToken</code></td><td>string?</td><td>Optional OAuth bearer token.</td></tr>
+            </table>
+            <h5>Returns</h5>
+            <p class="ok">The default <code>OpenCloudClient</code> (chainable).</p>
+            <h5>Rejects</h5>
+            <p>Does not call the network. Later requests reject if the key is missing or lacks scope.</p>
+            <pre><code>const { setOpenCloudKey } = require("funblox.js");
 setOpenCloudKey(process.env.ROBLOX_CLOUD_KEY);</code></pre>
+          </div>
+        </article>
 
-      <h3>Dual mode</h3>
-      <p class="what">On supported functions, pass <code>{ useOpenCloud: true }</code> to hit Open Cloud instead of the cookie API.</p>
-      <pre><code>const group = await getGroup(123456, { useOpenCloud: true });</code></pre>
+        <h2>Users</h2>
 
-      <h2 id="users">Users</h2>
+        <article class="fn" id="getUser" data-name="getuser">
+          <div class="sig"><span class="name">getUser</span>(identifier, options?) → <span class="ret">Promise<User></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-dual">dual</span><span class="badge b-pub">public</span></div>
+            <p class="desc">Looks up a user by username or id. Legacy mode also tries friends, followers and the avatar. If those social endpoints 401, counts come back as 0 instead of failing the whole call.</p>
+            <h5>Parameters</h5>
+            <table><tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              <tr><td><code>identifier</code></td><td>number | string</td><td>User id or username.</td></tr>
+              <tr><td><code>options.useOpenCloud</code></td><td>boolean?</td><td>Use <code>GET /cloud/v2/users/{id}</code>.</td></tr>
+            </table>
+            <h5>Returns (legacy)</h5>
+            <pre><code>{
+  id, username, displayName, description, created,
+  avatar_url,
+  friends:   { count, ids },
+  followers: { count, ids },
+  following: { count, ids }
+}</code></pre>
+            <h5>Returns (Open Cloud)</h5>
+            <p class="ok mono">Roblox user resource: path, id, name, displayName, createTime…</p>
+            <h5>Rejects</h5>
+            <ul class="err">
+              <li><code>TypeError: Identifier must be a number or a string</code></li>
+              <li><code>HTTPError 404</code> — user does not exist.</li>
+              <li><code>Open Cloud request failed [401|403]</code> — bad or under-scoped key.</li>
+            </ul>
+            <pre><code>const user = await getUser("builderman");
+const byId = await getUser(156, { useOpenCloud: true });</code></pre>
+          </div>
+        </article>
 
-      <h3>getUser <span class="tag">dual</span></h3>
-      <p class="what">Gets a user's public profile: id, username, display name, description, created date, and (legacy) friend/follower counts. Accepts a username or a user id.</p>
-      <pre><code>const { getUser } = require("funblox.js");
+        <article class="fn" id="getUserRank" data-name="getuserrank">
+          <div class="sig"><span class="name">getUserRank</span>(groupId, userId) → <span class="ret">Promise<Rank></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Rank and role name of a user inside one group. Use this before promote/demote.</p>
+            <h5>Parameters</h5>
+            <table><tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              <tr><td><code>groupId</code></td><td>number</td><td>Group id.</td></tr>
+              <tr><td><code>userId</code></td><td>number</td><td>User id.</td></tr>
+            </table>
+            <h5>Returns</h5>
+            <p class="ok mono">{ rank: number, role: string, roleId?: number }</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 400/404</code> — user is not in the group, or ids are invalid.</li></ul>
+            <pre><code>const rank = await getUserRank(123456, 987654);</code></pre>
+          </div>
+        </article>
 
-const user = await getUser("builderman");
-const byId = await getUser(156);
-const cloud = await getUser(156, { useOpenCloud: true });</code></pre>
+        <article class="fn" id="getGroups" data-name="getgroups">
+          <div class="sig"><span class="name">getGroups</span>(userId) → <span class="ret">Promise<GroupMembership[]></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Every group the user is in, with their role in each.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">[{ group: { id, name }, role: { id, name, rank } }]</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 400</code> — bad user id.</li></ul>
+            <pre><code>const groups = await getGroups(156);</code></pre>
+          </div>
+        </article>
 
-      <h3>getUserRank</h3>
-      <p class="what">Gets a user's rank and role inside a specific group. Useful to check permissions before promoting or paying out.</p>
-      <pre><code>const { getUserRank } = require("funblox.js");
-const rank = await getUserRank(123456, 987654); // groupId, userId</code></pre>
+        <article class="fn" id="getPlayerThumbnail" data-name="getplayerthumbnail">
+          <div class="sig"><span class="name">getPlayerThumbnail</span>(userId) → <span class="ret">Promise<Thumbnail></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Avatar image URL. Good for bots and dashboards.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">{ imageUrl: string, state: "Completed" | "Pending" }</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 400</code> — invalid user id.</li></ul>
+            <pre><code>const thumb = await getPlayerThumbnail(156);</code></pre>
+          </div>
+        </article>
 
-      <h3>getGroups</h3>
-      <p class="what">Lists the groups a user is in, with their role in each one.</p>
-      <pre><code>const { getGroups } = require("funblox.js");
-const groups = await getGroups(156);</code></pre>
+        <article class="fn" id="getUserBundles" data-name="getuserbundles">
+          <div class="sig"><span class="name">getUserBundles</span>(userId) → <span class="ret">Promise<Bundle[]></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Bundles (avatar packages) owned by the user.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">[{ id, name, bundleType, creator }]</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 400/404</code> — user not found.</li></ul>
+            <pre><code>const bundles = await getUserBundles(156);</code></pre>
+          </div>
+        </article>
 
-      <h3>getPlayerThumbnail</h3>
-      <p class="what">Returns the URL of a user's avatar thumbnail. Handy for bots, dashboards, or embeds.</p>
-      <pre><code>const { getPlayerThumbnail } = require("funblox.js");
-const thumb = await getPlayerThumbnail(156);</code></pre>
+        <article class="fn" id="getUserFavoriteGames" data-name="getuserfavoritegames">
+          <div class="sig"><span class="name">getUserFavoriteGames</span>(userId, limit) → <span class="ret">Promise<Game[]></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Games the user favorited. Roblox often 400s this endpoint now; the function returns <code>[]</code> instead of throwing.</p>
+            <h5>Parameters</h5>
+            <table><tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              <tr><td><code>userId</code></td><td>number | string</td><td>User id.</td></tr>
+              <tr><td><code>limit</code></td><td>number</td><td>Page size. Roblox accepts 10, 25, 50, 100.</td></tr>
+            </table>
+            <h5>Returns</h5>
+            <p class="ok mono">Game[] or [] when the API refuses the request.</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>Error: userId must be a number</code></li></ul>
+            <pre><code>const games = await getUserFavoriteGames(156, 10);</code></pre>
+          </div>
+        </article>
 
-      <h3>getUserBundles</h3>
-      <p class="what">Lists the bundles (avatar packages) a user owns.</p>
-      <pre><code>const { getUserBundles } = require("funblox.js");
-const bundles = await getUserBundles(156);</code></pre>
+        <h2>Groups</h2>
 
-      <h3>getUserFavoriteGames</h3>
-      <p class="what">Gets the games a user has favorited. If Roblox blocks the endpoint, it returns an empty array instead of throwing.</p>
-      <pre><code>const { getUserFavoriteGames } = require("funblox.js");
-const games = await getUserFavoriteGames(156, 10);</code></pre>
-
-      <h2 id="groups">Groups</h2>
-
-      <h3>getGroup <span class="tag">dual</span></h3>
-      <p class="what">Gets group info: name, description, owner, member count, roles, shout, and thumbnail. Accepts a numeric id, a string id, or a group name.</p>
-      <pre><code>const { getGroup } = require("funblox.js");
-
-const byId = await getGroup(2700627);
-const byName = await getGroup("Target Store");
+        <article class="fn" id="getGroup" data-name="getgroup">
+          <div class="sig"><span class="name">getGroup</span>(identifier, options?) → <span class="ret">Promise<GroupData></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-dual">dual</span><span class="badge b-pub">public</span></div>
+            <p class="desc">Group profile by numeric id, numeric string, or name. Legacy mode also loads roles, shout and the icon.</p>
+            <h5>Parameters</h5>
+            <table><tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              <tr><td><code>identifier</code></td><td>number | string</td><td>Id or exact group name.</td></tr>
+              <tr><td><code>options.useOpenCloud</code></td><td>boolean?</td><td>Hit <code>/cloud/v2/groups/{id}</code>.</td></tr>
+            </table>
+            <h5>Returns (legacy)</h5>
+            <pre><code>{
+  id, name, description, membercount, thumbnail,
+  owner: { userId, username, displayName },
+  shout: { content, created, author } | null,
+  roles: [{ id, name, membercount }]
+}</code></pre>
+            <h5>Rejects</h5>
+            <ul class="err">
+              <li><code>Error: Group not found</code> — name search had no match.</li>
+              <li><code>TypeError: Invalid group identifier</code></li>
+              <li><code>HTTPError 404</code> — id does not exist.</li>
+              <li><code>Open Cloud request failed [401|403|404]</code></li>
+            </ul>
+            <pre><code>const g = await getGroup(2700627);
+const byName = await getGroup("Roblox");
 const cloud = await getGroup(2700627, { useOpenCloud: true });</code></pre>
+          </div>
+        </article>
 
-      <h3>getGroupGames</h3>
-      <p class="what">Lists the games (experiences) owned by a group.</p>
-      <pre><code>const { getGroupGames } = require("funblox.js");
-const games = await getGroupGames(2700627);</code></pre>
+        <article class="fn" id="getGroupGames" data-name="getgroupgames">
+          <div class="sig"><span class="name">getGroupGames</span>(groupId) → <span class="ret">Promise<Game[]></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Experiences owned by the group.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">[{ id, name, description, rootPlace, placeVisits, created, updated }]</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 400/404</code> — bad group id.</li></ul>
+            <pre><code>const games = await getGroupGames(2700627);</code></pre>
+          </div>
+        </article>
 
-      <h3>getGroupWall</h3>
-      <p class="what">Gets the group's wall posts. Useful for moderation bots that scan or clean the wall.</p>
-      <pre><code>const { getGroupWall } = require("funblox.js");
-const wall = await getGroupWall(2700627);</code></pre>
+        <article class="fn" id="getGroupWall" data-name="getgroupwall">
+          <div class="sig"><span class="name">getGroupWall</span>(groupId) → <span class="ret">Promise<Post[]></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Recent wall posts. Feed this into <code>deletePost</code> if you are moderating.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">[{ id, body, created, poster: { user: { userId, username } } }]</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 403</code> — wall is locked or the group hides posts.</li></ul>
+            <pre><code>const wall = await getGroupWall(123456);</code></pre>
+          </div>
+        </article>
 
-      <h3>setRank <span class="tag">dual</span></h3>
-      <p class="what">Sets a user's role in a group to a specific rank id. Requires cookie (legacy) or an Open Cloud key with group permissions.</p>
-      <pre><code>const { setRank } = require("funblox.js");
+        <article class="fn" id="setRank" data-name="setrank">
+          <div class="sig"><span class="name">setRank</span>(groupId, userId, roleId, options?) → <span class="ret">Promise<object></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-dual">dual</span><span class="badge b-cookie">cookie or key</span></div>
+            <p class="desc">Sets a member to a specific role. Legacy uses cookie + CSRF. Open Cloud calls <code>assignRole</code> after finding the membership.</p>
+            <h5>Parameters</h5>
+            <table><tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              <tr><td><code>groupId</code></td><td>number</td><td>Group id.</td></tr>
+              <tr><td><code>userId</code></td><td>number</td><td>Member to change.</td></tr>
+              <tr><td><code>roleId</code></td><td>number</td><td>Target role id (not the rank number 0–255).</td></tr>
+              <tr><td><code>options.useOpenCloud</code></td><td>boolean?</td><td>Skip the cookie path.</td></tr>
+            </table>
+            <h5>Returns</h5>
+            <p class="ok mono">Legacy: updated role object. Open Cloud: membership resource.</p>
+            <h5>Rejects</h5>
+            <ul class="err">
+              <li><code>HTTPError 401</code> — not logged in, or CSRF failed. Call <code>setCookie</code> first.</li>
+              <li><code>HTTPError 403</code> — your rank is not high enough, or you targeted the owner.</li>
+              <li><code>Open Cloud request failed [403]</code> — key missing <code>group:write</code>.</li>
+            </ul>
+            <pre><code>await setRank(123456, 987654, 111222);
+await setRank(123456, 987654, 111222, { useOpenCloud: true });</code></pre>
+          </div>
+        </article>
 
-await setRank(123456, 987654, 111222);                          // cookie
-await setRank(123456, 987654, 111222, { useOpenCloud: true });  // Open Cloud</code></pre>
+        <article class="fn" id="promote" data-name="promote">
+          <div class="sig"><span class="name">promote</span>(groupId, userId) → <span class="ret">Promise<object></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cookie">cookie</span></div>
+            <p class="desc">Moves the user one role up. Reads the current rank, then calls <code>setRank</code> with the next role id.</p>
+            <h5>Returns</h5>
+            <p class="ok">Same shape as <code>setRank</code>.</p>
+            <h5>Rejects</h5>
+            <ul class="err">
+              <li>Already at the highest rank you can assign.</li>
+              <li>Same 401/403 as <code>setRank</code>.</li>
+            </ul>
+            <pre><code>await promote(123456, 987654);</code></pre>
+          </div>
+        </article>
 
-      <h3>promote / demote</h3>
-      <p class="what">Moves a user one rank up or one rank down in the group. Easier than looking up role ids when you just want the next/previous rank.</p>
-      <pre><code>const { promote, demote } = require("funblox.js");
+        <article class="fn" id="demote" data-name="demote">
+          <div class="sig"><span class="name">demote</span>(groupId, userId) → <span class="ret">Promise<object></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cookie">cookie</span></div>
+            <p class="desc">Moves the user one role down.</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li>Already Guest / lowest role, or 401/403 from <code>setRank</code>.</li></ul>
+            <pre><code>await demote(123456, 987654);</code></pre>
+          </div>
+        </article>
 
-await promote(123456, 987654);
-await demote(123456, 987654);</code></pre>
+        <article class="fn" id="deletePost" data-name="deletepost">
+          <div class="sig"><span class="name">deletePost</span>(groupId, postId) → <span class="ret">Promise<void></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cookie">cookie</span></div>
+            <p class="desc">Deletes one wall post. Needs a cookie that can manage the wall.</p>
+            <h5>Rejects</h5>
+            <ul class="err">
+              <li><code>HTTPError 401</code> — no cookie.</li>
+              <li><code>HTTPError 403</code> — no permission.</li>
+              <li><code>HTTPError 404</code> — post already gone.</li>
+            </ul>
+            <pre><code>await deletePost(123456, 555);</code></pre>
+          </div>
+        </article>
 
-      <h3>deletePost</h3>
-      <p class="what">Deletes a single wall post by its id. Needs a cookie with permission to manage the wall.</p>
-      <pre><code>const { deletePost } = require("funblox.js");
-await deletePost(123456, 555); // groupId, postId</code></pre>
+        <article class="fn" id="deletePostBySpecificUser" data-name="deletepostbyspecificuser">
+          <div class="sig"><span class="name">deletePostBySpecificUser</span>(groupId, userId) → <span class="ret">Promise<void></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cookie">cookie</span></div>
+            <p class="desc">Deletes wall posts from one user. Useful for spam cleanup.</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li>Same 401/403 as <code>deletePost</code>.</li></ul>
+            <pre><code>await deletePostBySpecificUser(123456, 987654);</code></pre>
+          </div>
+        </article>
 
-      <h3>deletePostBySpecificUser</h3>
-      <p class="what">Deletes wall posts made by a specific user. Useful for cleaning spam from one account.</p>
-      <pre><code>const { deletePostBySpecificUser } = require("funblox.js");
-await deletePostBySpecificUser(123456, 987654);</code></pre>
+        <h2>Games</h2>
 
-      <h2 id="games">Games</h2>
+        <article class="fn" id="getPlaceInfo" data-name="getplaceinfo">
+          <div class="sig"><span class="name">getPlaceInfo</span>(placeId) → <span class="ret">Promise<Place></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Place metadata. The id is the number in the game URL, not the universe id.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">{ id, name, description, builder, url, universeId, playing, visits }</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 400/404</code> — place does not exist.</li></ul>
+            <pre><code>const place = await getPlaceInfo(1818);</code></pre>
+          </div>
+        </article>
 
-      <h3>getPlaceInfo</h3>
-      <p class="what">Gets info about a place: name, description, creator, visits, and related data. Use a place id (the number in the game URL).</p>
-      <pre><code>const { getPlaceInfo } = require("funblox.js");
-const place = await getPlaceInfo(1818);</code></pre>
+        <article class="fn" id="getGameVotes" data-name="getgamevotes">
+          <div class="sig"><span class="name">getGameVotes</span>(placeId) → <span class="ret">Promise<Votes></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Upvotes and downvotes for a game.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">{ upVotes: number, downVotes: number }</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 400</code> — bad id, or you passed a universe id by mistake.</li></ul>
+            <pre><code>const votes = await getGameVotes(1818);</code></pre>
+          </div>
+        </article>
 
-      <h3>getGameVotes</h3>
-      <p class="what">Gets the like/dislike (upvote/downvote) counts for a game.</p>
-      <pre><code>const { getGameVotes } = require("funblox.js");
-const votes = await getGameVotes(1818);</code></pre>
+        <article class="fn" id="getUniverseId" data-name="getuniverseid">
+          <div class="sig"><span class="name">getUniverseId</span>(placeId) → <span class="ret">Promise<number></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Converts a place id into a universe id. Open Cloud messaging and data stores need the universe id.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">number</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 400</code> — unknown place.</li></ul>
+            <pre><code>const universeId = await getUniverseId(1818);</code></pre>
+          </div>
+        </article>
 
-      <h3>getUniverseId</h3>
-      <p class="what">Converts a place id into a universe id. Open Cloud and many modern APIs need the universe id, not the place id.</p>
-      <pre><code>const { getUniverseId } = require("funblox.js");
-const universeId = await getUniverseId(1818);</code></pre>
+        <h2>Catalog</h2>
 
-      <h2 id="catalog">Catalog</h2>
+        <article class="fn" id="getCategories" data-name="getcategories">
+          <div class="sig"><span class="name">getCategories</span>() → <span class="ret">Promise<Category[]></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Catalog categories (hats, gear, and so on).</p>
+            <h5>Returns</h5>
+            <p class="ok mono">[{ id, name, subcategories? }]</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 5xx</code> — catalog is down. No arguments to get wrong.</li></ul>
+            <pre><code>const categories = await getCategories();</code></pre>
+          </div>
+        </article>
 
-      <h3>getCategories</h3>
-      <p class="what">Lists catalog categories (hats, gear, etc.). Useful if you're building a catalog browser.</p>
-      <pre><code>const { getCategories } = require("funblox.js");
-const categories = await getCategories();</code></pre>
+        <article class="fn" id="getFavoritesOfItem" data-name="getfavoritesofitem">
+          <div class="sig"><span class="name">getFavoritesOfItem</span>(assetId) → <span class="ret">Promise<number></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">How many people favorited a catalog asset.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">number</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 400</code> — asset id is not a catalog item.</li></ul>
+            <pre><code>const n = await getFavoritesOfItem(1028595);</code></pre>
+          </div>
+        </article>
 
-      <h3>getFavoritesOfItem</h3>
-      <p class="what">Gets how many people favorited a catalog item (asset).</p>
-      <pre><code>const { getFavoritesOfItem } = require("funblox.js");
-const favs = await getFavoritesOfItem(1028595);</code></pre>
+        <article class="fn" id="getFavoritesOfBundle" data-name="getfavoritesofbundle">
+          <div class="sig"><span class="name">getFavoritesOfBundle</span>(bundleId) → <span class="ret">Promise<number></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-pub">public</span></div>
+            <p class="desc">Favorite count for a bundle.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">number</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>HTTPError 400/404</code> — bundle does not exist.</li></ul>
+            <pre><code>const n = await getFavoritesOfBundle(192);</code></pre>
+          </div>
+        </article>
 
-      <h3>getFavoritesOfBundle</h3>
-      <p class="what">Gets how many people favorited a bundle.</p>
-      <pre><code>const { getFavoritesOfBundle } = require("funblox.js");
-const favs = await getFavoritesOfBundle(192);</code></pre>
+        <h2>Open Cloud</h2>
+        <p class="lead">Call these on <code>opencloud</code> after <code>setOpenCloudKey</code>. Every method rejects with <code>Error: Open Cloud request failed [status]</code>. The error has <code>statusCode</code> and <code>body</code>.</p>
+        <pre><code>try {
+  await opencloud.publishMessage(universeId, "news", "hi");
+} catch (err) {
+  console.log(err.statusCode, err.body);
+  // 401 invalid key · 403 missing scope · 404 unknown id · 429 rate limit
+}</code></pre>
 
-      <h2 id="opencloud">Open Cloud</h2>
-      <p>Use <code>opencloud</code> for endpoints that don't have a cookie equivalent, or when you want to be explicit.</p>
+        <article class="fn" id="publishMessage" data-name="publishmessage getuniverse">
+          <div class="sig"><span class="name">opencloud.publishMessage</span>(universeId, topic, message) → <span class="ret">Promise<object></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cloud">open cloud</span></div>
+            <p class="desc">Publishes to MessagingService. Game servers subscribed to <code>topic</code> receive it. <code>getUniverse</code> returns the experience resource for the same id.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">publish: {} &nbsp;·&nbsp; getUniverse: { path, displayName, ... }</p>
+            <h5>Rejects</h5>
+            <ul class="err">
+              <li><code>401</code> bad key.</li>
+              <li><code>403</code> key cannot publish to this universe.</li>
+              <li><code>400</code> topic or message too long.</li>
+            </ul>
+            <pre><code>const u = await opencloud.getUniverse(123456789);
+await opencloud.publishMessage(123456789, "announcements", "Hello");</code></pre>
+          </div>
+        </article>
 
-      <h3>getUniverse</h3>
-      <p class="what">Gets universe (experience) details from Open Cloud.</p>
-      <pre><code>const { opencloud } = require("funblox.js");
-const universe = await opencloud.getUniverse(123456789);</code></pre>
+        <article class="fn" id="datastores" data-name="listdatastores getdatastoreentry setdatastoreentry">
+          <div class="sig"><span class="name">opencloud.listDataStores / getDataStoreEntry / setDataStoreEntry</span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cloud">open cloud</span></div>
+            <p class="desc">Read and write DataStores from outside the game. Scope defaults to <code>global</code>.</p>
+            <h5>Returns</h5>
+            <pre><code>list:  { datastores: [{ name }], nextPageToken? }
+get:   stored JSON value
+set:   { version, ... }</code></pre>
+            <h5>Rejects</h5>
+            <ul class="err">
+              <li><code>404</code> — datastore or entry does not exist (get).</li>
+              <li><code>403</code> — key has no datastore scope for that universe.</li>
+            </ul>
+            <pre><code>await opencloud.listDataStores(universeId);
+const coins = await opencloud.getDataStoreEntry(universeId, "PlayerData", "user_156");
+await opencloud.setDataStoreEntry(universeId, "PlayerData", "user_156", { coins: 100 });</code></pre>
+          </div>
+        </article>
 
-      <h3>publishMessage</h3>
-      <p class="what">Publishes a message to a Messaging Service topic. Your game servers can subscribe and react (announcements, live events, etc.).</p>
-      <pre><code>await opencloud.publishMessage(123456789, "announcements", "Hello!");</code></pre>
+        <article class="fn" id="roles" data-name="listgrouproles listgroupmemberships assignrole unassignrole setrank getgroupshout">
+          <div class="sig"><span class="name">opencloud roles, memberships, shout</span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cloud">open cloud</span></div>
+            <p class="desc"><code>assignRole</code> / <code>unassignRole</code> need a membership id from <code>listGroupMemberships</code>, not a user id. <code>setRank(groupId, userId, roleId)</code> looks the membership up for you.</p>
+            <h5>Returns</h5>
+            <pre><code>roles:        { groupRoles: [{ id, displayName, rank }] }
+memberships:  { groupMemberships: [{ path, user, role }] }
+shout:        { content, poster, updateTime } | null</code></pre>
+            <h5>Rejects</h5>
+            <ul class="err">
+              <li><code>403</code> on write — key cannot manage roles.</li>
+              <li><code>404</code> — membership id is wrong.</li>
+              <li><code>400</code> — cannot change the owner role.</li>
+            </ul>
+            <pre><code>const roles = await opencloud.listGroupRoles(groupId);
+const members = await opencloud.listGroupMemberships(groupId);
+await opencloud.assignRole(groupId, membershipId, roleId);
+await opencloud.setRank(groupId, userId, roleId);
+const shout = await opencloud.getGroupShout(groupId);</code></pre>
+          </div>
+        </article>
 
-      <h3>Data stores</h3>
-      <p class="what">Read and write DataStore entries from outside the game. Needs a key with data store permissions.</p>
-      <pre><code>const stores = await opencloud.listDataStores(123456789);
-const entry = await opencloud.getDataStoreEntry(123456789, "PlayerData", "user_156");
-await opencloud.setDataStoreEntry(123456789, "PlayerData", "user_156", { coins: 100 });</code></pre>
+        <article class="fn" id="join" data-name="listjoinrequests acceptjoinrequest declinejoinrequest">
+          <div class="sig"><span class="name">opencloud.listJoinRequests / accept / decline</span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cloud">open cloud</span></div>
+            <p class="desc">Pending join requests. Accept or decline by user id.</p>
+            <h5>Returns</h5>
+            <p class="ok mono">list: { groupJoinRequests: [{ user, createTime }] } · accept/decline: empty object</p>
+            <h5>Rejects</h5>
+            <ul class="err">
+              <li><code>404</code> — no pending request for that user.</li>
+              <li><code>403</code> — key cannot manage join requests.</li>
+            </ul>
+            <pre><code>const reqs = await opencloud.listJoinRequests(groupId);
+await opencloud.acceptJoinRequest(groupId, userId);
+await opencloud.declineJoinRequest(groupId, userId);</code></pre>
+          </div>
+        </article>
 
-      <h3>Roles & memberships</h3>
-      <p class="what">List roles and members, then assign or remove a role. Open Cloud uses membership ids for assign/unassign.</p>
-      <pre><code>const roles = await opencloud.listGroupRoles(123456);
-const members = await opencloud.listGroupMemberships(123456);
+        <article class="fn" id="openCloudRequest" data-name="opencloudrequest">
+          <div class="sig"><span class="name">openCloudRequest</span>(path, options?) → <span class="ret">Promise<unknown></span></div>
+          <div class="body">
+            <div class="badges"><span class="badge b-cloud">open cloud</span></div>
+            <p class="desc">Any Open Cloud path when there is no helper yet. Path must start with <code>/</code>. Base URL is <code>https://apis.roblox.com</code>.</p>
+            <h5>Parameters</h5>
+            <table><tr><th>Name</th><th>Type</th><th>Description</th></tr>
+              <tr><td><code>path</code></td><td>string</td><td>e.g. <code>/cloud/v2/groups/123</code></td></tr>
+              <tr><td><code>options.method</code></td><td>GET|POST|PATCH|PUT|DELETE</td><td>Default GET.</td></tr>
+              <tr><td><code>options.body</code></td><td>object?</td><td>JSON body for non-GET.</td></tr>
+              <tr><td><code>options.searchParams</code></td><td>object?</td><td>Query string.</td></tr>
+            </table>
+            <h5>Returns</h5>
+            <p class="ok">Parsed JSON body.</p>
+            <h5>Rejects</h5>
+            <ul class="err"><li><code>Open Cloud request failed [status]: {…body}</code> with <code>err.statusCode</code> and <code>err.body</code>.</li></ul>
+            <pre><code>const data = await openCloudRequest("/cloud/v2/groups/123456");</code></pre>
+          </div>
+        </article>
 
-await opencloud.assignRole(123456, "membership-id", 111222);
-await opencloud.unassignRole(123456, "membership-id", 111222);
-await opencloud.setRank(123456, 987654, 111222);</code></pre>
-
-      <h3>getGroupShout</h3>
-      <p class="what">Gets the current group shout (the status message at the top of the group page).</p>
-      <pre><code>const shout = await opencloud.getGroupShout(123456);</code></pre>
-
-      <h3>Join requests</h3>
-      <p class="what">List, accept, or decline pending join requests. Useful for group bots that auto-accept or review applications.</p>
-      <pre><code>const requests = await opencloud.listJoinRequests(123456);
-await opencloud.acceptJoinRequest(123456, 987654);
-await opencloud.declineJoinRequest(123456, 987654);</code></pre>
-
-      <h3>openCloudRequest</h3>
-      <p class="what">Generic request to any Open Cloud path. Use this when a helper doesn't exist yet.</p>
-      <pre><code>const { openCloudRequest } = require("funblox.js");
-const data = await openCloudRequest("/cloud/v2/groups/123456");</code></pre>
-
-      <h2>Questions / bugs</h2>
-      <p>
-        Missing a method, something broke, or an endpoint changed again?
-        Open an issue on <a href="https://github.com/mybot-rblx/FunBlox.js/issues">GitHub</a>. I'm around.
-      </p>
+        <h2>Questions</h2>
+        <p>Something returns a status that is not listed, or an endpoint moved? Open an issue on <a href="https://github.com/mybot-rblx/FunBlox.js/issues">GitHub</a>.</p>
+      </div>
+      <footer>FunBlox.js · MIT · unofficial, not affiliated with Roblox</footer>
     </main>
   </div>
+  <script>
+    const q = document.getElementById("q");
+    const items = [...document.querySelectorAll(".fn")];
+    const links = [...document.querySelectorAll("a.nav")];
+    q.addEventListener("input", () => {
+      const v = q.value.trim().toLowerCase();
+      items.forEach((el) => {
+        const hit = !v || (el.dataset.name || "").includes(v) || el.textContent.toLowerCase().includes(v);
+        el.style.display = hit ? "" : "none";
+      });
+      links.forEach((a) => {
+        a.style.display = !v || a.textContent.toLowerCase().includes(v) ? "" : "none";
+      });
+    });
+  </script>
 </body>
 </html>
